@@ -50,6 +50,7 @@ function insertSort(oriArr){
 		arr[j+1] = temp;
 		this.pushHis(arr.slice(),i,j,temp);
 	}
+	alert(arr)
 	return arr;
 }
 

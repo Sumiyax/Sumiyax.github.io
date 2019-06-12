@@ -58,5 +58,6 @@ function shellSort(oriArr){
 		}
 		gap = parseInt(gap/2);
 	}
+	alert(arr)
 	return arr;
 }

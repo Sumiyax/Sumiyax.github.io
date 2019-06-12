@@ -15,6 +15,7 @@ function mergeSort(oriArr){
 			s1.call(this,arr,j,j+gap*2-1,gap);//借用方法。其实是为了传递this。
 		}  
 	}
+	alert(arr)
 	return arr;
 }
 

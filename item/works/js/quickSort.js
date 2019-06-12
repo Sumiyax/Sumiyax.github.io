@@ -52,7 +52,9 @@ function quickSort(arr,a,b,qArr){
 		ra = b + 1 - len_r;
 		this.sort(rightArr,ra,b,qArr)
 	}
+	
 	return qArr
+	
 }
 
 
@@ -63,7 +65,7 @@ function quickSort(arr,a,b,qArr){
 *  tag:当前在对比的序号;循环中的k
 */
 function quickSortDom(arr,a,b,tag){
-
+	
 	var html='',item= '',len = arr.length,i;
 	for (i = 0; i < len; i++) {
 
@@ -81,5 +83,6 @@ function quickSortDom(arr,a,b,tag){
 		html= html+item;
 	}
 	document.querySelector('.sort_ul').innerHTML = html;
+	
 }
 

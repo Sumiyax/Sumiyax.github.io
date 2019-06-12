@@ -19,6 +19,7 @@
 					break;
 				}				
 			}
+			alert(resArr)
 			return resArr;
 		}
 

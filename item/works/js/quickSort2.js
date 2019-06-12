@@ -57,6 +57,7 @@ function quickSort2(arr,a,b,qArr){
 		ra = b + 1 - len_r;
 		this.sort(rightArr,ra,b,qArr)
 	}
+	
 	return qArr;
 }
 

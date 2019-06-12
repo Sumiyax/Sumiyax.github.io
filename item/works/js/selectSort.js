@@ -16,6 +16,7 @@ function selectSort(oriArr){
 		arr[i] = temp;
 		this.pushHis(arr.slice(),i);
 	}
+	alert(arr)
 	return arr;
 }
 
