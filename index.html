@@ -230,6 +230,209 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-【手撕MR】WordCount" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/03/17/【手撕MR】WordCount/" class="article-date">
+      <time datetime="2020-03-17T10:11:30.000Z" itemprop="datePublished">2020-03-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/17/【手撕MR】WordCount/">【手撕MR】WordCount</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h2 id="简单题，走流程即可，此处由本地0起点到集群详细介绍"><a href="#简单题，走流程即可，此处由本地0起点到集群详细介绍" class="headerlink" title="简单题，走流程即可，此处由本地0起点到集群详细介绍~"></a>简单题，走流程即可，此处由本地0起点到集群详细介绍~</h2>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+        <p class="article-more-link">
+          <a href="/2020/03/17/【手撕MR】WordCount/#more">大航海 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-【灵光一现】MR辅助排序深入理解-MR重点盘点" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/03/17/【灵光一现】MR辅助排序深入理解-MR重点盘点/" class="article-date">
+      <time datetime="2020-03-17T10:04:19.000Z" itemprop="datePublished">2020-03-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/17/【灵光一现】MR辅助排序深入理解-MR重点盘点/">【灵光一现】MR辅助排序深入理解&amp;MR重点盘点</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="辅助排序：发生在map输出的数据进入reduce之前，可根据键值的一部分对整个键值对进行排序"><a href="#辅助排序：发生在map输出的数据进入reduce之前，可根据键值的一部分对整个键值对进行排序" class="headerlink" title="辅助排序：发生在map输出的数据进入reduce之前，可根据键值的一部分对整个键值对进行排序"></a>辅助排序：发生在map输出的数据进入reduce之前，可根据键值的一部分对整个键值对进行排序</h1><!-- ![1](1.png) -->
+<hr>
+<p>常用于提取一组数据中不同id下每个id对应的价值的最大值或最小值<br>实际案例可参见mr文档的辅助排序案例</p>
+<h2 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h2><p>重新建立一个mr的分组器 继承自 WritableComparator类并重写其比较方法</p>
+<p>此外，需注意。必须写一个无参构造并传递一个true值给父类，不然数据会全被定位空<br>源码如下：</p>
+<img src="/2020/03/17/【灵光一现】MR辅助排序深入理解-MR重点盘点/1.png" title="[1]">
+
+<p>布尔参数createInstances即为必须传true的原因</p>
+<h2 id="重写其比较方法："><a href="#重写其比较方法：" class="headerlink" title="重写其比较方法："></a>重写其比较方法：</h2><p>使对于一个键值只根据其一部分来进行排序<br>如此一来，进入reduce阶段时，原本是不同的键值对会变成相同的键值对，再加上value为空的话，则会只传入第一个（即为排序好的最大或者最小的键值对）<br>举个例子：<br>map阶段出来的键值对如下所示：<br>a.&lt;(1,20):null&gt;  b.&lt;(1,18):null&gt;  c.&lt;(2,34):null&gt;<br>原本a与b是不相同的键值对，排序上a&gt;b但是，经过辅助排序后 只根据id进行排序<br>再加上value同为空那reduce阶段就会认为a=b，只输出第一个，即为a 就可得到id为a的最大值为20</p>
+<h1 id="MR学习总结"><a href="#MR学习总结" class="headerlink" title="MR学习总结"></a>MR学习总结</h1><h3 id="1-要去关注job提交源码和切片提交源码"><a href="#1-要去关注job提交源码和切片提交源码" class="headerlink" title="1.要去关注job提交源码和切片提交源码"></a>1.要去关注job提交源码和切片提交源码</h3><p>切片源码maps中有三个参数，一个最小值1，一个最大值longwritable<br>还有一个块大小，集群中块大小默认128m，本地是32m。<br>如果存一个129m文件，只切一片</p>
+<h3 id="2-shuffle重中之重"><a href="#2-shuffle重中之重" class="headerlink" title="2.shuffle重中之重"></a>2.shuffle重中之重</h3><p>分区，排序，合并 需要全掌握</p>
+<p>combiner是mapreduce的优化手段，适用于汇总不适用均值</p>
+<h3 id="3-outputformat-reduce-join-map-join"><a href="#3-outputformat-reduce-join-map-join" class="headerlink" title="3.outputformat,reduce join , map join"></a>3.outputformat,reduce join , map join</h3><p>数仓岗位很重要</p>
+<h3 id="4-etl很重要-需要加深练习"><a href="#4-etl很重要-需要加深练习" class="headerlink" title="4.etl很重要 需要加深练习"></a>4.etl很重要 需要加深练习</h3><h3 id="5-inputformat"><a href="#5-inputformat" class="headerlink" title="5.inputformat"></a>5.inputformat</h3><p>默认实现类：TextInputFormat，默认按照块大小去切片，k是偏移量，v是行内容</p>
+<p>KeyValueTextInputFormat：每一行均为一条记录，被分割符分割为key，value，默认分隔符是\t，分隔符之前为key，之后为value</p>
+<p>NlineInputFormat：按照指定的行数N来划分切片</p>
+<p>CombineTextInputFormat:可以把多个小文件合并成一个切片处理，提高处理效率，改变了KV，K是文件路径加名称，V是文件内容</p>
+<p>用户还可以自定义InputFormat</p>
+<h3 id="6-逻辑处理接口：Mapper"><a href="#6-逻辑处理接口：Mapper" class="headerlink" title="6.逻辑处理接口：Mapper"></a>6.逻辑处理接口：Mapper</h3><p>用户根据业务需求实现其中三个方法<br>map（）：实现业务逻辑</p>
+<p>setup（）：初始化</p>
+<p>cleanup（）：关闭资源收尾</p>
+<h3 id="7-Partitioner分区"><a href="#7-Partitioner分区" class="headerlink" title="7.Partitioner分区"></a>7.Partitioner分区</h3><p>有默认实现HashPartitioner，逻辑是根据key的哈希值和numReduces来返回一个分区号；公式为：key.hashCode()&amp;Integer.MAXVALUE % numReduces<br>若有特定业务需求，可自定义分区，需注意分区是有顺序的必须从0开始</p>
+<h3 id="8-Comparable排序"><a href="#8-Comparable排序" class="headerlink" title="8.Comparable排序"></a>8.Comparable排序</h3><p>当我们用自定义的对象key来输出时，就必须实现WritableComparable接口重写他的compareto（）方法<br>部分排序：对最终的输出的每一个文件进行内部排序</p>
+<p>全排序：对所有数据进行排序，通常只有一个reduce</p>
+<p>二次排序：排序的条件有两个，同理可知三次排序</p>
+<h3 id="9-combiner合并"><a href="#9-combiner合并" class="headerlink" title="9.combiner合并"></a>9.combiner合并</h3><p>combiner合并可以提高程序执行效率，减少io传输，但是使用时必须不能影响原有业务的处理结果</p>
+<h3 id="10-reduce端分组：GroupingComparator"><a href="#10-reduce端分组：GroupingComparator" class="headerlink" title="10.reduce端分组：GroupingComparator"></a>10.reduce端分组：GroupingComparator</h3><p>在reduce端对key进行分组，应用于：在接收的key为bean对象时，想让一个或几个字段相同（全部字段比较不相同）的key进入到同一个reduce方法时，可以采用分组排序。</p>
+<h3 id="11-逻辑处理接口：reducer"><a href="#11-逻辑处理接口：reducer" class="headerlink" title="11.逻辑处理接口：reducer"></a>11.逻辑处理接口：reducer</h3><p>用户根据业务需求实现其中三个方法：reduce（） setup（） cleanup（）</p>
+<h3 id="12-OutputFormat"><a href="#12-OutputFormat" class="headerlink" title="12.OutputFormat"></a>12.OutputFormat</h3><p> 默认实现类时TextOutputFormat，功能逻辑是：将每一个KV对向目标文本文件输出一行。</p>
+<p>将SequenceFileOutputFormat输出作为后续MapReduce任务的输入，这便是一种好的输出格式，因为他格式紧凑，很容易被压缩</p>
+<p>用户可自定义OutputFormat</p>
+
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-【数仓项目】常用xhell脚本编写" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/03/17/【数仓项目】常用xhell脚本编写/" class="article-date">
+      <time datetime="2020-03-17T09:47:14.000Z" itemprop="datePublished">2020-03-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/17/【数仓项目】常用xhell脚本编写/">【数仓项目】常用xhell脚本编写 </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h2 id="zk-sh-用于zookeeper的启动，状态，停止"><a href="#zk-sh-用于zookeeper的启动，状态，停止" class="headerlink" title="zk.sh:用于zookeeper的启动，状态，停止"></a>zk.sh:用于zookeeper的启动，状态，停止</h2><hr>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+        <p class="article-more-link">
+          <a href="/2020/03/17/【数仓项目】常用xhell脚本编写/#more">大航海 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
     <article id="post-【做题杂记】sql中的连接" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -257,47 +460,16 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>外连接(out join)<br>外连接分为外左连接(left outer join)和外右连接(right outer join)</p>
+              <h2 id="外连接-out-join"><a href="#外连接-out-join" class="headerlink" title="外连接(out join)"></a>外连接(out join)</h2><p>外连接分为外左连接(left outer join)和外右连接(right outer join)</p>
 <p>注释：left outer join 与 left join 等价，    一般写成left join<br>           right outer join 与 right join等价，一般写成right join</p>
 <p>左连接，取左边的表的全部，右边的表按条件，符合的显示，不符合则显示null</p>
-<p>举例：select <select list> from A left join B on A.id=B.id</select></p>
-<p><img src="1.png" alt></p>
-<p>右连接：取右边的表的全部，左边的表按条件，符合的显示，不符合则显示null</p>
-<p>举例：select <select list> from A right join B on A.id=B.id</select></p>
-<p><img src="2.png" alt></p>
-<p>内连接（inner join）<br>内连接：也称为等值连接，返回两张表都满足条件的部分</p>
-<p>注释：inner join 就等于 join<br><img src="3.png" alt></p>
-<p>交叉连接（CROSS JOIN）<br>交叉连接：返回左表中的所有行，左表中的每一行与右表中的所有行组合。交叉联接也称作笛卡尔积</p>
-<p>首先，先简单解释一下笛卡尔积：笛卡尔乘积是指在数学中，两个集合X和Y的笛卡尓积（Cartesian product），又称直积，表示为X × Y，第一个对象是X的成员而第二个对象是Y的所有可能有序对的其中一个成员</p>
 <p>举例：</p>
-<p>现在，我们有两个集合A和B。</p>
-<p>A = {0,1}     B = {2,3,4}</p>
-<p>集合 A×B 和 B×A的结果集就可以分别表示为以下这种形式：</p>
-<p>A×B = {（0，2），（1，2），（0，3），（1，3），（0，4），（1，4）}；</p>
-<p>B×A = {（2，0），（2，1），（3，0），（3，1），（4，0），（4，1）}；</p>
-<p>以上A×B和B×A的结果就可以叫做两个集合相乘的‘笛卡尔积’。</p>
-<p>从以上的数据分析我们可以得出以下两点结论：</p>
-<p>1，两个集合相乘，不满足交换率，既 A×B ≠ B×A;</p>
-<p>2，A集合和B集合相乘，包含了集合A中元素和集合B中元素相结合的所有的可能性。既两个集合相乘得到的新集合的元素个数是 A集合的元素个数 × B集合的元素个数;</p>
-<p>交叉连接有两种，显式的和隐式的，不带ON子句，返回的是两表的乘积，也叫笛卡尔积。<br>例如：下面的语句1和语句2的结果是相同的。</p>
-<p>语句1：隐式的交叉连接，没有CROSS JOIN。<br>SELECT O.ID, O.ORDER_NUMBER, C.ID, C.NAME<br>FROM ORDERS O , CUSTOMERS C<br>WHERE O.ID=1;</p>
-<p>语句2：显式的交叉连接，使用CROSS JOIN。<br>SELECT O.ID,O.ORDER_NUMBER,C.ID,<br>C.NAME<br>FROM ORDERS O CROSS JOIN CUSTOMERS C<br>WHERE O.ID=1;</p>
-<p>内连接和where的区别：<br>数据库表连接数据行匹配时所遵循的算法就是以上提到的笛卡尔积，表与表之间的连接可以看成是在做乘法运算。</p>
-<p>比如现在数据库中有两张表，student表和 student_subject表，如下所示：</p>
-<p>　　</p>
-<p>我们执行以下的sql语句，只是纯粹的进行表连接。</p>
-<p>SELECT * from student JOIN student_subject;<br>SELECT * from student_subject JOIN student;</p>
-<p>以第一条sql语句为例我们来看一下他的执行流程，</p>
-<p>1，from语句把student表 和 student_subject表从数据库文件加载到内存中。</p>
-<p>2，join语句相当于对两张表做了乘法运算，把student表中的每一行记录按照顺序和student_subject表中记录依次匹配。</p>
-<p>3，匹配完成后，我们得到了一张有 （student中记录数 × student_subject表中记录数）条的临时表。 在内存中形成的临时表如表1.0所示。我们又把内存中表1.0所示的表称为‘笛卡尔积表’。　　</p>
-<p>再看一下sql中主要关键字的执行顺序：</p>
-<p>from<br>on<br>join<br>where<br>group by<br>having<br>select<br>distinct<br>union<br>order by  </p>
-<p> 我们看到on是在join和where前面的</p>
-<pre><code>如果两张表的数据量都比较大的话，那样就会占用很大的内存空间这显然是不合理的。所以，我们在进行表连接查询的时候一般都会使用JOIN xxx ON xxx的语法，ON语句的执行是在JOIN语句之前的，也就是说两张表数据行之间进行匹配的时候，会先判断数据行是否符合ON语句后面的条件，再决定是否JOIN。</code></pre><p>　　因此，有一个显而易见的SQL优化的方案是，当两张表的数据量比较大，又需要连接查询时，应该使用 FROM table1 JOIN table2 ON xxx的语法，避免使用 FROM table1,table2 WHERE xxx 的语法，因为后者会在内存中先生成一张数据量比较大的笛卡尔积表，增加了内存的开销。</p>
-<p>全连接（Full join）</p>
-<p>全外连接是在结果中除了显示满足连接的条件的行外，还显示了join两侧表中所有满足检索条件的行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select &lt;select list&gt; from A left join B on A.id=B.id</span><br></pre></td></tr></table></figure>
 
+<img src="/2020/03/17/【做题杂记】sql中的连接/1.png" title="[1]">
+<!-- ![1](1.png) -->
+<hr>
+          
       
       
     </div>
@@ -307,6 +479,10 @@
       
 
       
+      
+        <p class="article-more-link">
+          <a href="/2020/03/17/【做题杂记】sql中的连接/#more">大航海 >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -351,23 +527,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="现在有“课程表”，记录了学生选修课程的名称以及成绩。"><a href="#现在有“课程表”，记录了学生选修课程的名称以及成绩。" class="headerlink" title="现在有“课程表”，记录了学生选修课程的名称以及成绩。"></a>现在有“课程表”，记录了学生选修课程的名称以及成绩。</h1><h1 id="现在需要找出语文课中成绩第二高的学生成绩。如果不存在第二高成绩的学生，那么查询应返回-null。当遇到查找第二名时"><a href="#现在需要找出语文课中成绩第二高的学生成绩。如果不存在第二高成绩的学生，那么查询应返回-null。当遇到查找第二名时" class="headerlink" title="现在需要找出语文课中成绩第二高的学生成绩。如果不存在第二高成绩的学生，那么查询应返回 null。当遇到查找第二名时"></a>现在需要找出语文课中成绩第二高的学生成绩。如果不存在第二高成绩的学生，那么查询应返回 null。当遇到查找第二名时</h1><h2 id="思路一（不实用，只能找第二位）："><a href="#思路一（不实用，只能找第二位）：" class="headerlink" title="思路一（不实用，只能找第二位）："></a>思路一（不实用，只能找第二位）：</h2><h3 id="1-找出所有选修了语文课的学生成绩"><a href="#1-找出所有选修了语文课的学生成绩" class="headerlink" title="1.找出所有选修了语文课的学生成绩"></a>1.找出所有选修了语文课的学生成绩</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from grades</span><br><span class="line">where class = &quot;Chinese&quot;;</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-找出最高值"><a href="#2-找出最高值" class="headerlink" title="2.找出最高值"></a>2.找出最高值</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select max(distinct score) from grades</span><br><span class="line">where class = &quot;Chinese&quot;</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-组合找出第二"><a href="#3-组合找出第二" class="headerlink" title="3.组合找出第二"></a>3.组合找出第二</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">select max(distinct score)</span><br><span class="line">from grades</span><br><span class="line">where class = &quot;Chinese&quot; and</span><br><span class="line">score&lt;(</span><br><span class="line">    select max(distinct score) from grades</span><br><span class="line">    where class = &quot;Chinese&quot;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<h2 id="思路2（普遍）："><a href="#思路2（普遍）：" class="headerlink" title="思路2（普遍）："></a>思路2（普遍）：</h2><p>使用 limit 和 offset<br>limit n子句表示查询结果返回前n条数据</p>
-<p>offset n表示跳过x条语句</p>
-<p>limit y offset x 分句表示查询结果跳过 x 条数据，读取前 y 条数据</p>
-<p>注意：limit x：y和offset不同<br>前者表示跳过x条数据读取y条数据</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select distinct score</span><br><span class="line">from grades</span><br><span class="line">where class = &quot;Chinese&quot;</span><br><span class="line">order by class,score desc</span><br><span class="line">limit 1,1;</span><br></pre></td></tr></table></figure>
-
-<h2 id="拓展：若没有第x名呢？"><a href="#拓展：若没有第x名呢？" class="headerlink" title="拓展：若没有第x名呢？"></a>拓展：若没有第x名呢？</h2><p>ifnull：<br>ifnull(a,b)函数解释：<br>如果value1不是空，结果返回a<br>如果value1是空，结果返回b</p>
-<p>完善代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">select ifnull(</span><br><span class="line">    (select max(distinct score) from grades</span><br><span class="line">    where class = &quot;Chinese&quot; </span><br><span class="line">    order by class,score desc</span><br><span class="line">    limit 1,1</span><br><span class="line">    ),null</span><br><span class="line">) as &quot;the second score&quot;</span><br></pre></td></tr></table></figure>
-
-
+              <h1 id="现在有“课程表”，记录了学生选修课程的名称以及成绩。"><a href="#现在有“课程表”，记录了学生选修课程的名称以及成绩。" class="headerlink" title="现在有“课程表”，记录了学生选修课程的名称以及成绩。"></a>现在有“课程表”，记录了学生选修课程的名称以及成绩。</h1><h1 id="现在需要找出语文课中成绩第二高的学生成绩。如果不存在第二高成绩的学生，那么查询应返回-null。"><a href="#现在需要找出语文课中成绩第二高的学生成绩。如果不存在第二高成绩的学生，那么查询应返回-null。" class="headerlink" title="现在需要找出语文课中成绩第二高的学生成绩。如果不存在第二高成绩的学生，那么查询应返回 null。"></a>现在需要找出语文课中成绩第二高的学生成绩。如果不存在第二高成绩的学生，那么查询应返回 null。</h1><hr>
+          
       
       
     </div>
@@ -377,6 +538,10 @@
       
 
       
+      
+        <p class="article-more-link">
+          <a href="/2020/03/17/title-【做题杂记】类型题：查询第N高的数据/#more">大航海 >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -476,24 +641,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>由于近期在协会举办了一场比赛，赛后需要将200份不同成绩单分别发给参赛者，为了方便，用python实现了该功能，并利用博客进行记录分享学习。<br>还是那句话，菜鸡菜笔，如有不正，还请大佬们不吝惜赐教！</p>
-<hr>
-<h3 id="第一阶段：前期准备"><a href="#第一阶段：前期准备" class="headerlink" title="第一阶段：前期准备"></a>第一阶段：前期准备</h3><p>语言：python3<br>使用工具：pycharm<br>使用库：xlrd，xlwt，email，smtplib</p>
-<h3 id="第二阶段：代码实现与讲解"><a href="#第二阶段：代码实现与讲解" class="headerlink" title="第二阶段：代码实现与讲解"></a>第二阶段：代码实现与讲解</h3><dl><dt>1.import</dt><dd>要实现该功能需作如下引用：</dd></dl><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import smtplib</span><br><span class="line">import email</span><br><span class="line">import xlrd</span><br><span class="line">import xlwt</span><br><span class="line">import re</span><br><span class="line">from email.mime.multipart import MIMEMultipart</span><br><span class="line">from email.mime.text import MIMEText</span><br><span class="line">from email.mime.image import MIMEImage</span><br><span class="line">from email.header import Header</span><br></pre></td></tr></table></figure>
-
-<dl><dt>其中：</dt><dd>smtplib:发送邮件所用库<br>email：邮件内容编辑所用库<br>xlrd，xlwt：excel文件处理所用库<br>re：正则表达式所用库</dd></dl><dl><dt>2.基础功能算法的编写</dt><dd>代码如下：</dd></dl><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">table = xlrd.open_workbook(&quot;D:\成绩.xlsx&quot;, &apos;rb&apos;)</span><br><span class="line">sheet1 =table.sheet_by_name(&quot;详情&quot;)</span><br><span class="line">grades=[]</span><br><span class="line">data1=[]</span><br><span class="line">data2=[]</span><br><span class="line">nrows = sheet1.nrows</span><br><span class="line">ncols=sheet1.ncols</span><br><span class="line">print(nrows,ncols)</span><br><span class="line">ncol_value = sheet1.col_values(0)</span><br><span class="line">data_value1=sheet1.col_values(14)</span><br><span class="line">data_value2=sheet1.col_values(15)</span><br><span class="line">for grade in ncol_value:</span><br><span class="line">    if re.match(&quot;^.+\\@(\\[?)[a-zA-Z0-9\\-\\.]+\\.([a-zA-Z]&#123;2,3&#125;|[0-9]&#123;1,3&#125;)(\\]?)$&quot;, grade)!=None:</span><br><span class="line">        grades.append(grade)</span><br><span class="line">k=0</span><br><span class="line">for c in ncol_value:</span><br><span class="line">    if re.match(&quot;^.+\\@(\\[?)[a-zA-Z0-9\\-\\.]+\\.([a-zA-Z]&#123;2,3&#125;|[0-9]&#123;1,3&#125;)(\\]?)$&quot;, c) != None:</span><br><span class="line">        data2.append(data_value2[k])</span><br><span class="line">    k=k+1</span><br><span class="line">print(len(data1)==len(data2))</span><br><span class="line">print(len(data1)==len(grades))</span><br><span class="line">count=0</span><br></pre></td></tr></table></figure>
-
-<dl><dt>算法思路：</dt><dd>a.创建两个空数组<br>b.读取excel文件，并获取文件中的邮箱一列的所有数据，并存入一个空数组grades中（此处需用正则表达式作为条件语句<code>re.match(&quot;^.+\\@(\\[?)[a-zA-Z0-9\\-\\.]+\\.([a-zA-Z]{2,3}|[0-9]{1,3})(\\]?)$&quot;, grade)!=None:</code>）</dd></dl>
-c.遍历grades数组，每遍历一次将列表中对应邮箱的成绩单pdf地址取出，并存入空数组data2中<br>d.判断取得后两数组的长度，数据等是否对应<br>e.设置一个计数器<code>count=0</code>，此后的代码将在一个循环中进行，计数器可用于邮件信息的录入，收件人的变换<dl><dt>3.参数配置</dt><dd>代码如下：</dd></dl><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">for n in grades:</span><br><span class="line">    smtpserver = &apos;smtp.qq.com&apos;</span><br><span class="line">    username = &apos;发件人邮箱&apos;</span><br><span class="line">    password = &apos;登陆密码/外部程序授权码&apos;</span><br><span class="line">    sender = &apos;发件人邮箱&apos;</span><br><span class="line">    receiver = grades[count]</span><br><span class="line">    subject = &apos;邮件标题&apos;</span><br><span class="line">    msg = MIMEMultipart(&apos;mixed&apos;)</span><br><span class="line">    msg[&apos;Subject&apos;] = subject</span><br><span class="line">    msg[&apos;From&apos;] = &apos;发件人 &lt;发件人邮箱&gt;&apos;</span><br><span class="line">    msg[&apos;To&apos;] = &quot;;&quot;.join(receiver)</span><br></pre></td></tr></table></figure>
-
-<dl><dt>代码解析：</dt><dd>a.smtpserver:可选择邮箱服务端，这里选择的是qq邮箱，也可根据情况将其改为网易(<code>smtp.163.com</code>)，新浪(<code>smtp.sina.com</code>)等泛用性高的邮箱<br>b.username,password,sender,subject等已在代码中用中文标注<br>c.receiver：引号中间填写收件人的邮箱，这里笔者使用的是存储有邮箱数据的grades数组<br>d.msg = MIMEMultipart(‘mixed’)：允许发送内容为文本，图片等所有形式<br>e. msg[‘To’] = “;”.join(receiver)：收件人为多个收件人,通过join将列表转换为以;为间隔的字符串</dd></dl><dl><dt>4.发送内容设置：</dt><dd>代码如下:</dd></dl><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">text = &quot;亲爱的同学，这里有一份您期待已久的成绩单，请注意查收\n&#123;&#125;&quot;.format(data2[count])</span><br><span class="line">text_plain = MIMEText(text,&apos;plain&apos;, &apos;utf-8&apos;)</span><br><span class="line">msg.attach(text_plain)</span><br><span class="line">smtp = smtplib.SMTP()</span><br><span class="line">smtp.connect(&apos;smtp.qq.com&apos;)</span><br><span class="line">smtp.login(username, password)</span><br><span class="line">smtp.sendmail(sender, receiver, msg.as_string())</span><br><span class="line">smtp.quit()</span><br><span class="line">count=count+1</span><br></pre></td></tr></table></figure>
-
-<dl><dt>代码解析：</dt><dd>a.文本内容由前端语句构成，<code>&lt;text&gt;,&lt;image&gt;,&lt;a&gt;</code>等标签均可以使用<br>b.前端之外的代码便是将前面设置好的参数导入使用<br>c.注意编码设置为utf-8方便浏览器读入<br>d.注意循环中计数器的使用！</dd></dl><hr>
-<h2 id="项目总结："><a href="#项目总结：" class="headerlink" title="项目总结："></a>项目总结：</h2><p>已达成功能：邮件单发群发，不同邮件单发群发<br>尚待完善：qq邮件发送频率过快，会被腾讯自动拦截一部分邮件，导致部分邮件发送失败，希望有解决思路的大佬们能够私聊博主，或者下方评论</p>
-<h4 id="关于授权码的获取"><a href="#关于授权码的获取" class="headerlink" title="关于授权码的获取"></a>关于授权码的获取</h4><p><a href="https://service.mail.qq.com/cgi-bin/help?subtype=1&id=28&no=1001256" target="_blank" rel="noopener">点我进行了解</a></p>
-<h4 id="关于正则表达式"><a href="#关于正则表达式" class="headerlink" title="关于正则表达式"></a>关于正则表达式</h4><p><a href="http://www.runoob.com/regexp/regexp-syntax.html" target="_blank" rel="noopener">点我进行了解</a></p>
-<h4 id="代码链接："><a href="#代码链接：" class="headerlink" title="代码链接："></a>代码链接：</h4><p>由于代码内容涉及个人隐私，修改繁杂，若有兴趣可私聊博主，博主会修改后上传百度云或github</p>
-
+              <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>由于近期在协会举办了一场比赛，赛后需要将200份不同成绩单分别发给参赛者，为了方便，用python实现了该功能，并利用博客进行记录分享学习。<br>还是那句话，菜鸡菜笔，如有不正，还请大佬们不吝惜赐教！</p>
+          
       
       
     </div>
@@ -503,6 +652,10 @@ c.遍历grades数组，每遍历一次将列表中对应邮箱的成绩单pdf地
       
 
       
+      
+        <p class="article-more-link">
+          <a href="/2019/06/09/菜鸡教程-群发不同邮件脚本编写/#more">大航海 >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>

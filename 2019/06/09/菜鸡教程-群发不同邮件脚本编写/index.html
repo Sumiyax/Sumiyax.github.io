@@ -5,17 +5,17 @@
   
   <title>菜鸡教程-群发不同邮件脚本编写 | Welcome to Sumiyax</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="写在前面由于近期在协会举办了一场比赛，赛后需要将200份不同成绩单分别发给参赛者，为了方便，用python实现了该功能，并利用博客进行记录分享学习。还是那句话，菜鸡菜笔，如有不正，还请大佬们不吝惜赐教！  第一阶段：前期准备语言：python3使用工具：pycharm使用库：xlrd，xlwt，email，smtplib 第二阶段：代码实现与讲解1.import要实现该功能需作如下引用：12345">
+  <meta name="description" content="写在前面由于近期在协会举办了一场比赛，赛后需要将200份不同成绩单分别发给参赛者，为了方便，用python实现了该功能，并利用博客进行记录分享学习。还是那句话，菜鸡菜笔，如有不正，还请大佬们不吝惜赐教！">
 <meta property="og:type" content="article">
 <meta property="og:title" content="菜鸡教程-群发不同邮件脚本编写">
 <meta property="og:url" content="http://yoursite.com/2019/06/09/菜鸡教程-群发不同邮件脚本编写/index.html">
 <meta property="og:site_name" content="Welcome to Sumiyax">
-<meta property="og:description" content="写在前面由于近期在协会举办了一场比赛，赛后需要将200份不同成绩单分别发给参赛者，为了方便，用python实现了该功能，并利用博客进行记录分享学习。还是那句话，菜鸡菜笔，如有不正，还请大佬们不吝惜赐教！  第一阶段：前期准备语言：python3使用工具：pycharm使用库：xlrd，xlwt，email，smtplib 第二阶段：代码实现与讲解1.import要实现该功能需作如下引用：12345">
+<meta property="og:description" content="写在前面由于近期在协会举办了一场比赛，赛后需要将200份不同成绩单分别发给参赛者，为了方便，用python实现了该功能，并利用博客进行记录分享学习。还是那句话，菜鸡菜笔，如有不正，还请大佬们不吝惜赐教！">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-09T11:25:31.759Z">
+<meta property="og:updated_time" content="2020-03-17T09:31:46.283Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="菜鸡教程-群发不同邮件脚本编写">
-<meta name="twitter:description" content="写在前面由于近期在协会举办了一场比赛，赛后需要将200份不同成绩单分别发给参赛者，为了方便，用python实现了该功能，并利用博客进行记录分享学习。还是那句话，菜鸡菜笔，如有不正，还请大佬们不吝惜赐教！  第一阶段：前期准备语言：python3使用工具：pycharm使用库：xlrd，xlwt，email，smtplib 第二阶段：代码实现与讲解1.import要实现该功能需作如下引用：12345">
+<meta name="twitter:description" content="写在前面由于近期在协会举办了一场比赛，赛后需要将200份不同成绩单分别发给参赛者，为了方便，用python实现了该功能，并利用博客进行记录分享学习。还是那句话，菜鸡菜笔，如有不正，还请大佬们不吝惜赐教！">
   
     <link rel="alternative" href="/atom.xml" title="Welcome to Sumiyax" type="application/atom+xml">
   
@@ -264,6 +264,7 @@
       
           
         <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>由于近期在协会举办了一场比赛，赛后需要将200份不同成绩单分别发给参赛者，为了方便，用python实现了该功能，并利用博客进行记录分享学习。<br>还是那句话，菜鸡菜笔，如有不正，还请大佬们不吝惜赐教！</p>
+<a id="more"></a>
 <hr>
 <h3 id="第一阶段：前期准备"><a href="#第一阶段：前期准备" class="headerlink" title="第一阶段：前期准备"></a>第一阶段：前期准备</h3><p>语言：python3<br>使用工具：pycharm<br>使用库：xlrd，xlwt，email，smtplib</p>
 <h3 id="第二阶段：代码实现与讲解"><a href="#第二阶段：代码实现与讲解" class="headerlink" title="第二阶段：代码实现与讲解"></a>第二阶段：代码实现与讲解</h3><dl><dt>1.import</dt><dd>要实现该功能需作如下引用：</dd></dl><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import smtplib</span><br><span class="line">import email</span><br><span class="line">import xlrd</span><br><span class="line">import xlwt</span><br><span class="line">import re</span><br><span class="line">from email.mime.multipart import MIMEMultipart</span><br><span class="line">from email.mime.text import MIMEText</span><br><span class="line">from email.mime.image import MIMEImage</span><br><span class="line">from email.header import Header</span><br></pre></td></tr></table></figure>
@@ -338,7 +339,7 @@ c.遍历grades数组，每遍历一次将列表中对应邮箱的成绩单pdf地
         <p><span>本文标题:</span><a href="/2019/06/09/菜鸡教程-群发不同邮件脚本编写/">菜鸡教程-群发不同邮件脚本编写</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Sumiyax 的个人博客">Sumiyax</a></p>
         <p><span>发布时间:</span>2019年06月09日 - 19时25分</p>
-        <p><span>最后更新:</span>2019年06月09日 - 19时25分</p>
+        <p><span>最后更新:</span>2020年03月17日 - 17时31分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2019/06/09/菜鸡教程-群发不同邮件脚本编写/" title="菜鸡教程-群发不同邮件脚本编写">http://yoursite.com/2019/06/09/菜鸡教程-群发不同邮件脚本编写/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/06/09/菜鸡教程-群发不同邮件脚本编写/　　作者: Sumiyax" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -446,7 +447,7 @@ c.遍历grades数组，每遍历一次将列表中对应邮箱的成绩单pdf地
             <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
     </div>
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/03/17/【做题杂记】sql中的连接/">【做题杂记】sql中的连接</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/17/title-【做题杂记】类型题：查询第N高的数据/">【做题杂记】类型题：查询第N高的数据'</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/10/菜鸡教程-简易每周游戏推荐小程序制作/">菜鸡教程-简易每周游戏推荐小程序制作</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/09/菜鸡教程-群发不同邮件脚本编写/">菜鸡教程-群发不同邮件脚本编写</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/03/17/【手撕MR】WordCount/">【手撕MR】WordCount</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/17/【灵光一现】MR辅助排序深入理解-MR重点盘点/">【灵光一现】MR辅助排序深入理解&MR重点盘点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/17/【数仓项目】常用xhell脚本编写/">【数仓项目】常用xhell脚本编写 </a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/17/【做题杂记】sql中的连接/">【做题杂记】sql中的连接</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/17/title-【做题杂记】类型题：查询第N高的数据/">【做题杂记】类型题：查询第N高的数据'</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/10/菜鸡教程-简易每周游戏推荐小程序制作/">菜鸡教程-简易每周游戏推荐小程序制作</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/09/菜鸡教程-群发不同邮件脚本编写/">菜鸡教程-群发不同邮件脚本编写</a></li></ul>
     <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
     <script>
         $(".post-list").addClass("toc-article");

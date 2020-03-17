@@ -3,19 +3,21 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>菜鸡教程-简易每周游戏推荐小程序制作 | Welcome to Sumiyax</title>
+  <title>【灵光一现】MR辅助排序深入理解&amp;MR重点盘点 | Welcome to Sumiyax</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="由于不可抗力因素（版本对markdown规范的不一致，所以本篇博文暂时无法显示成功，请点击下方文字进入中北大学技术论坛–听雨轩，进行查看！）点我进入听雨轩本篇文章界面">
+  <meta name="description" content="辅助排序：发生在map输出的数据进入reduce之前，可根据键值的一部分对整个键值对进行排序  常用于提取一组数据中不同id下每个id对应的价值的最大值或最小值实际案例可参见mr文档的辅助排序案例 原理：重新建立一个mr的分组器 继承自 WritableComparator类并重写其比较方法 此外，需注意。必须写一个无参构造并传递一个true值给父类，不然数据会全被定位空源码如下：   布尔参数c">
 <meta property="og:type" content="article">
-<meta property="og:title" content="菜鸡教程-简易每周游戏推荐小程序制作">
-<meta property="og:url" content="http://yoursite.com/2019/06/10/菜鸡教程-简易每周游戏推荐小程序制作/index.html">
+<meta property="og:title" content="【灵光一现】MR辅助排序深入理解&amp;MR重点盘点">
+<meta property="og:url" content="http://yoursite.com/2020/03/17/【灵光一现】MR辅助排序深入理解-MR重点盘点/index.html">
 <meta property="og:site_name" content="Welcome to Sumiyax">
-<meta property="og:description" content="由于不可抗力因素（版本对markdown规范的不一致，所以本篇博文暂时无法显示成功，请点击下方文字进入中北大学技术论坛–听雨轩，进行查看！）点我进入听雨轩本篇文章界面">
+<meta property="og:description" content="辅助排序：发生在map输出的数据进入reduce之前，可根据键值的一部分对整个键值对进行排序  常用于提取一组数据中不同id下每个id对应的价值的最大值或最小值实际案例可参见mr文档的辅助排序案例 原理：重新建立一个mr的分组器 继承自 WritableComparator类并重写其比较方法 此外，需注意。必须写一个无参构造并传递一个true值给父类，不然数据会全被定位空源码如下：   布尔参数c">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-11T12:13:39.534Z">
+<meta property="og:image" content="http://yoursite.com/2020/03/17/【灵光一现】MR辅助排序深入理解-MR重点盘点/1.png">
+<meta property="og:updated_time" content="2020-03-17T10:09:20.273Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="菜鸡教程-简易每周游戏推荐小程序制作">
-<meta name="twitter:description" content="由于不可抗力因素（版本对markdown规范的不一致，所以本篇博文暂时无法显示成功，请点击下方文字进入中北大学技术论坛–听雨轩，进行查看！）点我进入听雨轩本篇文章界面">
+<meta name="twitter:title" content="【灵光一现】MR辅助排序深入理解&amp;MR重点盘点">
+<meta name="twitter:description" content="辅助排序：发生在map输出的数据进入reduce之前，可根据键值的一部分对整个键值对进行排序  常用于提取一组数据中不同id下每个id对应的价值的最大值或最小值实际案例可参见mr文档的辅助排序案例 原理：重新建立一个mr的分组器 继承自 WritableComparator类并重写其比较方法 此外，需注意。必须写一个无参构造并传递一个true值给父类，不然数据会全被定位空源码如下：   布尔参数c">
+<meta name="twitter:image" content="http://yoursite.com/2020/03/17/【灵光一现】MR辅助排序深入理解-MR重点盘点/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Welcome to Sumiyax" type="application/atom+xml">
   
@@ -229,11 +231,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-菜鸡教程-简易每周游戏推荐小程序制作" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-【灵光一现】MR辅助排序深入理解-MR重点盘点" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2019/06/10/菜鸡教程-简易每周游戏推荐小程序制作/" class="article-date">
-      <time datetime="2019-06-10T13:55:55.000Z" itemprop="datePublished">2019-06-10</time>
+      <a href="/2020/03/17/【灵光一现】MR辅助排序深入理解-MR重点盘点/" class="article-date">
+      <time datetime="2020-03-17T10:04:19.000Z" itemprop="datePublished">2020-03-17</time>
 </a>
     </div>
   
@@ -246,7 +248,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      菜鸡教程-简易每周游戏推荐小程序制作
+      【灵光一现】MR辅助排序深入理解&amp;MR重点盘点
     </h1>
   
 
@@ -263,7 +265,37 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h4 id="由于不可抗力因素（版本对markdown规范的不一致，所以本篇博文暂时无法显示成功，请点击下方文字进入中北大学技术论坛–听雨轩，进行查看！）"><a href="#由于不可抗力因素（版本对markdown规范的不一致，所以本篇博文暂时无法显示成功，请点击下方文字进入中北大学技术论坛–听雨轩，进行查看！）" class="headerlink" title="由于不可抗力因素（版本对markdown规范的不一致，所以本篇博文暂时无法显示成功，请点击下方文字进入中北大学技术论坛–听雨轩，进行查看！）"></a>由于不可抗力因素（版本对markdown规范的不一致，所以本篇博文暂时无法显示成功，请点击下方文字进入中北大学技术论坛–听雨轩，进行查看！）</h4><p><a href="http://nucode.cn/article/1540820448482" target="_blank" rel="noopener">点我进入听雨轩本篇文章界面</a></p>
+        <h1 id="辅助排序：发生在map输出的数据进入reduce之前，可根据键值的一部分对整个键值对进行排序"><a href="#辅助排序：发生在map输出的数据进入reduce之前，可根据键值的一部分对整个键值对进行排序" class="headerlink" title="辅助排序：发生在map输出的数据进入reduce之前，可根据键值的一部分对整个键值对进行排序"></a>辅助排序：发生在map输出的数据进入reduce之前，可根据键值的一部分对整个键值对进行排序</h1><!-- ![1](1.png) -->
+<hr>
+<p>常用于提取一组数据中不同id下每个id对应的价值的最大值或最小值<br>实际案例可参见mr文档的辅助排序案例</p>
+<h2 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h2><p>重新建立一个mr的分组器 继承自 WritableComparator类并重写其比较方法</p>
+<p>此外，需注意。必须写一个无参构造并传递一个true值给父类，不然数据会全被定位空<br>源码如下：</p>
+<img src="/2020/03/17/【灵光一现】MR辅助排序深入理解-MR重点盘点/1.png" title="[1]">
+
+<p>布尔参数createInstances即为必须传true的原因</p>
+<h2 id="重写其比较方法："><a href="#重写其比较方法：" class="headerlink" title="重写其比较方法："></a>重写其比较方法：</h2><p>使对于一个键值只根据其一部分来进行排序<br>如此一来，进入reduce阶段时，原本是不同的键值对会变成相同的键值对，再加上value为空的话，则会只传入第一个（即为排序好的最大或者最小的键值对）<br>举个例子：<br>map阶段出来的键值对如下所示：<br>a.&lt;(1,20):null&gt;  b.&lt;(1,18):null&gt;  c.&lt;(2,34):null&gt;<br>原本a与b是不相同的键值对，排序上a&gt;b但是，经过辅助排序后 只根据id进行排序<br>再加上value同为空那reduce阶段就会认为a=b，只输出第一个，即为a 就可得到id为a的最大值为20</p>
+<h1 id="MR学习总结"><a href="#MR学习总结" class="headerlink" title="MR学习总结"></a>MR学习总结</h1><h3 id="1-要去关注job提交源码和切片提交源码"><a href="#1-要去关注job提交源码和切片提交源码" class="headerlink" title="1.要去关注job提交源码和切片提交源码"></a>1.要去关注job提交源码和切片提交源码</h3><p>切片源码maps中有三个参数，一个最小值1，一个最大值longwritable<br>还有一个块大小，集群中块大小默认128m，本地是32m。<br>如果存一个129m文件，只切一片</p>
+<h3 id="2-shuffle重中之重"><a href="#2-shuffle重中之重" class="headerlink" title="2.shuffle重中之重"></a>2.shuffle重中之重</h3><p>分区，排序，合并 需要全掌握</p>
+<p>combiner是mapreduce的优化手段，适用于汇总不适用均值</p>
+<h3 id="3-outputformat-reduce-join-map-join"><a href="#3-outputformat-reduce-join-map-join" class="headerlink" title="3.outputformat,reduce join , map join"></a>3.outputformat,reduce join , map join</h3><p>数仓岗位很重要</p>
+<h3 id="4-etl很重要-需要加深练习"><a href="#4-etl很重要-需要加深练习" class="headerlink" title="4.etl很重要 需要加深练习"></a>4.etl很重要 需要加深练习</h3><h3 id="5-inputformat"><a href="#5-inputformat" class="headerlink" title="5.inputformat"></a>5.inputformat</h3><p>默认实现类：TextInputFormat，默认按照块大小去切片，k是偏移量，v是行内容</p>
+<p>KeyValueTextInputFormat：每一行均为一条记录，被分割符分割为key，value，默认分隔符是\t，分隔符之前为key，之后为value</p>
+<p>NlineInputFormat：按照指定的行数N来划分切片</p>
+<p>CombineTextInputFormat:可以把多个小文件合并成一个切片处理，提高处理效率，改变了KV，K是文件路径加名称，V是文件内容</p>
+<p>用户还可以自定义InputFormat</p>
+<h3 id="6-逻辑处理接口：Mapper"><a href="#6-逻辑处理接口：Mapper" class="headerlink" title="6.逻辑处理接口：Mapper"></a>6.逻辑处理接口：Mapper</h3><p>用户根据业务需求实现其中三个方法<br>map（）：实现业务逻辑</p>
+<p>setup（）：初始化</p>
+<p>cleanup（）：关闭资源收尾</p>
+<h3 id="7-Partitioner分区"><a href="#7-Partitioner分区" class="headerlink" title="7.Partitioner分区"></a>7.Partitioner分区</h3><p>有默认实现HashPartitioner，逻辑是根据key的哈希值和numReduces来返回一个分区号；公式为：key.hashCode()&amp;Integer.MAXVALUE % numReduces<br>若有特定业务需求，可自定义分区，需注意分区是有顺序的必须从0开始</p>
+<h3 id="8-Comparable排序"><a href="#8-Comparable排序" class="headerlink" title="8.Comparable排序"></a>8.Comparable排序</h3><p>当我们用自定义的对象key来输出时，就必须实现WritableComparable接口重写他的compareto（）方法<br>部分排序：对最终的输出的每一个文件进行内部排序</p>
+<p>全排序：对所有数据进行排序，通常只有一个reduce</p>
+<p>二次排序：排序的条件有两个，同理可知三次排序</p>
+<h3 id="9-combiner合并"><a href="#9-combiner合并" class="headerlink" title="9.combiner合并"></a>9.combiner合并</h3><p>combiner合并可以提高程序执行效率，减少io传输，但是使用时必须不能影响原有业务的处理结果</p>
+<h3 id="10-reduce端分组：GroupingComparator"><a href="#10-reduce端分组：GroupingComparator" class="headerlink" title="10.reduce端分组：GroupingComparator"></a>10.reduce端分组：GroupingComparator</h3><p>在reduce端对key进行分组，应用于：在接收的key为bean对象时，想让一个或几个字段相同（全部字段比较不相同）的key进入到同一个reduce方法时，可以采用分组排序。</p>
+<h3 id="11-逻辑处理接口：reducer"><a href="#11-逻辑处理接口：reducer" class="headerlink" title="11.逻辑处理接口：reducer"></a>11.逻辑处理接口：reducer</h3><p>用户根据业务需求实现其中三个方法：reduce（） setup（） cleanup（）</p>
+<h3 id="12-OutputFormat"><a href="#12-OutputFormat" class="headerlink" title="12.OutputFormat"></a>12.OutputFormat</h3><p> 默认实现类时TextOutputFormat，功能逻辑是：将每一个KV对向目标文本文件输出一行。</p>
+<p>将SequenceFileOutputFormat输出作为后续MapReduce任务的输入，这便是一种好的输出格式，因为他格式紧凑，很容易被压缩</p>
+<p>用户可自定义OutputFormat</p>
 
       
       
@@ -319,13 +351,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/06/10/菜鸡教程-简易每周游戏推荐小程序制作/">菜鸡教程-简易每周游戏推荐小程序制作</a></p>
+        <p><span>本文标题:</span><a href="/2020/03/17/【灵光一现】MR辅助排序深入理解-MR重点盘点/">【灵光一现】MR辅助排序深入理解&amp;MR重点盘点</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Sumiyax 的个人博客">Sumiyax</a></p>
-        <p><span>发布时间:</span>2019年06月10日 - 21时55分</p>
-        <p><span>最后更新:</span>2019年06月11日 - 20时13分</p>
+        <p><span>发布时间:</span>2020年03月17日 - 18时04分</p>
+        <p><span>最后更新:</span>2020年03月17日 - 18时09分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/06/10/菜鸡教程-简易每周游戏推荐小程序制作/" title="菜鸡教程-简易每周游戏推荐小程序制作">http://yoursite.com/2019/06/10/菜鸡教程-简易每周游戏推荐小程序制作/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/06/10/菜鸡教程-简易每周游戏推荐小程序制作/　　作者: Sumiyax" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/03/17/【灵光一现】MR辅助排序深入理解-MR重点盘点/" title="【灵光一现】MR辅助排序深入理解&amp;MR重点盘点">http://yoursite.com/2020/03/17/【灵光一现】MR辅助排序深入理解-MR重点盘点/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/03/17/【灵光一现】MR辅助排序深入理解-MR重点盘点/　　作者: Sumiyax" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -338,18 +370,18 @@
 
 <nav id="article-nav">
   
-    <a href="/2020/03/17/title-【做题杂记】类型题：查询第N高的数据/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/03/17/【手撕MR】WordCount/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          【做题杂记】类型题：查询第N高的数据&#39;
+          【手撕MR】WordCount
         
       </div>
     </a>
   
   
-    <a href="/2019/06/09/菜鸡教程-群发不同邮件脚本编写/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">菜鸡教程-群发不同邮件脚本编写</div>
+    <a href="/2020/03/17/【数仓项目】常用xhell脚本编写/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">【数仓项目】常用xhell脚本编写 </div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -360,7 +392,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#由于不可抗力因素（版本对markdown规范的不一致，所以本篇博文暂时无法显示成功，请点击下方文字进入中北大学技术论坛–听雨轩，进行查看！）"><span class="toc-number">1.</span> <span class="toc-text">由于不可抗力因素（版本对markdown规范的不一致，所以本篇博文暂时无法显示成功，请点击下方文字进入中北大学技术论坛–听雨轩，进行查看！）</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#辅助排序：发生在map输出的数据进入reduce之前，可根据键值的一部分对整个键值对进行排序"><span class="toc-number">1.</span> <span class="toc-text">辅助排序：发生在map输出的数据进入reduce之前，可根据键值的一部分对整个键值对进行排序</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#原理："><span class="toc-number">1.1.</span> <span class="toc-text">原理：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重写其比较方法："><span class="toc-number">1.2.</span> <span class="toc-text">重写其比较方法：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MR学习总结"><span class="toc-number">2.</span> <span class="toc-text">MR学习总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-要去关注job提交源码和切片提交源码"><span class="toc-number">2.0.1.</span> <span class="toc-text">1.要去关注job提交源码和切片提交源码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-shuffle重中之重"><span class="toc-number">2.0.2.</span> <span class="toc-text">2.shuffle重中之重</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-outputformat-reduce-join-map-join"><span class="toc-number">2.0.3.</span> <span class="toc-text">3.outputformat,reduce join , map join</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-etl很重要-需要加深练习"><span class="toc-number">2.0.4.</span> <span class="toc-text">4.etl很重要 需要加深练习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-inputformat"><span class="toc-number">2.0.5.</span> <span class="toc-text">5.inputformat</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-逻辑处理接口：Mapper"><span class="toc-number">2.0.6.</span> <span class="toc-text">6.逻辑处理接口：Mapper</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-Partitioner分区"><span class="toc-number">2.0.7.</span> <span class="toc-text">7.Partitioner分区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-Comparable排序"><span class="toc-number">2.0.8.</span> <span class="toc-text">8.Comparable排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-combiner合并"><span class="toc-number">2.0.9.</span> <span class="toc-text">9.combiner合并</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-reduce端分组：GroupingComparator"><span class="toc-number">2.0.10.</span> <span class="toc-text">10.reduce端分组：GroupingComparator</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-逻辑处理接口：reducer"><span class="toc-number">2.0.11.</span> <span class="toc-text">11.逻辑处理接口：reducer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-OutputFormat"><span class="toc-number">2.0.12.</span> <span class="toc-text">12.OutputFormat</span></a></li></ol></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
 
@@ -426,13 +458,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2020/03/17/title-【做题杂记】类型题：查询第N高的数据/" title="上一篇: 【做题杂记】类型题：查询第N高的数据&#39;">
+            <a href="/2020/03/17/【手撕MR】WordCount/" title="上一篇: 【手撕MR】WordCount">
                 <i class="fa fa-angle-left"></i>
             </a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2019/06/09/菜鸡教程-群发不同邮件脚本编写/" title="下一篇: 菜鸡教程-群发不同邮件脚本编写">
+            <a href="/2020/03/17/【数仓项目】常用xhell脚本编写/" title="下一篇: 【数仓项目】常用xhell脚本编写 ">
                 <i class="fa fa-angle-right"></i>
             </a>
         
