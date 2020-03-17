@@ -5,18 +5,18 @@
   
   <title>【灵光一现】MR辅助排序深入理解&amp;MR重点盘点 | Welcome to Sumiyax</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="辅助排序：发生在map输出的数据进入reduce之前，可根据键值的一部分对整个键值对进行排序  常用于提取一组数据中不同id下每个id对应的价值的最大值或最小值实际案例可参见mr文档的辅助排序案例 原理：重新建立一个mr的分组器 继承自 WritableComparator类并重写其比较方法 此外，需注意。必须写一个无参构造并传递一个true值给父类，不然数据会全被定位空源码如下：   布尔参数c">
+  <meta name="description" content="辅助排序：发生在map输出的数据进入reduce之前，可根据键值的一部分对整个键值对进行排序">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【灵光一现】MR辅助排序深入理解&amp;MR重点盘点">
 <meta property="og:url" content="http://yoursite.com/2020/03/17/【灵光一现】MR辅助排序深入理解-MR重点盘点/index.html">
 <meta property="og:site_name" content="Welcome to Sumiyax">
-<meta property="og:description" content="辅助排序：发生在map输出的数据进入reduce之前，可根据键值的一部分对整个键值对进行排序  常用于提取一组数据中不同id下每个id对应的价值的最大值或最小值实际案例可参见mr文档的辅助排序案例 原理：重新建立一个mr的分组器 继承自 WritableComparator类并重写其比较方法 此外，需注意。必须写一个无参构造并传递一个true值给父类，不然数据会全被定位空源码如下：   布尔参数c">
+<meta property="og:description" content="辅助排序：发生在map输出的数据进入reduce之前，可根据键值的一部分对整个键值对进行排序">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2020/03/17/【灵光一现】MR辅助排序深入理解-MR重点盘点/1.png">
-<meta property="og:updated_time" content="2020-03-17T10:09:20.273Z">
+<meta property="og:updated_time" content="2020-03-17T11:47:17.624Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【灵光一现】MR辅助排序深入理解&amp;MR重点盘点">
-<meta name="twitter:description" content="辅助排序：发生在map输出的数据进入reduce之前，可根据键值的一部分对整个键值对进行排序  常用于提取一组数据中不同id下每个id对应的价值的最大值或最小值实际案例可参见mr文档的辅助排序案例 原理：重新建立一个mr的分组器 继承自 WritableComparator类并重写其比较方法 此外，需注意。必须写一个无参构造并传递一个true值给父类，不然数据会全被定位空源码如下：   布尔参数c">
+<meta name="twitter:description" content="辅助排序：发生在map输出的数据进入reduce之前，可根据键值的一部分对整个键值对进行排序">
 <meta name="twitter:image" content="http://yoursite.com/2020/03/17/【灵光一现】MR辅助排序深入理解-MR重点盘点/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Welcome to Sumiyax" type="application/atom+xml">
@@ -265,8 +265,10 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="辅助排序：发生在map输出的数据进入reduce之前，可根据键值的一部分对整个键值对进行排序"><a href="#辅助排序：发生在map输出的数据进入reduce之前，可根据键值的一部分对整个键值对进行排序" class="headerlink" title="辅助排序：发生在map输出的数据进入reduce之前，可根据键值的一部分对整个键值对进行排序"></a>辅助排序：发生在map输出的数据进入reduce之前，可根据键值的一部分对整个键值对进行排序</h1><!-- ![1](1.png) -->
-<hr>
+        <h1 id="辅助排序：发生在map输出的数据进入reduce之前，可根据键值的一部分对整个键值对进行排序"><a href="#辅助排序：发生在map输出的数据进入reduce之前，可根据键值的一部分对整个键值对进行排序" class="headerlink" title="辅助排序：发生在map输出的数据进入reduce之前，可根据键值的一部分对整个键值对进行排序"></a>辅助排序：发生在map输出的数据进入reduce之前，可根据键值的一部分对整个键值对进行排序</h1><hr>
+<a id="more"></a>
+
+
 <p>常用于提取一组数据中不同id下每个id对应的价值的最大值或最小值<br>实际案例可参见mr文档的辅助排序案例</p>
 <h2 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h2><p>重新建立一个mr的分组器 继承自 WritableComparator类并重写其比较方法</p>
 <p>此外，需注意。必须写一个无参构造并传递一个true值给父类，不然数据会全被定位空<br>源码如下：</p>
@@ -354,7 +356,7 @@
         <p><span>本文标题:</span><a href="/2020/03/17/【灵光一现】MR辅助排序深入理解-MR重点盘点/">【灵光一现】MR辅助排序深入理解&amp;MR重点盘点</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Sumiyax 的个人博客">Sumiyax</a></p>
         <p><span>发布时间:</span>2020年03月17日 - 18时04分</p>
-        <p><span>最后更新:</span>2020年03月17日 - 18时09分</p>
+        <p><span>最后更新:</span>2020年03月17日 - 19时47分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2020/03/17/【灵光一现】MR辅助排序深入理解-MR重点盘点/" title="【灵光一现】MR辅助排序深入理解&amp;MR重点盘点">http://yoursite.com/2020/03/17/【灵光一现】MR辅助排序深入理解-MR重点盘点/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/03/17/【灵光一现】MR辅助排序深入理解-MR重点盘点/　　作者: Sumiyax" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
