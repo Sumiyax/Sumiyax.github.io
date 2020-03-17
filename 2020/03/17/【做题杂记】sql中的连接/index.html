@@ -3,19 +3,23 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>菜鸡教程-简易每周游戏推荐小程序制作 | Welcome to Sumiyax</title>
+  <title>【做题杂记】sql中的连接 | Welcome to Sumiyax</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="由于不可抗力因素（版本对markdown规范的不一致，所以本篇博文暂时无法显示成功，请点击下方文字进入中北大学技术论坛–听雨轩，进行查看！）点我进入听雨轩本篇文章界面">
+  <meta name="description" content="外连接(out join)外连接分为外左连接(left outer join)和外右连接(right outer join) 注释：left outer join 与 left join 等价，    一般写成left join           right outer join 与 right join等价，一般写成right join 左连接，取左边的表的全部，右边的表按条件，符合的显示，不">
 <meta property="og:type" content="article">
-<meta property="og:title" content="菜鸡教程-简易每周游戏推荐小程序制作">
-<meta property="og:url" content="http://yoursite.com/2019/06/10/菜鸡教程-简易每周游戏推荐小程序制作/index.html">
+<meta property="og:title" content="【做题杂记】sql中的连接">
+<meta property="og:url" content="http://yoursite.com/2020/03/17/【做题杂记】sql中的连接/index.html">
 <meta property="og:site_name" content="Welcome to Sumiyax">
-<meta property="og:description" content="由于不可抗力因素（版本对markdown规范的不一致，所以本篇博文暂时无法显示成功，请点击下方文字进入中北大学技术论坛–听雨轩，进行查看！）点我进入听雨轩本篇文章界面">
+<meta property="og:description" content="外连接(out join)外连接分为外左连接(left outer join)和外右连接(right outer join) 注释：left outer join 与 left join 等价，    一般写成left join           right outer join 与 right join等价，一般写成right join 左连接，取左边的表的全部，右边的表按条件，符合的显示，不">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-11T12:13:39.534Z">
+<meta property="og:image" content="http://yoursite.com/2020/03/17/【做题杂记】sql中的连接/1.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/17/【做题杂记】sql中的连接/2.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/17/【做题杂记】sql中的连接/3.png">
+<meta property="og:updated_time" content="2020-03-17T09:02:44.535Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="菜鸡教程-简易每周游戏推荐小程序制作">
-<meta name="twitter:description" content="由于不可抗力因素（版本对markdown规范的不一致，所以本篇博文暂时无法显示成功，请点击下方文字进入中北大学技术论坛–听雨轩，进行查看！）点我进入听雨轩本篇文章界面">
+<meta name="twitter:title" content="【做题杂记】sql中的连接">
+<meta name="twitter:description" content="外连接(out join)外连接分为外左连接(left outer join)和外右连接(right outer join) 注释：left outer join 与 left join 等价，    一般写成left join           right outer join 与 right join等价，一般写成right join 左连接，取左边的表的全部，右边的表按条件，符合的显示，不">
+<meta name="twitter:image" content="http://yoursite.com/2020/03/17/【做题杂记】sql中的连接/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Welcome to Sumiyax" type="application/atom+xml">
   
@@ -229,11 +233,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-菜鸡教程-简易每周游戏推荐小程序制作" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-【做题杂记】sql中的连接" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2019/06/10/菜鸡教程-简易每周游戏推荐小程序制作/" class="article-date">
-      <time datetime="2019-06-10T13:55:55.000Z" itemprop="datePublished">2019-06-10</time>
+      <a href="/2020/03/17/【做题杂记】sql中的连接/" class="article-date">
+      <time datetime="2020-03-17T08:58:27.000Z" itemprop="datePublished">2020-03-17</time>
 </a>
     </div>
   
@@ -246,7 +250,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      菜鸡教程-简易每周游戏推荐小程序制作
+      【做题杂记】sql中的连接
     </h1>
   
 
@@ -263,7 +267,46 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h4 id="由于不可抗力因素（版本对markdown规范的不一致，所以本篇博文暂时无法显示成功，请点击下方文字进入中北大学技术论坛–听雨轩，进行查看！）"><a href="#由于不可抗力因素（版本对markdown规范的不一致，所以本篇博文暂时无法显示成功，请点击下方文字进入中北大学技术论坛–听雨轩，进行查看！）" class="headerlink" title="由于不可抗力因素（版本对markdown规范的不一致，所以本篇博文暂时无法显示成功，请点击下方文字进入中北大学技术论坛–听雨轩，进行查看！）"></a>由于不可抗力因素（版本对markdown规范的不一致，所以本篇博文暂时无法显示成功，请点击下方文字进入中北大学技术论坛–听雨轩，进行查看！）</h4><p><a href="http://nucode.cn/article/1540820448482" target="_blank" rel="noopener">点我进入听雨轩本篇文章界面</a></p>
+        <p>外连接(out join)<br>外连接分为外左连接(left outer join)和外右连接(right outer join)</p>
+<p>注释：left outer join 与 left join 等价，    一般写成left join<br>           right outer join 与 right join等价，一般写成right join</p>
+<p>左连接，取左边的表的全部，右边的表按条件，符合的显示，不符合则显示null</p>
+<p>举例：select <select list> from A left join B on A.id=B.id</select></p>
+<p><img src="1.png" alt></p>
+<p>右连接：取右边的表的全部，左边的表按条件，符合的显示，不符合则显示null</p>
+<p>举例：select <select list> from A right join B on A.id=B.id</select></p>
+<p><img src="2.png" alt></p>
+<p>内连接（inner join）<br>内连接：也称为等值连接，返回两张表都满足条件的部分</p>
+<p>注释：inner join 就等于 join<br><img src="3.png" alt></p>
+<p>交叉连接（CROSS JOIN）<br>交叉连接：返回左表中的所有行，左表中的每一行与右表中的所有行组合。交叉联接也称作笛卡尔积</p>
+<p>首先，先简单解释一下笛卡尔积：笛卡尔乘积是指在数学中，两个集合X和Y的笛卡尓积（Cartesian product），又称直积，表示为X × Y，第一个对象是X的成员而第二个对象是Y的所有可能有序对的其中一个成员</p>
+<p>举例：</p>
+<p>现在，我们有两个集合A和B。</p>
+<p>A = {0,1}     B = {2,3,4}</p>
+<p>集合 A×B 和 B×A的结果集就可以分别表示为以下这种形式：</p>
+<p>A×B = {（0，2），（1，2），（0，3），（1，3），（0，4），（1，4）}；</p>
+<p>B×A = {（2，0），（2，1），（3，0），（3，1），（4，0），（4，1）}；</p>
+<p>以上A×B和B×A的结果就可以叫做两个集合相乘的‘笛卡尔积’。</p>
+<p>从以上的数据分析我们可以得出以下两点结论：</p>
+<p>1，两个集合相乘，不满足交换率，既 A×B ≠ B×A;</p>
+<p>2，A集合和B集合相乘，包含了集合A中元素和集合B中元素相结合的所有的可能性。既两个集合相乘得到的新集合的元素个数是 A集合的元素个数 × B集合的元素个数;</p>
+<p>交叉连接有两种，显式的和隐式的，不带ON子句，返回的是两表的乘积，也叫笛卡尔积。<br>例如：下面的语句1和语句2的结果是相同的。</p>
+<p>语句1：隐式的交叉连接，没有CROSS JOIN。<br>SELECT O.ID, O.ORDER_NUMBER, C.ID, C.NAME<br>FROM ORDERS O , CUSTOMERS C<br>WHERE O.ID=1;</p>
+<p>语句2：显式的交叉连接，使用CROSS JOIN。<br>SELECT O.ID,O.ORDER_NUMBER,C.ID,<br>C.NAME<br>FROM ORDERS O CROSS JOIN CUSTOMERS C<br>WHERE O.ID=1;</p>
+<p>内连接和where的区别：<br>数据库表连接数据行匹配时所遵循的算法就是以上提到的笛卡尔积，表与表之间的连接可以看成是在做乘法运算。</p>
+<p>比如现在数据库中有两张表，student表和 student_subject表，如下所示：</p>
+<p>　　</p>
+<p>我们执行以下的sql语句，只是纯粹的进行表连接。</p>
+<p>SELECT * from student JOIN student_subject;<br>SELECT * from student_subject JOIN student;</p>
+<p>以第一条sql语句为例我们来看一下他的执行流程，</p>
+<p>1，from语句把student表 和 student_subject表从数据库文件加载到内存中。</p>
+<p>2，join语句相当于对两张表做了乘法运算，把student表中的每一行记录按照顺序和student_subject表中记录依次匹配。</p>
+<p>3，匹配完成后，我们得到了一张有 （student中记录数 × student_subject表中记录数）条的临时表。 在内存中形成的临时表如表1.0所示。我们又把内存中表1.0所示的表称为‘笛卡尔积表’。　　</p>
+<p>再看一下sql中主要关键字的执行顺序：</p>
+<p>from<br>on<br>join<br>where<br>group by<br>having<br>select<br>distinct<br>union<br>order by  </p>
+<p> 我们看到on是在join和where前面的</p>
+<pre><code>如果两张表的数据量都比较大的话，那样就会占用很大的内存空间这显然是不合理的。所以，我们在进行表连接查询的时候一般都会使用JOIN xxx ON xxx的语法，ON语句的执行是在JOIN语句之前的，也就是说两张表数据行之间进行匹配的时候，会先判断数据行是否符合ON语句后面的条件，再决定是否JOIN。</code></pre><p>　　因此，有一个显而易见的SQL优化的方案是，当两张表的数据量比较大，又需要连接查询时，应该使用 FROM table1 JOIN table2 ON xxx的语法，避免使用 FROM table1,table2 WHERE xxx 的语法，因为后者会在内存中先生成一张数据量比较大的笛卡尔积表，增加了内存的开销。</p>
+<p>全连接（Full join）</p>
+<p>全外连接是在结果中除了显示满足连接的条件的行外，还显示了join两侧表中所有满足检索条件的行</p>
 
       
       
@@ -319,13 +362,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2019/06/10/菜鸡教程-简易每周游戏推荐小程序制作/">菜鸡教程-简易每周游戏推荐小程序制作</a></p>
+        <p><span>本文标题:</span><a href="/2020/03/17/【做题杂记】sql中的连接/">【做题杂记】sql中的连接</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Sumiyax 的个人博客">Sumiyax</a></p>
-        <p><span>发布时间:</span>2019年06月10日 - 21时55分</p>
-        <p><span>最后更新:</span>2019年06月11日 - 20时13分</p>
+        <p><span>发布时间:</span>2020年03月17日 - 16时58分</p>
+        <p><span>最后更新:</span>2020年03月17日 - 17时02分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2019/06/10/菜鸡教程-简易每周游戏推荐小程序制作/" title="菜鸡教程-简易每周游戏推荐小程序制作">http://yoursite.com/2019/06/10/菜鸡教程-简易每周游戏推荐小程序制作/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2019/06/10/菜鸡教程-简易每周游戏推荐小程序制作/　　作者: Sumiyax" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/03/17/【做题杂记】sql中的连接/" title="【做题杂记】sql中的连接">http://yoursite.com/2020/03/17/【做题杂记】sql中的连接/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/03/17/【做题杂记】sql中的连接/　　作者: Sumiyax" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -338,18 +381,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2020/03/17/title-【做题杂记】类型题：查询第N高的数据/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          【做题杂记】类型题：查询第N高的数据&#39;
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/06/09/菜鸡教程-群发不同邮件脚本编写/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">菜鸡教程-群发不同邮件脚本编写</div>
+    <a href="/2020/03/17/title-【做题杂记】类型题：查询第N高的数据/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">【做题杂记】类型题：查询第N高的数据&#39;</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -360,7 +394,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#由于不可抗力因素（版本对markdown规范的不一致，所以本篇博文暂时无法显示成功，请点击下方文字进入中北大学技术论坛–听雨轩，进行查看！）"><span class="toc-number">1.</span> <span class="toc-text">由于不可抗力因素（版本对markdown规范的不一致，所以本篇博文暂时无法显示成功，请点击下方文字进入中北大学技术论坛–听雨轩，进行查看！）</span></a></li></ol>
+    
 </div>
 <input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
 
@@ -426,13 +460,11 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2020/03/17/title-【做题杂记】类型题：查询第N高的数据/" title="上一篇: 【做题杂记】类型题：查询第N高的数据&#39;">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2019/06/09/菜鸡教程-群发不同邮件脚本编写/" title="下一篇: 菜鸡教程-群发不同邮件脚本编写">
+            <a href="/2020/03/17/title-【做题杂记】类型题：查询第N高的数据/" title="下一篇: 【做题杂记】类型题：查询第N高的数据&#39;">
                 <i class="fa fa-angle-right"></i>
             </a>
         
