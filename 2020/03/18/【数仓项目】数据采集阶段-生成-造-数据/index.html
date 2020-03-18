@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>【数仓项目】数据采集阶段-生成(造)数据 | Welcome to Sumiyax</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="写在前面巧妇难为无米之炊，所以今天我们来造数据2333（别问我为什么要造，不然我一个普通大三在校生去哪搞大数据hhhh，淘宝买的数据格式参差不齐用不了，唉~基本原理运用java脚本bean，生成项目中可能会需要的各项数据 运用阿里的开源json处理框架fastjson将相应数据转为json，分为启动日志和事件日志其中启动日志不带时间戳为纯json，事件日志加了时间戳格式为时间戳|json，打印到控">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【数仓项目】数据采集阶段-生成(造)数据">
+<meta property="og:url" content="http://yoursite.com/2020/03/18/【数仓项目】数据采集阶段-生成-造-数据/index.html">
+<meta property="og:site_name" content="Welcome to Sumiyax">
+<meta property="og:description" content="写在前面巧妇难为无米之炊，所以今天我们来造数据2333（别问我为什么要造，不然我一个普通大三在校生去哪搞大数据hhhh，淘宝买的数据格式参差不齐用不了，唉~基本原理运用java脚本bean，生成项目中可能会需要的各项数据 运用阿里的开源json处理框架fastjson将相应数据转为json，分为启动日志和事件日志其中启动日志不带时间戳为纯json，事件日志加了时间戳格式为时间戳|json，打印到控">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-03-18T15:03:49.587Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【数仓项目】数据采集阶段-生成(造)数据">
+<meta name="twitter:description" content="写在前面巧妇难为无米之炊，所以今天我们来造数据2333（别问我为什么要造，不然我一个普通大三在校生去哪搞大数据hhhh，淘宝买的数据格式参差不齐用不了，唉~基本原理运用java脚本bean，生成项目中可能会需要的各项数据 运用阿里的开源json处理框架fastjson将相应数据转为json，分为启动日志和事件日志其中启动日志不带时间戳为纯json，事件日志加了时间戳格式为时间戳|json，打印到控">
+  
+    <link rel="alternative" href="/atom.xml" title="Welcome to Sumiyax" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet">
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/sumiya.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Sumiyax</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="#">博客首页</a></li>
+                        
+                            <li><a href="/item/works/index.html">程序设计作品展示</a></li>
+                        
+                            <li><a href="/item/about.html">留言打卡</a></li>
+                        
+                            <li><a href="/item/tags.html">静心阅读</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="#" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/Sumiyax" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="#" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://Sumiyax.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">中北大学&lt;br/&gt;1707054151宋子康</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Sumiyax</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/sumiya.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Sumiyax</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="#">博客首页</a></li>
+                
+                    <li><a href="/item/works/index.html">程序设计作品展示</a></li>
+                
+                    <li><a href="/item/about.html">留言打卡</a></li>
+                
+                    <li><a href="/item/tags.html">静心阅读</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="#" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/Sumiyax" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
+                    
+                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-【数仓项目】数据采集阶段-生成-造-数据" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/03/18/【数仓项目】数据采集阶段-生成-造-数据/" class="article-date">
+      <time datetime="2020-03-18T14:29:02.000Z" itemprop="datePublished">2020-03-18</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【数仓项目】数据采集阶段-生成(造)数据
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><h2 id="巧妇难为无米之炊，所以今天我们来造数据2333（别问我为什么要造，不然我一个普通大三在校生去哪搞大数据hhhh，淘宝买的数据格式参差不齐用不了，唉"><a href="#巧妇难为无米之炊，所以今天我们来造数据2333（别问我为什么要造，不然我一个普通大三在校生去哪搞大数据hhhh，淘宝买的数据格式参差不齐用不了，唉" class="headerlink" title="巧妇难为无米之炊，所以今天我们来造数据2333（别问我为什么要造，不然我一个普通大三在校生去哪搞大数据hhhh，淘宝买的数据格式参差不齐用不了，唉~"></a>巧妇难为无米之炊，所以今天我们来造数据2333（别问我为什么要造，不然我一个普通大三在校生去哪搞大数据hhhh，淘宝买的数据格式参差不齐用不了，唉~</h2><h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>运用java脚本bean，生成项目中可能会需要的各项数据</p>
+<p>运用阿里的开源json处理框架fastjson将相应数据转为json，分为启动日志和事件日志<br>其中启动日志不带时间戳为纯json，事件日志加了时间戳格式为时间戳|json，打印到控制台</p>
+<a id="more"></a>
+
+<p>运用logback（日志生成框架）将打印到控制台的所有数据保存到磁盘</p>
+<p>日志文件还配置了单个文件存储最大大小等参数信息，可到logbanck.xml<br>文件查看</p>
+<h2 id="附"><a href="#附" class="headerlink" title="附"></a>附</h2><p>埋点数据的格式（分公共字段和业务字段）<br>埋点数据基本格式</p>
+<h3 id="公共字段：基本所有安卓手机都包含的字段"><a href="#公共字段：基本所有安卓手机都包含的字段" class="headerlink" title="公共字段：基本所有安卓手机都包含的字段"></a>公共字段：基本所有安卓手机都包含的字段</h3><h3 id="业务字段：埋点上报的字段，有具体的业务类型"><a href="#业务字段：埋点上报的字段，有具体的业务类型" class="headerlink" title="业务字段：埋点上报的字段，有具体的业务类型"></a>业务字段：埋点上报的字段，有具体的业务类型</h3><p>下面就是一个示例，表示业务字段的上传。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">&quot;ap&quot;:&quot;xxxxx&quot;,//项目数据来源 app pc</span><br><span class="line">&quot;cm&quot;: &#123;  //公共字段</span><br><span class="line">      &quot;mid&quot;: &quot;&quot;,  // (String) 设备唯一标识</span><br><span class="line">        &quot;uid&quot;: &quot;&quot;,  // (String) 用户标识</span><br><span class="line">        &quot;vc&quot;: &quot;1&quot;,  // (String) versionCode，程序版本号</span><br><span class="line">        &quot;vn&quot;: &quot;1.0&quot;,  // (String) versionName，程序版本名</span><br><span class="line">        &quot;l&quot;: &quot;zh&quot;,  // (String) 系统语言</span><br><span class="line">        &quot;sr&quot;: &quot;&quot;,  // (String) 渠道号，应用从哪个渠道来的。</span><br><span class="line">        &quot;os&quot;: &quot;7.1.1&quot;,  // (String) Android系统版本</span><br><span class="line">        &quot;ar&quot;: &quot;CN&quot;,  // (String) 区域</span><br><span class="line">        &quot;md&quot;: &quot;BBB100-1&quot;,  // (String) 手机型号</span><br><span class="line">        &quot;ba&quot;: &quot;blackberry&quot;,  // (String) 手机品牌</span><br><span class="line">        &quot;sv&quot;: &quot;V2.2.1&quot;,  // (String) sdkVersion</span><br><span class="line">        &quot;g&quot;: &quot;&quot;,  // (String) gmail</span><br><span class="line">        &quot;hw&quot;: &quot;1620x1080&quot;,  // (String) heightXwidth，屏幕宽高</span><br><span class="line">        &quot;t&quot;: &quot;1506047606608&quot;,  // (String) 客户端日志产生时的时间</span><br><span class="line">        &quot;nw&quot;: &quot;WIFI&quot;,  // (String) 网络模式</span><br><span class="line">        &quot;ln&quot;: 0,  // (double) lng经度</span><br><span class="line">        &quot;la&quot;: 0  // (double) lat 纬度</span><br><span class="line">    &#125;,</span><br><span class="line">&quot;et&quot;:  [  //事件</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;ett&quot;: &quot;1506047605364&quot;,  //客户端事件产生时间</span><br><span class="line">                &quot;en&quot;: &quot;display&quot;,  //事件名称</span><br><span class="line">                &quot;kv&quot;: &#123;  //事件结果，以key-value形式自行定义</span><br><span class="line">                    &quot;goodsid&quot;: &quot;236&quot;,</span><br><span class="line">                    &quot;action&quot;: &quot;1&quot;,</span><br><span class="line">                    &quot;extend1&quot;: &quot;1&quot;,</span><br><span class="line">&quot;place&quot;: &quot;2&quot;,</span><br><span class="line">&quot;category&quot;: &quot;75&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="示例日志（服务器时间戳-日志）："><a href="#示例日志（服务器时间戳-日志）：" class="headerlink" title="示例日志（服务器时间戳 | 日志）："></a>示例日志（服务器时间戳 | 日志）：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">1540934156385|&#123;</span><br><span class="line">    &quot;ap&quot;: &quot;gmall&quot;,</span><br><span class="line">    &quot;cm&quot;: &#123;</span><br><span class="line">        &quot;uid&quot;: &quot;1234&quot;,</span><br><span class="line">        &quot;vc&quot;: &quot;2&quot;,</span><br><span class="line">        &quot;vn&quot;: &quot;1.0&quot;,</span><br><span class="line">        &quot;la&quot;: &quot;EN&quot;,</span><br><span class="line">        &quot;sr&quot;: &quot;&quot;,</span><br><span class="line">        &quot;os&quot;: &quot;7.1.1&quot;,</span><br><span class="line">        &quot;ar&quot;: &quot;CN&quot;,</span><br><span class="line">        &quot;md&quot;: &quot;BBB100-1&quot;,</span><br><span class="line">        &quot;ba&quot;: &quot;blackberry&quot;,</span><br><span class="line">        &quot;sv&quot;: &quot;V2.2.1&quot;,</span><br><span class="line">        &quot;g&quot;: &quot;abc@gmail.com&quot;,</span><br><span class="line">        &quot;hw&quot;: &quot;1620x1080&quot;,</span><br><span class="line">        &quot;t&quot;: &quot;1506047606608&quot;,</span><br><span class="line">        &quot;nw&quot;: &quot;WIFI&quot;,</span><br><span class="line">        &quot;ln&quot;: 0</span><br><span class="line">    &#125;,</span><br><span class="line">        &quot;et&quot;: [</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;ett&quot;: &quot;1506047605364&quot;,  //客户端事件产生时间</span><br><span class="line">                &quot;en&quot;: &quot;display&quot;,  //事件名称</span><br><span class="line">                &quot;kv&quot;: &#123;  //事件结果，以key-value形式自行定义</span><br><span class="line">                    &quot;goodsid&quot;: &quot;236&quot;,</span><br><span class="line">                    &quot;action&quot;: &quot;1&quot;,</span><br><span class="line">                    &quot;extend1&quot;: &quot;1&quot;,</span><br><span class="line">&quot;place&quot;: &quot;2&quot;,</span><br><span class="line">&quot;category&quot;: &quot;75&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,&#123;</span><br><span class="line">              &quot;ett&quot;: &quot;1552352626835&quot;,</span><br><span class="line">              &quot;en&quot;: &quot;active_background&quot;,</span><br><span class="line">              &quot;kv&quot;: &#123;</span><br><span class="line">                   &quot;active_source&quot;: &quot;1&quot;</span><br><span class="line">              &#125;</span><br><span class="line">           &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="造数据的java代码主函数："><a href="#造数据的java代码主函数：" class="headerlink" title="造数据的java代码主函数："></a>造数据的java代码主函数：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br><span class="line">450</span><br><span class="line">451</span><br><span class="line">452</span><br><span class="line">453</span><br><span class="line">454</span><br><span class="line">455</span><br><span class="line">456</span><br><span class="line">457</span><br><span class="line">458</span><br><span class="line">459</span><br><span class="line">460</span><br><span class="line">461</span><br><span class="line">462</span><br><span class="line">463</span><br><span class="line">464</span><br><span class="line">465</span><br><span class="line">466</span><br><span class="line">467</span><br><span class="line">468</span><br><span class="line">469</span><br><span class="line">470</span><br><span class="line">471</span><br><span class="line">472</span><br><span class="line">473</span><br><span class="line">474</span><br><span class="line">475</span><br><span class="line">476</span><br><span class="line">477</span><br><span class="line">478</span><br><span class="line">479</span><br><span class="line">480</span><br><span class="line">481</span><br><span class="line">482</span><br><span class="line">483</span><br><span class="line">484</span><br><span class="line">485</span><br><span class="line">486</span><br><span class="line">487</span><br><span class="line">488</span><br><span class="line">489</span><br><span class="line">490</span><br><span class="line">491</span><br><span class="line">492</span><br><span class="line">493</span><br><span class="line">494</span><br><span class="line">495</span><br><span class="line">496</span><br><span class="line">497</span><br><span class="line">498</span><br><span class="line">499</span><br><span class="line">500</span><br><span class="line">501</span><br><span class="line">502</span><br><span class="line">503</span><br><span class="line">504</span><br><span class="line">505</span><br><span class="line">506</span><br><span class="line">507</span><br><span class="line">508</span><br><span class="line">509</span><br><span class="line">510</span><br><span class="line">511</span><br><span class="line">512</span><br><span class="line">513</span><br><span class="line">514</span><br><span class="line">515</span><br><span class="line">516</span><br><span class="line">517</span><br><span class="line">518</span><br><span class="line">519</span><br><span class="line">520</span><br><span class="line">521</span><br><span class="line">522</span><br><span class="line">523</span><br><span class="line">524</span><br><span class="line">525</span><br><span class="line">526</span><br><span class="line">527</span><br><span class="line">528</span><br><span class="line">529</span><br><span class="line">530</span><br><span class="line">531</span><br><span class="line">532</span><br><span class="line">533</span><br><span class="line">534</span><br><span class="line">535</span><br><span class="line">536</span><br><span class="line">537</span><br><span class="line">538</span><br><span class="line">539</span><br><span class="line">540</span><br><span class="line">541</span><br><span class="line">542</span><br><span class="line">543</span><br><span class="line">544</span><br><span class="line">545</span><br><span class="line">546</span><br><span class="line">547</span><br><span class="line">548</span><br><span class="line">549</span><br><span class="line">550</span><br><span class="line">551</span><br><span class="line">552</span><br><span class="line">553</span><br><span class="line">554</span><br><span class="line">555</span><br><span class="line">556</span><br><span class="line">557</span><br><span class="line">558</span><br><span class="line">559</span><br><span class="line">560</span><br><span class="line">561</span><br><span class="line">562</span><br><span class="line">563</span><br><span class="line">564</span><br><span class="line">565</span><br><span class="line">566</span><br><span class="line">567</span><br><span class="line">568</span><br><span class="line">569</span><br><span class="line">570</span><br><span class="line">571</span><br><span class="line">572</span><br><span class="line">573</span><br><span class="line">574</span><br><span class="line">575</span><br><span class="line">576</span><br><span class="line">577</span><br><span class="line">578</span><br><span class="line">579</span><br><span class="line">580</span><br><span class="line">581</span><br><span class="line">582</span><br><span class="line">583</span><br><span class="line">584</span><br><span class="line">585</span><br><span class="line">586</span><br><span class="line">587</span><br><span class="line">588</span><br><span class="line">589</span><br><span class="line">590</span><br><span class="line">591</span><br><span class="line">592</span><br><span class="line">593</span><br><span class="line">594</span><br><span class="line">595</span><br><span class="line">596</span><br><span class="line">597</span><br><span class="line">598</span><br><span class="line">599</span><br><span class="line">600</span><br><span class="line">601</span><br><span class="line">602</span><br><span class="line">603</span><br><span class="line">604</span><br><span class="line">605</span><br><span class="line">606</span><br><span class="line">607</span><br><span class="line">608</span><br><span class="line">609</span><br><span class="line">610</span><br><span class="line">611</span><br><span class="line">612</span><br><span class="line">613</span><br><span class="line">614</span><br><span class="line">615</span><br><span class="line">616</span><br><span class="line">617</span><br><span class="line">618</span><br><span class="line">619</span><br><span class="line">620</span><br><span class="line">621</span><br><span class="line">622</span><br><span class="line">623</span><br><span class="line">624</span><br><span class="line">625</span><br><span class="line">626</span><br><span class="line">627</span><br><span class="line">628</span><br><span class="line">629</span><br><span class="line">630</span><br><span class="line">631</span><br><span class="line">632</span><br><span class="line">633</span><br><span class="line">634</span><br><span class="line">635</span><br><span class="line">636</span><br><span class="line">637</span><br><span class="line">638</span><br><span class="line">639</span><br><span class="line">640</span><br><span class="line">641</span><br><span class="line">642</span><br><span class="line">643</span><br><span class="line">644</span><br><span class="line">645</span><br><span class="line">646</span><br><span class="line">647</span><br><span class="line">648</span><br><span class="line">649</span><br><span class="line">650</span><br><span class="line">651</span><br><span class="line">652</span><br><span class="line">653</span><br><span class="line">654</span><br><span class="line">655</span><br><span class="line">656</span><br><span class="line">657</span><br><span class="line">658</span><br><span class="line">659</span><br><span class="line">660</span><br><span class="line">661</span><br><span class="line">662</span><br><span class="line">663</span><br><span class="line">664</span><br><span class="line">665</span><br><span class="line">666</span><br><span class="line">667</span><br><span class="line">668</span><br><span class="line">669</span><br><span class="line">670</span><br><span class="line">671</span><br><span class="line">672</span><br><span class="line">673</span><br><span class="line">674</span><br><span class="line">675</span><br><span class="line">676</span><br><span class="line">677</span><br><span class="line">678</span><br><span class="line">679</span><br><span class="line">680</span><br><span class="line">681</span><br><span class="line">682</span><br><span class="line">683</span><br><span class="line">684</span><br><span class="line">685</span><br><span class="line">686</span><br><span class="line">687</span><br><span class="line">688</span><br><span class="line">689</span><br><span class="line">690</span><br><span class="line">691</span><br><span class="line">692</span><br><span class="line">693</span><br><span class="line">694</span><br><span class="line">695</span><br><span class="line">696</span><br><span class="line">697</span><br><span class="line">698</span><br><span class="line">699</span><br><span class="line">700</span><br><span class="line">701</span><br><span class="line">702</span><br><span class="line">703</span><br><span class="line">704</span><br><span class="line">705</span><br><span class="line">706</span><br><span class="line">707</span><br><span class="line">708</span><br><span class="line">709</span><br><span class="line">710</span><br><span class="line">711</span><br><span class="line">712</span><br><span class="line">713</span><br><span class="line">714</span><br><span class="line">715</span><br><span class="line">716</span><br><span class="line">717</span><br><span class="line">718</span><br><span class="line">719</span><br><span class="line">720</span><br><span class="line">721</span><br><span class="line">722</span><br><span class="line">723</span><br><span class="line">724</span><br><span class="line">725</span><br><span class="line">726</span><br><span class="line">727</span><br><span class="line">728</span><br><span class="line">729</span><br><span class="line">730</span><br><span class="line">731</span><br><span class="line">732</span><br><span class="line">733</span><br><span class="line">734</span><br><span class="line">735</span><br><span class="line">736</span><br><span class="line">737</span><br><span class="line">738</span><br><span class="line">739</span><br><span class="line">740</span><br><span class="line">741</span><br><span class="line">742</span><br><span class="line">743</span><br><span class="line">744</span><br><span class="line">745</span><br><span class="line">746</span><br><span class="line">747</span><br><span class="line">748</span><br><span class="line">749</span><br><span class="line">750</span><br><span class="line">751</span><br><span class="line">752</span><br><span class="line">753</span><br><span class="line">754</span><br><span class="line">755</span><br><span class="line">756</span><br><span class="line">757</span><br><span class="line">758</span><br><span class="line">759</span><br><span class="line">760</span><br><span class="line">761</span><br><span class="line">762</span><br><span class="line">763</span><br><span class="line">764</span><br><span class="line">765</span><br><span class="line">766</span><br><span class="line">767</span><br><span class="line">768</span><br><span class="line">769</span><br><span class="line">770</span><br><span class="line">771</span><br><span class="line">772</span><br><span class="line">773</span><br><span class="line">774</span><br><span class="line">775</span><br><span class="line">776</span><br><span class="line">777</span><br><span class="line">778</span><br><span class="line">779</span><br><span class="line">780</span><br><span class="line">781</span><br><span class="line">782</span><br><span class="line">783</span><br><span class="line">784</span><br><span class="line">785</span><br><span class="line">786</span><br><span class="line">787</span><br><span class="line">788</span><br><span class="line">789</span><br><span class="line">790</span><br><span class="line">791</span><br><span class="line">792</span><br><span class="line">793</span><br><span class="line">794</span><br><span class="line">795</span><br><span class="line">796</span><br><span class="line">797</span><br><span class="line">798</span><br><span class="line">799</span><br><span class="line">800</span><br><span class="line">801</span><br><span class="line">802</span><br><span class="line">803</span><br><span class="line">804</span><br><span class="line">805</span><br><span class="line">806</span><br><span class="line">807</span><br><span class="line">808</span><br><span class="line">809</span><br><span class="line">810</span><br><span class="line">811</span><br><span class="line">812</span><br><span class="line">813</span><br><span class="line">814</span><br><span class="line">815</span><br><span class="line">816</span><br><span class="line">817</span><br><span class="line">818</span><br><span class="line">819</span><br><span class="line">820</span><br><span class="line">821</span><br><span class="line">822</span><br><span class="line">823</span><br><span class="line">824</span><br><span class="line">825</span><br><span class="line">826</span><br><span class="line">827</span><br><span class="line">828</span><br><span class="line">829</span><br><span class="line">830</span><br><span class="line">831</span><br><span class="line">832</span><br><span class="line">833</span><br><span class="line">834</span><br><span class="line">835</span><br><span class="line">836</span><br><span class="line">837</span><br><span class="line">838</span><br><span class="line">839</span><br><span class="line">840</span><br><span class="line">841</span><br><span class="line">842</span><br><span class="line">843</span><br><span class="line">844</span><br><span class="line">845</span><br><span class="line">846</span><br><span class="line">847</span><br><span class="line">848</span><br><span class="line">849</span><br><span class="line">850</span><br><span class="line">851</span><br><span class="line">852</span><br><span class="line">853</span><br><span class="line">854</span><br><span class="line">855</span><br><span class="line">856</span><br><span class="line">857</span><br><span class="line">858</span><br><span class="line">859</span><br><span class="line">860</span><br><span class="line">861</span><br><span class="line">862</span><br><span class="line">863</span><br><span class="line">864</span><br><span class="line">865</span><br><span class="line">866</span><br><span class="line">867</span><br><span class="line">868</span><br><span class="line">869</span><br><span class="line">870</span><br><span class="line">871</span><br><span class="line">872</span><br><span class="line">873</span><br><span class="line">874</span><br><span class="line">875</span><br><span class="line">876</span><br><span class="line">877</span><br><span class="line">878</span><br><span class="line">879</span><br><span class="line">880</span><br><span class="line">881</span><br><span class="line">882</span><br><span class="line">883</span><br><span class="line">884</span><br><span class="line">885</span><br><span class="line">886</span><br><span class="line">887</span><br><span class="line">888</span><br><span class="line">889</span><br></pre></td><td class="code"><pre><span class="line">package com.sumiya.appclient;</span><br><span class="line"></span><br><span class="line">import java.io.UnsupportedEncodingException;</span><br><span class="line">import java.util.Random;</span><br><span class="line"></span><br><span class="line">import com.alibaba.fastjson.JSON;</span><br><span class="line">import com.alibaba.fastjson.JSONArray;</span><br><span class="line">import com.alibaba.fastjson.JSONObject;</span><br><span class="line">import com.sumiya.bean.*;</span><br><span class="line">import org.slf4j.Logger;</span><br><span class="line">import org.slf4j.LoggerFactory;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 日志行为数据模拟</span><br><span class="line"> */</span><br><span class="line">public class AppMain &#123;</span><br><span class="line"></span><br><span class="line">    private final static Logger logger = LoggerFactory.getLogger(AppMain.class);</span><br><span class="line">    private static Random rand = new Random();</span><br><span class="line"></span><br><span class="line">    // 设备id</span><br><span class="line">    private static int s_mid = 0;</span><br><span class="line"></span><br><span class="line">    // 用户id</span><br><span class="line">    private static int s_uid = 0;</span><br><span class="line"></span><br><span class="line">    // 商品id</span><br><span class="line">    private static int s_goodsid = 0;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        // 参数一：控制发送每条的延时时间，默认是0</span><br><span class="line">        Long delay = args.length &gt; 0 ? Long.parseLong(args[0]) : 0L;</span><br><span class="line"></span><br><span class="line">        // 参数二：循环遍历次数</span><br><span class="line">        int loop_len = args.length &gt; 1 ? Integer.parseInt(args[1]) : 1000;</span><br><span class="line"></span><br><span class="line">        // 生成数据</span><br><span class="line">        generateLog(delay, loop_len);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static void generateLog(Long delay, int loop_len) &#123;</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt; loop_len; i++) &#123;</span><br><span class="line"></span><br><span class="line">            int flag = rand.nextInt(2);</span><br><span class="line"></span><br><span class="line">            switch (flag) &#123;</span><br><span class="line">                case (0):</span><br><span class="line">                    //应用启动</span><br><span class="line">                    AppStart appStart = generateStart();</span><br><span class="line">                    String jsonString = JSON.toJSONString(appStart);</span><br><span class="line"></span><br><span class="line">                    //控制台打印</span><br><span class="line">                    logger.info(jsonString);</span><br><span class="line">                    break;</span><br><span class="line"></span><br><span class="line">                case (1):</span><br><span class="line"></span><br><span class="line">                    JSONObject json = new JSONObject();</span><br><span class="line"></span><br><span class="line">                    json.put(&quot;ap&quot;, &quot;app&quot;);</span><br><span class="line">                    json.put(&quot;cm&quot;, generateComFields());</span><br><span class="line"></span><br><span class="line">                    JSONArray eventsArray = new JSONArray();</span><br><span class="line"></span><br><span class="line">                    // 事件日志</span><br><span class="line">                    // 商品点击，展示</span><br><span class="line">                    if (rand.nextBoolean()) &#123;</span><br><span class="line">                        eventsArray.add(generateDisplay());</span><br><span class="line">                        json.put(&quot;et&quot;, eventsArray);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    // 商品详情页</span><br><span class="line">                    if (rand.nextBoolean()) &#123;</span><br><span class="line">                        eventsArray.add(generateNewsDetail());</span><br><span class="line">                        json.put(&quot;et&quot;, eventsArray);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    // 商品列表页</span><br><span class="line">                    if (rand.nextBoolean()) &#123;</span><br><span class="line">                        eventsArray.add(generateNewList());</span><br><span class="line">                        json.put(&quot;et&quot;, eventsArray);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    // 广告</span><br><span class="line">                    if (rand.nextBoolean()) &#123;</span><br><span class="line">                        eventsArray.add(generateAd());</span><br><span class="line">                        json.put(&quot;et&quot;, eventsArray);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    // 消息通知</span><br><span class="line">                    if (rand.nextBoolean()) &#123;</span><br><span class="line">                        eventsArray.add(generateNotification());</span><br><span class="line">                        json.put(&quot;et&quot;, eventsArray);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    // 用户前台活跃</span><br><span class="line">                    if (rand.nextBoolean()) &#123;</span><br><span class="line">                        eventsArray.add(generatbeforeground());</span><br><span class="line">                        json.put(&quot;et&quot;, eventsArray);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    // 用户后台活跃</span><br><span class="line">                    if (rand.nextBoolean()) &#123;</span><br><span class="line">                        eventsArray.add(generateBackground());</span><br><span class="line">                        json.put(&quot;et&quot;, eventsArray);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    //故障日志</span><br><span class="line">                    if (rand.nextBoolean()) &#123;</span><br><span class="line">                        eventsArray.add(generateError());</span><br><span class="line">                        json.put(&quot;et&quot;, eventsArray);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    // 用户评论</span><br><span class="line">                    if (rand.nextBoolean()) &#123;</span><br><span class="line">                        eventsArray.add(generateComment());</span><br><span class="line">                        json.put(&quot;et&quot;, eventsArray);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    // 用户收藏</span><br><span class="line">                    if (rand.nextBoolean()) &#123;</span><br><span class="line">                        eventsArray.add(generateFavorites());</span><br><span class="line">                        json.put(&quot;et&quot;, eventsArray);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    // 用户点赞</span><br><span class="line">                    if (rand.nextBoolean()) &#123;</span><br><span class="line">                        eventsArray.add(generatePraise());</span><br><span class="line">                        json.put(&quot;et&quot;, eventsArray);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    //时间</span><br><span class="line">                    long millis = System.currentTimeMillis();</span><br><span class="line"></span><br><span class="line">                    //控制台打印</span><br><span class="line">                    logger.info(millis + &quot;|&quot; + json.toJSONString());</span><br><span class="line">                    break;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            // 延迟</span><br><span class="line">            try &#123;</span><br><span class="line">                Thread.sleep(delay);</span><br><span class="line">            &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 公共字段设置</span><br><span class="line">     */</span><br><span class="line">    private static JSONObject generateComFields() &#123;</span><br><span class="line"></span><br><span class="line">        AppBase appBase = new AppBase();</span><br><span class="line"></span><br><span class="line">        //设备id</span><br><span class="line">        appBase.setMid(s_mid + &quot;&quot;);</span><br><span class="line">        s_mid++;</span><br><span class="line"></span><br><span class="line">        // 用户id</span><br><span class="line">        appBase.setUid(s_uid + &quot;&quot;);</span><br><span class="line">        s_uid++;</span><br><span class="line"></span><br><span class="line">        // 程序版本号 5,6等</span><br><span class="line">        appBase.setVc(&quot;&quot; + rand.nextInt(20));</span><br><span class="line"></span><br><span class="line">        //程序版本名 v1.1.1</span><br><span class="line">        appBase.setVn(&quot;1.&quot; + rand.nextInt(4) + &quot;.&quot; + rand.nextInt(10));</span><br><span class="line"></span><br><span class="line">        // 安卓系统版本</span><br><span class="line">        appBase.setOs(&quot;8.&quot; + rand.nextInt(3) + &quot;.&quot; + rand.nextInt(10));</span><br><span class="line"></span><br><span class="line">        // 语言  es,en,pt</span><br><span class="line">        int flag = rand.nextInt(3);</span><br><span class="line">        switch (flag) &#123;</span><br><span class="line">            case (0):</span><br><span class="line">                appBase.setL(&quot;es&quot;);</span><br><span class="line">                break;</span><br><span class="line">            case (1):</span><br><span class="line">                appBase.setL(&quot;en&quot;);</span><br><span class="line">                break;</span><br><span class="line">            case (2):</span><br><span class="line">                appBase.setL(&quot;pt&quot;);</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 渠道号   从哪个渠道来的</span><br><span class="line">        appBase.setSr(getRandomChar(1));</span><br><span class="line"></span><br><span class="line">        // 区域</span><br><span class="line">        flag = rand.nextInt(2);</span><br><span class="line">        switch (flag) &#123;</span><br><span class="line">            case 0:</span><br><span class="line">                appBase.setAr(&quot;BR&quot;);</span><br><span class="line">            case 1:</span><br><span class="line">                appBase.setAr(&quot;MX&quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 手机品牌 ba ,手机型号 md，就取2位数字了</span><br><span class="line">        flag = rand.nextInt(3);</span><br><span class="line">        switch (flag) &#123;</span><br><span class="line">            case 0:</span><br><span class="line">                appBase.setBa(&quot;Sumsung&quot;);</span><br><span class="line">                appBase.setMd(&quot;sumsung-&quot; + rand.nextInt(20));</span><br><span class="line">                break;</span><br><span class="line">            case 1:</span><br><span class="line">                appBase.setBa(&quot;Huawei&quot;);</span><br><span class="line">                appBase.setMd(&quot;Huawei-&quot; + rand.nextInt(20));</span><br><span class="line">                break;</span><br><span class="line">            case 2:</span><br><span class="line">                appBase.setBa(&quot;HTC&quot;);</span><br><span class="line">                appBase.setMd(&quot;HTC-&quot; + rand.nextInt(20));</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 嵌入sdk的版本</span><br><span class="line">        appBase.setSv(&quot;V2.&quot; + rand.nextInt(10) + &quot;.&quot; + rand.nextInt(10));</span><br><span class="line">        // gmail</span><br><span class="line">        appBase.setG(getRandomCharAndNumr(8) + &quot;@gmail.com&quot;);</span><br><span class="line"></span><br><span class="line">        // 屏幕宽高 hw</span><br><span class="line">        flag = rand.nextInt(4);</span><br><span class="line">        switch (flag) &#123;</span><br><span class="line">            case 0:</span><br><span class="line">                appBase.setHw(&quot;640*960&quot;);</span><br><span class="line">                break;</span><br><span class="line">            case 1:</span><br><span class="line">                appBase.setHw(&quot;640*1136&quot;);</span><br><span class="line">                break;</span><br><span class="line">            case 2:</span><br><span class="line">                appBase.setHw(&quot;750*1134&quot;);</span><br><span class="line">                break;</span><br><span class="line">            case 3:</span><br><span class="line">                appBase.setHw(&quot;1080*1920&quot;);</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 客户端产生日志时间</span><br><span class="line">        long millis = System.currentTimeMillis();</span><br><span class="line">        appBase.setT(&quot;&quot; + (millis - rand.nextInt(99999999)));</span><br><span class="line"></span><br><span class="line">        // 手机网络模式 3G,4G,WIFI</span><br><span class="line">        flag = rand.nextInt(3);</span><br><span class="line">        switch (flag) &#123;</span><br><span class="line">            case 0:</span><br><span class="line">                appBase.setNw(&quot;3G&quot;);</span><br><span class="line">                break;</span><br><span class="line">            case 1:</span><br><span class="line">                appBase.setNw(&quot;4G&quot;);</span><br><span class="line">                break;</span><br><span class="line">            case 2:</span><br><span class="line">                appBase.setNw(&quot;WIFI&quot;);</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 拉丁美洲 西经34°46′至西经117°09；北纬32°42′至南纬53°54′</span><br><span class="line">        // 经度</span><br><span class="line">        appBase.setLn((-34 - rand.nextInt(83) - rand.nextInt(60) / 10.0) + &quot;&quot;);</span><br><span class="line">        // 纬度</span><br><span class="line">        appBase.setLa((32 - rand.nextInt(85) - rand.nextInt(60) / 10.0) + &quot;&quot;);</span><br><span class="line"></span><br><span class="line">        return (JSONObject) JSON.toJSON(appBase);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 商品展示事件</span><br><span class="line">     */</span><br><span class="line">    private static JSONObject generateDisplay() &#123;</span><br><span class="line"></span><br><span class="line">        AppDisplay appDisplay = new AppDisplay();</span><br><span class="line"></span><br><span class="line">        boolean boolFlag = rand.nextInt(10) &lt; 7;</span><br><span class="line"></span><br><span class="line">        // 动作：曝光商品=1，点击商品=2，</span><br><span class="line">        if (boolFlag) &#123;</span><br><span class="line">            appDisplay.setAction(&quot;1&quot;);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            appDisplay.setAction(&quot;2&quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 商品id</span><br><span class="line">        String goodsId = s_goodsid + &quot;&quot;;</span><br><span class="line">        s_goodsid++;</span><br><span class="line"></span><br><span class="line">        appDisplay.setGoodsid(goodsId);</span><br><span class="line"></span><br><span class="line">        // 顺序  设置成6条吧</span><br><span class="line">        int flag = rand.nextInt(6);</span><br><span class="line">        appDisplay.setPlace(&quot;&quot; + flag);</span><br><span class="line"></span><br><span class="line">        // 曝光类型</span><br><span class="line">        flag = 1 + rand.nextInt(2);</span><br><span class="line">        appDisplay.setExtend1(&quot;&quot; + flag);</span><br><span class="line"></span><br><span class="line">        // 分类</span><br><span class="line">        flag = 1 + rand.nextInt(100);</span><br><span class="line">        appDisplay.setCategory(&quot;&quot; + flag);</span><br><span class="line"></span><br><span class="line">        JSONObject jsonObject = (JSONObject) JSON.toJSON(appDisplay);</span><br><span class="line"></span><br><span class="line">        return packEventJson(&quot;display&quot;, jsonObject);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 商品详情页</span><br><span class="line">     */</span><br><span class="line">    private static JSONObject generateNewsDetail() &#123;</span><br><span class="line"></span><br><span class="line">        AppNewsDetail appNewsDetail = new AppNewsDetail();</span><br><span class="line"></span><br><span class="line">        // 页面入口来源</span><br><span class="line">        int flag = 1 + rand.nextInt(3);</span><br><span class="line">        appNewsDetail.setEntry(flag + &quot;&quot;);</span><br><span class="line"></span><br><span class="line">        // 动作</span><br><span class="line">        appNewsDetail.setAction(&quot;&quot; + (rand.nextInt(4) + 1));</span><br><span class="line"></span><br><span class="line">        // 商品id</span><br><span class="line">        appNewsDetail.setGoodsid(s_goodsid + &quot;&quot;);</span><br><span class="line"></span><br><span class="line">        // 商品来源类型</span><br><span class="line">        flag = 1 + rand.nextInt(3);</span><br><span class="line">        appNewsDetail.setShowtype(flag + &quot;&quot;);</span><br><span class="line"></span><br><span class="line">        // 商品样式</span><br><span class="line">        flag = rand.nextInt(6);</span><br><span class="line">        appNewsDetail.setShowtype(&quot;&quot; + flag);</span><br><span class="line"></span><br><span class="line">        // 页面停留时长</span><br><span class="line">        flag = rand.nextInt(10) * rand.nextInt(7);</span><br><span class="line">        appNewsDetail.setNews_staytime(flag + &quot;&quot;);</span><br><span class="line"></span><br><span class="line">        // 加载时长</span><br><span class="line">        flag = rand.nextInt(10) * rand.nextInt(7);</span><br><span class="line">        appNewsDetail.setLoading_time(flag + &quot;&quot;);</span><br><span class="line"></span><br><span class="line">        // 加载失败码</span><br><span class="line">        flag = rand.nextInt(10);</span><br><span class="line">        switch (flag) &#123;</span><br><span class="line">            case 1:</span><br><span class="line">                appNewsDetail.setType1(&quot;102&quot;);</span><br><span class="line">                break;</span><br><span class="line">            case 2:</span><br><span class="line">                appNewsDetail.setType1(&quot;201&quot;);</span><br><span class="line">                break;</span><br><span class="line">            case 3:</span><br><span class="line">                appNewsDetail.setType1(&quot;325&quot;);</span><br><span class="line">                break;</span><br><span class="line">            case 4:</span><br><span class="line">                appNewsDetail.setType1(&quot;433&quot;);</span><br><span class="line">                break;</span><br><span class="line">            case 5:</span><br><span class="line">                appNewsDetail.setType1(&quot;542&quot;);</span><br><span class="line">                break;</span><br><span class="line">            default:</span><br><span class="line">                appNewsDetail.setType1(&quot;&quot;);</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 分类</span><br><span class="line">        flag = 1 + rand.nextInt(100);</span><br><span class="line">        appNewsDetail.setCategory(&quot;&quot; + flag);</span><br><span class="line"></span><br><span class="line">        JSONObject eventJson = (JSONObject) JSON.toJSON(appNewsDetail);</span><br><span class="line"></span><br><span class="line">        return packEventJson(&quot;newsdetail&quot;, eventJson);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 商品列表</span><br><span class="line">     */</span><br><span class="line">    private static JSONObject generateNewList() &#123;</span><br><span class="line"></span><br><span class="line">        AppLoading appLoading = new AppLoading();</span><br><span class="line"></span><br><span class="line">        // 动作</span><br><span class="line">        int flag = rand.nextInt(3) + 1;</span><br><span class="line">        appLoading.setAction(flag + &quot;&quot;);</span><br><span class="line"></span><br><span class="line">        // 加载时长</span><br><span class="line">        flag = rand.nextInt(10) * rand.nextInt(7);</span><br><span class="line">        appLoading.setLoading_time(flag + &quot;&quot;);</span><br><span class="line"></span><br><span class="line">        // 失败码</span><br><span class="line">        flag = rand.nextInt(10);</span><br><span class="line">        switch (flag) &#123;</span><br><span class="line">            case 1:</span><br><span class="line">                appLoading.setType1(&quot;102&quot;);</span><br><span class="line">                break;</span><br><span class="line">            case 2:</span><br><span class="line">                appLoading.setType1(&quot;201&quot;);</span><br><span class="line">                break;</span><br><span class="line">            case 3:</span><br><span class="line">                appLoading.setType1(&quot;325&quot;);</span><br><span class="line">                break;</span><br><span class="line">            case 4:</span><br><span class="line">                appLoading.setType1(&quot;433&quot;);</span><br><span class="line">                break;</span><br><span class="line">            case 5:</span><br><span class="line">                appLoading.setType1(&quot;542&quot;);</span><br><span class="line">                break;</span><br><span class="line">            default:</span><br><span class="line">                appLoading.setType1(&quot;&quot;);</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 页面  加载类型</span><br><span class="line">        flag = 1 + rand.nextInt(2);</span><br><span class="line">        appLoading.setLoading_way(&quot;&quot; + flag);</span><br><span class="line"></span><br><span class="line">        // 扩展字段1</span><br><span class="line">        appLoading.setExtend1(&quot;&quot;);</span><br><span class="line"></span><br><span class="line">        // 扩展字段2</span><br><span class="line">        appLoading.setExtend2(&quot;&quot;);</span><br><span class="line"></span><br><span class="line">        // 用户加载类型</span><br><span class="line">        flag = 1 + rand.nextInt(3);</span><br><span class="line">        appLoading.setType(&quot;&quot; + flag);</span><br><span class="line"></span><br><span class="line">        JSONObject jsonObject = (JSONObject) JSON.toJSON(appLoading);</span><br><span class="line"></span><br><span class="line">        return packEventJson(&quot;loading&quot;, jsonObject);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 广告相关字段</span><br><span class="line">     */</span><br><span class="line">    private static JSONObject generateAd() &#123;</span><br><span class="line"></span><br><span class="line">        AppAd appAd = new AppAd();</span><br><span class="line"></span><br><span class="line">        // 入口</span><br><span class="line">        int flag = rand.nextInt(3) + 1;</span><br><span class="line">        appAd.setEntry(flag + &quot;&quot;);</span><br><span class="line"></span><br><span class="line">        // 动作</span><br><span class="line">        flag = rand.nextInt(5) + 1;</span><br><span class="line">        appAd.setAction(flag + &quot;&quot;);</span><br><span class="line"></span><br><span class="line">        // 状态</span><br><span class="line">        flag = rand.nextInt(10) &gt; 6 ? 2 : 1;</span><br><span class="line">        appAd.setContent(flag + &quot;&quot;);</span><br><span class="line"></span><br><span class="line">        // 失败码</span><br><span class="line">        flag = rand.nextInt(10);</span><br><span class="line">        switch (flag) &#123;</span><br><span class="line">            case 1:</span><br><span class="line">                appAd.setDetail(&quot;102&quot;);</span><br><span class="line">                break;</span><br><span class="line">            case 2:</span><br><span class="line">                appAd.setDetail(&quot;201&quot;);</span><br><span class="line">                break;</span><br><span class="line">            case 3:</span><br><span class="line">                appAd.setDetail(&quot;325&quot;);</span><br><span class="line">                break;</span><br><span class="line">            case 4:</span><br><span class="line">                appAd.setDetail(&quot;433&quot;);</span><br><span class="line">                break;</span><br><span class="line">            case 5:</span><br><span class="line">                appAd.setDetail(&quot;542&quot;);</span><br><span class="line">                break;</span><br><span class="line">            default:</span><br><span class="line">                appAd.setDetail(&quot;&quot;);</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 广告来源</span><br><span class="line">        flag = rand.nextInt(4) + 1;</span><br><span class="line">        appAd.setSource(flag + &quot;&quot;);</span><br><span class="line"></span><br><span class="line">        // 用户行为</span><br><span class="line">        flag = rand.nextInt(2) + 1;</span><br><span class="line">        appAd.setBehavior(flag + &quot;&quot;);</span><br><span class="line"></span><br><span class="line">        // 商品类型</span><br><span class="line">        flag = rand.nextInt(10);</span><br><span class="line">        appAd.setNewstype(&quot;&quot; + flag);</span><br><span class="line"></span><br><span class="line">        // 展示样式</span><br><span class="line">        flag = rand.nextInt(6);</span><br><span class="line">        appAd.setShow_style(&quot;&quot; + flag);</span><br><span class="line"></span><br><span class="line">        JSONObject jsonObject = (JSONObject) JSON.toJSON(appAd);</span><br><span class="line"></span><br><span class="line">        return packEventJson(&quot;ad&quot;, jsonObject);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 启动日志</span><br><span class="line">     */</span><br><span class="line">    private static AppStart generateStart() &#123;</span><br><span class="line"></span><br><span class="line">        AppStart appStart = new AppStart();</span><br><span class="line"></span><br><span class="line">        //设备id</span><br><span class="line">        appStart.setMid(s_mid + &quot;&quot;);</span><br><span class="line">        s_mid++;</span><br><span class="line"></span><br><span class="line">        // 用户id</span><br><span class="line">        appStart.setUid(s_uid + &quot;&quot;);</span><br><span class="line">        s_uid++;</span><br><span class="line"></span><br><span class="line">        // 程序版本号 5,6等</span><br><span class="line">        appStart.setVc(&quot;&quot; + rand.nextInt(20));</span><br><span class="line"></span><br><span class="line">        //程序版本名 v1.1.1</span><br><span class="line">        appStart.setVn(&quot;1.&quot; + rand.nextInt(4) + &quot;.&quot; + rand.nextInt(10));</span><br><span class="line"></span><br><span class="line">        // 安卓系统版本</span><br><span class="line">        appStart.setOs(&quot;8.&quot; + rand.nextInt(3) + &quot;.&quot; + rand.nextInt(10));</span><br><span class="line"></span><br><span class="line">        //设置日志类型</span><br><span class="line">        appStart.setEn(&quot;start&quot;);</span><br><span class="line"></span><br><span class="line">        //    语言  es,en,pt</span><br><span class="line">        int flag = rand.nextInt(3);</span><br><span class="line">        switch (flag) &#123;</span><br><span class="line">            case (0):</span><br><span class="line">                appStart.setL(&quot;es&quot;);</span><br><span class="line">                break;</span><br><span class="line">            case (1):</span><br><span class="line">                appStart.setL(&quot;en&quot;);</span><br><span class="line">                break;</span><br><span class="line">            case (2):</span><br><span class="line">                appStart.setL(&quot;pt&quot;);</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 渠道号   从哪个渠道来的</span><br><span class="line">        appStart.setSr(getRandomChar(1));</span><br><span class="line"></span><br><span class="line">        // 区域</span><br><span class="line">        flag = rand.nextInt(2);</span><br><span class="line">        switch (flag) &#123;</span><br><span class="line">            case 0:</span><br><span class="line">                appStart.setAr(&quot;BR&quot;);</span><br><span class="line">            case 1:</span><br><span class="line">                appStart.setAr(&quot;MX&quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 手机品牌 ba ,手机型号 md，就取2位数字了</span><br><span class="line">        flag = rand.nextInt(3);</span><br><span class="line">        switch (flag) &#123;</span><br><span class="line">            case 0:</span><br><span class="line">                appStart.setBa(&quot;Sumsung&quot;);</span><br><span class="line">                appStart.setMd(&quot;sumsung-&quot; + rand.nextInt(20));</span><br><span class="line">                break;</span><br><span class="line">            case 1:</span><br><span class="line">                appStart.setBa(&quot;Huawei&quot;);</span><br><span class="line">                appStart.setMd(&quot;Huawei-&quot; + rand.nextInt(20));</span><br><span class="line">                break;</span><br><span class="line">            case 2:</span><br><span class="line">                appStart.setBa(&quot;HTC&quot;);</span><br><span class="line">                appStart.setMd(&quot;HTC-&quot; + rand.nextInt(20));</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 嵌入sdk的版本</span><br><span class="line">        appStart.setSv(&quot;V2.&quot; + rand.nextInt(10) + &quot;.&quot; + rand.nextInt(10));</span><br><span class="line">        // gmail</span><br><span class="line">        appStart.setG(getRandomCharAndNumr(8) + &quot;@gmail.com&quot;);</span><br><span class="line"></span><br><span class="line">        // 屏幕宽高 hw</span><br><span class="line">        flag = rand.nextInt(4);</span><br><span class="line">        switch (flag) &#123;</span><br><span class="line">            case 0:</span><br><span class="line">                appStart.setHw(&quot;640*960&quot;);</span><br><span class="line">                break;</span><br><span class="line">            case 1:</span><br><span class="line">                appStart.setHw(&quot;640*1136&quot;);</span><br><span class="line">                break;</span><br><span class="line">            case 2:</span><br><span class="line">                appStart.setHw(&quot;750*1134&quot;);</span><br><span class="line">                break;</span><br><span class="line">            case 3:</span><br><span class="line">                appStart.setHw(&quot;1080*1920&quot;);</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 客户端产生日志时间</span><br><span class="line">        long millis = System.currentTimeMillis();</span><br><span class="line">        appStart.setT(&quot;&quot; + (millis - rand.nextInt(99999999)));</span><br><span class="line"></span><br><span class="line">        // 手机网络模式 3G,4G,WIFI</span><br><span class="line">        flag = rand.nextInt(3);</span><br><span class="line">        switch (flag) &#123;</span><br><span class="line">            case 0:</span><br><span class="line">                appStart.setNw(&quot;3G&quot;);</span><br><span class="line">                break;</span><br><span class="line">            case 1:</span><br><span class="line">                appStart.setNw(&quot;4G&quot;);</span><br><span class="line">                break;</span><br><span class="line">            case 2:</span><br><span class="line">                appStart.setNw(&quot;WIFI&quot;);</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 拉丁美洲 西经34°46′至西经117°09；北纬32°42′至南纬53°54′</span><br><span class="line">        // 经度</span><br><span class="line">        appStart.setLn((-34 - rand.nextInt(83) - rand.nextInt(60) / 10.0) + &quot;&quot;);</span><br><span class="line">        // 纬度</span><br><span class="line">        appStart.setLa((32 - rand.nextInt(85) - rand.nextInt(60) / 10.0) + &quot;&quot;);</span><br><span class="line"></span><br><span class="line">        // 入口</span><br><span class="line">        flag = rand.nextInt(5) + 1;</span><br><span class="line">        appStart.setEntry(flag + &quot;&quot;);</span><br><span class="line"></span><br><span class="line">        // 开屏广告类型</span><br><span class="line">        flag = rand.nextInt(2) + 1;</span><br><span class="line">        appStart.setOpen_ad_type(flag + &quot;&quot;);</span><br><span class="line"></span><br><span class="line">        // 状态</span><br><span class="line">        flag = rand.nextInt(10) &gt; 8 ? 2 : 1;</span><br><span class="line">        appStart.setAction(flag + &quot;&quot;);</span><br><span class="line"></span><br><span class="line">        // 加载时长</span><br><span class="line">        appStart.setLoading_time(rand.nextInt(20) + &quot;&quot;);</span><br><span class="line"></span><br><span class="line">        // 失败码</span><br><span class="line">        flag = rand.nextInt(10);</span><br><span class="line">        switch (flag) &#123;</span><br><span class="line">            case 1:</span><br><span class="line">                appStart.setDetail(&quot;102&quot;);</span><br><span class="line">                break;</span><br><span class="line">            case 2:</span><br><span class="line">                appStart.setDetail(&quot;201&quot;);</span><br><span class="line">                break;</span><br><span class="line">            case 3:</span><br><span class="line">                appStart.setDetail(&quot;325&quot;);</span><br><span class="line">                break;</span><br><span class="line">            case 4:</span><br><span class="line">                appStart.setDetail(&quot;433&quot;);</span><br><span class="line">                break;</span><br><span class="line">            case 5:</span><br><span class="line">                appStart.setDetail(&quot;542&quot;);</span><br><span class="line">                break;</span><br><span class="line">            default:</span><br><span class="line">                appStart.setDetail(&quot;&quot;);</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 扩展字段</span><br><span class="line">        appStart.setExtend1(&quot;&quot;);</span><br><span class="line"></span><br><span class="line">        return appStart;</span><br><span class="line">    &#125;</span><br><span class="line">    /**</span><br><span class="line">     * 消息通知</span><br><span class="line">     */</span><br><span class="line">    private static JSONObject generateNotification() &#123;</span><br><span class="line"></span><br><span class="line">        AppNotification appNotification = new AppNotification();</span><br><span class="line"></span><br><span class="line">        int flag = rand.nextInt(4) + 1;</span><br><span class="line"></span><br><span class="line">        // 动作</span><br><span class="line">        appNotification.setAction(flag + &quot;&quot;);</span><br><span class="line"></span><br><span class="line">        // 通知id</span><br><span class="line">        flag = rand.nextInt(4) + 1;</span><br><span class="line">        appNotification.setType(flag + &quot;&quot;);</span><br><span class="line"></span><br><span class="line">        // 客户端弹时间</span><br><span class="line">        appNotification.setAp_time((System.currentTimeMillis() - rand.nextInt(99999999)) + &quot;&quot;);</span><br><span class="line"></span><br><span class="line">        // 备用字段</span><br><span class="line">        appNotification.setContent(&quot;&quot;);</span><br><span class="line"></span><br><span class="line">        JSONObject jsonObject = (JSONObject) JSON.toJSON(appNotification);</span><br><span class="line"></span><br><span class="line">        return packEventJson(&quot;notification&quot;, jsonObject);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 前台活跃</span><br><span class="line">     */</span><br><span class="line">    private static JSONObject generatbeforeground() &#123;</span><br><span class="line"></span><br><span class="line">        AppActive_foreground appActive_foreground = new AppActive_foreground();</span><br><span class="line"></span><br><span class="line">        // 推送消息的id</span><br><span class="line">        int flag = rand.nextInt(2);</span><br><span class="line">        switch (flag) &#123;</span><br><span class="line">            case 1:</span><br><span class="line">                appActive_foreground.setAccess(flag + &quot;&quot;);</span><br><span class="line">                break;</span><br><span class="line">            default:</span><br><span class="line">                appActive_foreground.setAccess(&quot;&quot;);</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 1.push 2.icon 3.其他</span><br><span class="line">        flag = rand.nextInt(3) + 1;</span><br><span class="line">        appActive_foreground.setPush_id(flag + &quot;&quot;);</span><br><span class="line"></span><br><span class="line">        JSONObject jsonObject = (JSONObject) JSON.toJSON(appActive_foreground);</span><br><span class="line"></span><br><span class="line">        return packEventJson(&quot;active_foreground&quot;, jsonObject);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 后台活跃</span><br><span class="line">     */</span><br><span class="line">    private static JSONObject generateBackground() &#123;</span><br><span class="line"></span><br><span class="line">        AppActive_background appActive_background = new AppActive_background();</span><br><span class="line"></span><br><span class="line">        // 启动源</span><br><span class="line">        int flag = rand.nextInt(3) + 1;</span><br><span class="line">        appActive_background.setActive_source(flag + &quot;&quot;);</span><br><span class="line"></span><br><span class="line">        JSONObject jsonObject = (JSONObject) JSON.toJSON(appActive_background);</span><br><span class="line"></span><br><span class="line">        return packEventJson(&quot;active_background&quot;, jsonObject);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 错误日志数据</span><br><span class="line">     */</span><br><span class="line">    private static JSONObject generateError() &#123;</span><br><span class="line"></span><br><span class="line">        AppErrorLog appErrorLog = new AppErrorLog();</span><br><span class="line"></span><br><span class="line">        String[] errorBriefs = &#123;&quot;at cn.lift.dfdf.web.AbstractBaseController.validInbound(AbstractBaseController.java:72)&quot;, &quot;at cn.lift.appIn.control.CommandUtil.getInfo(CommandUtil.java:67)&quot;&#125;;        //错误摘要</span><br><span class="line">        String[] errorDetails = &#123;&quot;java.lang.NullPointerException\\n    &quot; + &quot;at cn.lift.appIn.web.AbstractBaseController.validInbound(AbstractBaseController.java:72)\\n &quot; + &quot;at cn.lift.dfdf.web.AbstractBaseController.validInbound&quot;, &quot;at cn.lift.dfdfdf.control.CommandUtil.getInfo(CommandUtil.java:67)\\n &quot; + &quot;at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\\n&quot; + &quot; at java.lang.reflect.Method.invoke(Method.java:606)\\n&quot;&#125;;        //错误详情</span><br><span class="line"></span><br><span class="line">        //错误摘要</span><br><span class="line">        appErrorLog.setErrorBrief(errorBriefs[rand.nextInt(errorBriefs.length)]);</span><br><span class="line">        //错误详情</span><br><span class="line">        appErrorLog.setErrorDetail(errorDetails[rand.nextInt(errorDetails.length)]);</span><br><span class="line"></span><br><span class="line">        JSONObject jsonObject = (JSONObject) JSON.toJSON(appErrorLog);</span><br><span class="line"></span><br><span class="line">        return packEventJson(&quot;error&quot;, jsonObject);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 为各个事件类型的公共字段（时间、事件类型、Json数据）拼接</span><br><span class="line">     */</span><br><span class="line">    private static JSONObject packEventJson(String eventName, JSONObject jsonObject) &#123;</span><br><span class="line"></span><br><span class="line">        JSONObject eventJson = new JSONObject();</span><br><span class="line"></span><br><span class="line">        eventJson.put(&quot;ett&quot;, (System.currentTimeMillis() - rand.nextInt(99999999)) + &quot;&quot;);</span><br><span class="line">        eventJson.put(&quot;en&quot;, eventName);</span><br><span class="line">        eventJson.put(&quot;kv&quot;, jsonObject);</span><br><span class="line"></span><br><span class="line">        return eventJson;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取随机字母组合</span><br><span class="line">     *</span><br><span class="line">     * @param length 字符串长度</span><br><span class="line">     */</span><br><span class="line">    private static String getRandomChar(Integer length) &#123;</span><br><span class="line"></span><br><span class="line">        StringBuilder str = new StringBuilder();</span><br><span class="line">        Random random = new Random();</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt; length; i++) &#123;</span><br><span class="line">            // 字符串</span><br><span class="line">            str.append((char) (65 + random.nextInt(26)));// 取得大写字母</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return str.toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取随机字母数字组合</span><br><span class="line">     *</span><br><span class="line">     * @param length 字符串长度</span><br><span class="line">     */</span><br><span class="line">    private static String getRandomCharAndNumr(Integer length) &#123;</span><br><span class="line"></span><br><span class="line">        StringBuilder str = new StringBuilder();</span><br><span class="line">        Random random = new Random();</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt; length; i++) &#123;</span><br><span class="line"></span><br><span class="line">            boolean b = random.nextBoolean();</span><br><span class="line"></span><br><span class="line">            if (b) &#123; // 字符串</span><br><span class="line">                // int choice = random.nextBoolean() ? 65 : 97; 取得65大写字母还是97小写字母</span><br><span class="line">                str.append((char) (65 + random.nextInt(26)));// 取得大写字母</span><br><span class="line">            &#125; else &#123; // 数字</span><br><span class="line">                str.append(String.valueOf(random.nextInt(10)));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return str.toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 收藏</span><br><span class="line">     */</span><br><span class="line">    private static JSONObject generateFavorites() &#123;</span><br><span class="line"></span><br><span class="line">        AppFavorites favorites = new AppFavorites();</span><br><span class="line"></span><br><span class="line">        favorites.setCourse_id(rand.nextInt(10));</span><br><span class="line">        favorites.setUserid(rand.nextInt(10));</span><br><span class="line">        favorites.setAdd_time((System.currentTimeMillis() - rand.nextInt(99999999)) + &quot;&quot;);</span><br><span class="line"></span><br><span class="line">        JSONObject jsonObject = (JSONObject) JSON.toJSON(favorites);</span><br><span class="line"></span><br><span class="line">        return packEventJson(&quot;favorites&quot;, jsonObject);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 点赞</span><br><span class="line">     */</span><br><span class="line">    private static JSONObject generatePraise() &#123;</span><br><span class="line"></span><br><span class="line">        AppPraise praise = new AppPraise();</span><br><span class="line"></span><br><span class="line">        praise.setId(rand.nextInt(10));</span><br><span class="line">        praise.setUserid(rand.nextInt(10));</span><br><span class="line">        praise.setTarget_id(rand.nextInt(10));</span><br><span class="line">        praise.setType(rand.nextInt(4) + 1);</span><br><span class="line">        praise.setAdd_time((System.currentTimeMillis() - rand.nextInt(99999999)) + &quot;&quot;);</span><br><span class="line"></span><br><span class="line">        JSONObject jsonObject = (JSONObject) JSON.toJSON(praise);</span><br><span class="line"></span><br><span class="line">        return packEventJson(&quot;praise&quot;, jsonObject);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 评论</span><br><span class="line">     */</span><br><span class="line">    private static JSONObject generateComment() &#123;</span><br><span class="line"></span><br><span class="line">        AppComment comment = new AppComment();</span><br><span class="line"></span><br><span class="line">        comment.setComment_id(rand.nextInt(10));</span><br><span class="line">        comment.setUserid(rand.nextInt(10));</span><br><span class="line">        comment.setP_comment_id(rand.nextInt(5));</span><br><span class="line"></span><br><span class="line">        comment.setContent(getCONTENT());</span><br><span class="line">        comment.setAddtime((System.currentTimeMillis() - rand.nextInt(99999999)) + &quot;&quot;);</span><br><span class="line"></span><br><span class="line">        comment.setOther_id(rand.nextInt(10));</span><br><span class="line">        comment.setPraise_count(rand.nextInt(1000));</span><br><span class="line">        comment.setReply_count(rand.nextInt(200));</span><br><span class="line"></span><br><span class="line">        JSONObject jsonObject = (JSONObject) JSON.toJSON(comment);</span><br><span class="line"></span><br><span class="line">        return packEventJson(&quot;comment&quot;, jsonObject);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 生成单个汉字</span><br><span class="line">     */</span><br><span class="line">    private static char getRandomChar() &#123;</span><br><span class="line">        String str = &quot;&quot;;</span><br><span class="line">        int hightPos; //</span><br><span class="line">        int lowPos;</span><br><span class="line">        Random random = new Random();</span><br><span class="line">        //随机生成汉子的两个字节</span><br><span class="line">        hightPos = (176 + Math.abs(random.nextInt(39)));</span><br><span class="line">        lowPos = (161 + Math.abs(random.nextInt(93)));</span><br><span class="line">        byte[] b = new byte[2];</span><br><span class="line">        b[0] = (Integer.valueOf(hightPos)).byteValue();</span><br><span class="line">        b[1] = (Integer.valueOf(lowPos)).byteValue();</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            str = new String(b, &quot;GBK&quot;);</span><br><span class="line">        &#125; catch (UnsupportedEncodingException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            System.out.println(&quot;错误&quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return str.charAt(0);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 拼接成多个汉字</span><br><span class="line">     */</span><br><span class="line">    private static String getCONTENT() &#123;</span><br><span class="line">        StringBuilder str = new StringBuilder();</span><br><span class="line">        for (int i = 0; i &lt; rand.nextInt(100); i++) &#123;</span><br><span class="line">            str.append(getRandomChar());</span><br><span class="line">        &#125;</span><br><span class="line">        return str.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫">
+            </div>
+              <div class="pay_explain">谢谢你</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.jpg" alt="支付宝"></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信"></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/03/18/【数仓项目】数据采集阶段-生成-造-数据/">【数仓项目】数据采集阶段-生成(造)数据</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Sumiyax 的个人博客">Sumiyax</a></p>
+        <p><span>发布时间:</span>2020年03月18日 - 22时29分</p>
+        <p><span>最后更新:</span>2020年03月18日 - 23时03分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/03/18/【数仓项目】数据采集阶段-生成-造-数据/" title="【数仓项目】数据采集阶段-生成(造)数据">http://yoursite.com/2020/03/18/【数仓项目】数据采集阶段-生成-造-数据/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/03/18/【数仓项目】数据采集阶段-生成-造-数据/　　作者: Sumiyax" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target="_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2020/03/18/【数仓项目】万丈高楼平地起-从0开始的环境搭建/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          【数仓项目】万丈高楼平地起-从0开始的环境搭建
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/03/17/【手撕MR】WordCount/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">【手撕MR】WordCount</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#写在前面"><span class="toc-number">1.</span> <span class="toc-text">写在前面</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#巧妇难为无米之炊，所以今天我们来造数据2333（别问我为什么要造，不然我一个普通大三在校生去哪搞大数据hhhh，淘宝买的数据格式参差不齐用不了，唉"><span class="toc-number">1.1.</span> <span class="toc-text">巧妇难为无米之炊，所以今天我们来造数据2333（别问我为什么要造，不然我一个普通大三在校生去哪搞大数据hhhh，淘宝买的数据格式参差不齐用不了，唉~</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本原理"><span class="toc-number">1.2.</span> <span class="toc-text">基本原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#附"><span class="toc-number">1.3.</span> <span class="toc-text">附</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#公共字段：基本所有安卓手机都包含的字段"><span class="toc-number">1.3.1.</span> <span class="toc-text">公共字段：基本所有安卓手机都包含的字段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#业务字段：埋点上报的字段，有具体的业务类型"><span class="toc-number">1.3.2.</span> <span class="toc-text">业务字段：埋点上报的字段，有具体的业务类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#示例日志（服务器时间戳-日志）："><span class="toc-number">1.3.3.</span> <span class="toc-text">示例日志（服务器时间戳 | 日志）：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#造数据的java代码主函数："><span class="toc-number">1.3.4.</span> <span class="toc-text">造数据的java代码主函数：</span></a></li></ol></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'Sumiyax',
+      repo: 'Sumiyax.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2020/03/18/【数仓项目】万丈高楼平地起-从0开始的环境搭建/" title="上一篇: 【数仓项目】万丈高楼平地起-从0开始的环境搭建">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2020/03/17/【手撕MR】WordCount/" title="下一篇: 【手撕MR】WordCount">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/03/18/【数仓项目】万丈高楼平地起-从0开始的环境搭建/">【数仓项目】万丈高楼平地起-从0开始的环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/18/【数仓项目】数据采集阶段-生成-造-数据/">【数仓项目】数据采集阶段-生成(造)数据</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/17/【手撕MR】WordCount/">【手撕MR】WordCount</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/17/【灵光一现】MR辅助排序深入理解-MR重点盘点/">【灵光一现】MR辅助排序深入理解&MR重点盘点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/17/【数仓项目】常用shell脚本编写/">【数仓项目】常用shell脚本编写 </a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/17/【做题杂记】sql中的连接/">【做题杂记】sql中的连接</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/17/title-【做题杂记】类型题：查询第N高的数据/">【做题杂记】类型题：查询第N高的数据'</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/09/菜鸡教程-群发不同邮件脚本编写/">菜鸡教程-群发不同邮件脚本编写</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2020 Sumiyax
+            </div>
+            <div class="footer-right">
+                
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit">到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 12;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
