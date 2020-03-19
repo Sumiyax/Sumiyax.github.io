@@ -3,19 +3,21 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>【数仓项目】万丈高楼平地起-从0开始的环境搭建 | Welcome to Sumiyax</title>
+  <title>【数仓项目】暴风雨前的宁静-术语介绍&amp;ods层构建&amp;一次磁盘崩溃 | Welcome to Sumiyax</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="写在前面本文主要配置项目开始阶段需要用到的集群环境，基本配置不再赘述，只提一些与初次搭建集群不同的点与优化的点，以及笔者在网上看到的一些比较有意思的相关部分面试题so  本文不适合没搭建过集群环境的小白其实还是能看看的，反正迟早会用到的嘛hhhh">
+  <meta name="description" content="术语介绍1.     用户用户以设备为判断标准，在移动统计中，每个独立设备认为是一个独立用户。Android系统根据IMEI号，IOS系统根据OpenUDID来标识一个独立用户，每部手机一个用户。 2.     新增用户首次联网使用应用的用户。如果一个用户首次打开某APP，那这个用户定义为新增用户；卸载再安装的设备，不会被算作一次新增。新增用户包括日新增用户、周新增用户、月新增用户。 3.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【数仓项目】万丈高楼平地起-从0开始的环境搭建">
-<meta property="og:url" content="http://yoursite.com/2020/03/18/【数仓项目】万丈高楼平地起-从0开始的环境搭建/index.html">
+<meta property="og:title" content="【数仓项目】暴风雨前的宁静-术语介绍&amp;ods层构建&amp;一次磁盘崩溃">
+<meta property="og:url" content="http://yoursite.com/2020/03/19/【数仓项目】暴风雨前的宁静-术语介绍-ods层构建-一次磁盘崩溃/index.html">
 <meta property="og:site_name" content="Welcome to Sumiyax">
-<meta property="og:description" content="写在前面本文主要配置项目开始阶段需要用到的集群环境，基本配置不再赘述，只提一些与初次搭建集群不同的点与优化的点，以及笔者在网上看到的一些比较有意思的相关部分面试题so  本文不适合没搭建过集群环境的小白其实还是能看看的，反正迟早会用到的嘛hhhh">
+<meta property="og:description" content="术语介绍1.     用户用户以设备为判断标准，在移动统计中，每个独立设备认为是一个独立用户。Android系统根据IMEI号，IOS系统根据OpenUDID来标识一个独立用户，每部手机一个用户。 2.     新增用户首次联网使用应用的用户。如果一个用户首次打开某APP，那这个用户定义为新增用户；卸载再安装的设备，不会被算作一次新增。新增用户包括日新增用户、周新增用户、月新增用户。 3.">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-03-18T15:12:53.139Z">
+<meta property="og:image" content="http://yoursite.com/2020/03/19/【数仓项目】暴风雨前的宁静-术语介绍-ods层构建-一次磁盘崩溃/1.png">
+<meta property="og:updated_time" content="2020-03-19T16:03:57.817Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【数仓项目】万丈高楼平地起-从0开始的环境搭建">
-<meta name="twitter:description" content="写在前面本文主要配置项目开始阶段需要用到的集群环境，基本配置不再赘述，只提一些与初次搭建集群不同的点与优化的点，以及笔者在网上看到的一些比较有意思的相关部分面试题so  本文不适合没搭建过集群环境的小白其实还是能看看的，反正迟早会用到的嘛hhhh">
+<meta name="twitter:title" content="【数仓项目】暴风雨前的宁静-术语介绍&amp;ods层构建&amp;一次磁盘崩溃">
+<meta name="twitter:description" content="术语介绍1.     用户用户以设备为判断标准，在移动统计中，每个独立设备认为是一个独立用户。Android系统根据IMEI号，IOS系统根据OpenUDID来标识一个独立用户，每部手机一个用户。 2.     新增用户首次联网使用应用的用户。如果一个用户首次打开某APP，那这个用户定义为新增用户；卸载再安装的设备，不会被算作一次新增。新增用户包括日新增用户、周新增用户、月新增用户。 3.">
+<meta name="twitter:image" content="http://yoursite.com/2020/03/19/【数仓项目】暴风雨前的宁静-术语介绍-ods层构建-一次磁盘崩溃/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Welcome to Sumiyax" type="application/atom+xml">
   
@@ -229,11 +231,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-【数仓项目】万丈高楼平地起-从0开始的环境搭建" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-【数仓项目】暴风雨前的宁静-术语介绍-ods层构建-一次磁盘崩溃" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/03/18/【数仓项目】万丈高楼平地起-从0开始的环境搭建/" class="article-date">
-      <time datetime="2020-03-18T14:38:21.000Z" itemprop="datePublished">2020-03-18</time>
+      <a href="/2020/03/19/【数仓项目】暴风雨前的宁静-术语介绍-ods层构建-一次磁盘崩溃/" class="article-date">
+      <time datetime="2020-03-19T15:38:22.000Z" itemprop="datePublished">2020-03-19</time>
 </a>
     </div>
   
@@ -246,7 +248,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      【数仓项目】万丈高楼平地起-从0开始的环境搭建
+      【数仓项目】暴风雨前的宁静-术语介绍&amp;ods层构建&amp;一次磁盘崩溃
     </h1>
   
 
@@ -263,35 +265,38 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>本文主要配置项目开始阶段需要用到的集群环境，基本配置不再赘述，只提一些与初次搭建集群不同的点与优化的点，以及笔者在网上看到的一些比较有意思的相关部分面试题<br>so  <del>本文不适合没搭建过集群环境的小白</del><br>其实还是能看看的，反正迟早会用到的嘛hhhh</p>
-<hr>
+        <h2 id="术语介绍"><a href="#术语介绍" class="headerlink" title="术语介绍"></a>术语介绍</h2><h3 id="1-用户"><a href="#1-用户" class="headerlink" title="1.     用户"></a>1.     用户</h3><p>用户以设备为判断标准，在移动统计中，每个独立设备认为是一个独立用户。Android系统根据IMEI号，IOS系统根据OpenUDID来标识一个独立用户，每部手机一个用户。</p>
+<h3 id="2-新增用户"><a href="#2-新增用户" class="headerlink" title="2.     新增用户"></a>2.     新增用户</h3><p>首次联网使用应用的用户。如果一个用户首次打开某APP，那这个用户定义为新增用户；卸载再安装的设备，不会被算作一次新增。新增用户包括日新增用户、周新增用户、月新增用户。</p>
+<h3 id="3-活跃用户"><a href="#3-活跃用户" class="headerlink" title="3.     活跃用户"></a>3.     活跃用户</h3><p>打开应用的用户即为活跃用户，不考虑用户的使用情况。每天一台设备打开多次会被计为一个活跃用户。</p>
 <a id="more"></a>
 
-<h2 id="数仓是什么？"><a href="#数仓是什么？" class="headerlink" title="数仓是什么？"></a>数仓是什么？</h2><p>数据仓库是为企业所有决策制定过程，提供所有系统数据支持的战略集合。<br>这是官方概念<br>自我理解应该就是一个集群上的超大型数据库系统，里面存放了各种用户信息，业务信息，商品信息等。公司能够根据这些信息来进行大数据分析，生成一些有利于业务发展，提高产品质量，用户体验的数据，而BOSS每天也会根据这些信息来对公司的未来战略进行调整，可以说对于一个做大做强的公司来说，十分重要！当然，对于笔者这种即将面试者来说特别是目标是大厂的，搭建数仓这种事根本轮不到我来做，但是我觉得，了解下数仓整个流程对于大数据来说还是很重要的~
-接下来是一道相关面试题~</p>
-<h3 id="数仓中数据从哪来？又去了哪？"><a href="#数仓中数据从哪来？又去了哪？" class="headerlink" title="数仓中数据从哪来？又去了哪？"></a>数仓中数据从哪来？又去了哪？</h3><p>来源可以是公司的日志采集系统，业务数据库信息，爬虫等等<br>去向最主要就是生成报表系统，用户画像等东西来帮助决策，好的公司还会用来做推荐系统，机器学习，风控等高精尖的东西</p>
-<p>接下来是环境搭建~</p>
-<h2 id="HADOOP2-7-2"><a href="#HADOOP2-7-2" class="headerlink" title="HADOOP2.7.2"></a>HADOOP2.7.2</h2><p>在原来的基础上增加了lzo压缩，需要去core-site.xml,mapred-site.xml文件配置信息，具体看官方文档，apache宇宙好的点就是要看什么直接就google：想看的东西.apache.org即可</p>
-<p>此外</p>
-<h3 id="有两个参数很重要"><a href="#有两个参数很重要" class="headerlink" title="有两个参数很重要"></a>有两个参数很重要</h3><p>（1）dfs.namenode.handler.count=20 * log2(Cluster Size)，比如集群规模为8台时，此参数设置为60<br>The number of Namenode RPC server threads that listen to requests from clients. If dfs.namenode.servicerpc-address is not configured then Namenode RPC server threads listen to requests from all nodes.<br>NameNode有一个工作线程池，用来处理不同DataNode的并发心跳以及客户端并发的元数据操作。对于大集群或者有大量客户端的集群来说，通常需要增大参数dfs.namenode.handler.count的默认值10。设置该值的一般原则是将其设置为集群大小的自然对数乘以20，即20logN，N为集群大小。<br>（2）编辑日志存储路径dfs.namenode.edits.dir设置与镜像文件存储路径dfs.namenode.name.dir尽量分开，达到最低写入延迟</p>
-<p>有一个点要注意：hadoop宕机怎么办？必竟意外总会有的</p>
-<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>（1）如果MR造成系统宕机。此时要控制Yarn同时运行的任务数，和每个任务申请的最大内存。调整参数：yarn.scheduler.maximum-allocation-mb（单个任务可申请的最多物理内存量，默认是8192MB）<br>（2）如果写入文件过量造成NameNode宕机。那么调高Kafka的存储大小，控制从Kafka到HDFS的写入速度。高峰期的时候用Kafka进行缓存，高峰期过去数据同步会自动跟上。</p>
-<h2 id="zookeeper3-4-10"><a href="#zookeeper3-4-10" class="headerlink" title="zookeeper3.4.10"></a>zookeeper3.4.10</h2><p>这没啥好说的，重要的是选举机制和常用指令，博主会在后面的项目总结文章中详细介绍</p>
-<h2 id="flume1-7-0"><a href="#flume1-7-0" class="headerlink" title="flume1.7.0"></a>flume1.7.0</h2><p>此处直接写我做项目过程中写的随笔，由于是边操作边写的，所以乱的地方，叙述不当的地方，我挖个坑，之后的总结文章填233</p>
-<h3 id="如何测试flume是否稳定？"><a href="#如何测试flume是否稳定？" class="headerlink" title="如何测试flume是否稳定？"></a>如何测试flume是否稳定？</h3><p>通过ganglia可以监控put和take的次数<br>若put的次数大于take很多的话则说明失败次数多，不稳定</p>
-<p>优化方案：增加flume台数，增加内存，配置双层flume</p>
-<h3 id="须知道："><a href="#须知道：" class="headerlink" title="须知道："></a>须知道：</h3><p>flume中一般有两块用于存放数据，一个是header一个是body，其中数据默认是放在body，header中为空，而在进行etl和类型拦截器设置时 就会用到header部分去存放带start和event的日志数据</p>
-<h3 id="kafkamanager1-3-3启动："><a href="#kafkamanager1-3-3启动：" class="headerlink" title="kafkamanager1.3.3启动："></a>kafkamanager1.3.3启动：</h3><p>nohup bin/kafka-manager   -Dhttp.port=7456 &gt;/opt/module/kafka-manager-1.3.3.22/start.log 2&gt;&amp;1 &amp;</p>
-<h2 id="Flume内存优化"><a href="#Flume内存优化" class="headerlink" title="Flume内存优化"></a>Flume内存优化</h2><h3 id="如何处理内存溢出问题：比如："><a href="#如何处理内存溢出问题：比如：" class="headerlink" title="如何处理内存溢出问题：比如："></a>如何处理内存溢出问题：比如：</h3><p>ERROR hdfs.HDFSEventSink: process failed<br>java.lang.OutOfMemoryError: GC overhead limit exceeded</p>
-<p>到flume-env.sh下修改配置：<br>export JAVA_OPTS=”-Xms100m -Xmx2000m -Dcom.sun.management.jmxremote”<br>内存范围，这个参数和idea，pycharm的调优相同<br>Flume内存参数设置及优化<br>JVM heap一般设置为4G或更高，部署在单独的服务器上（4核8线程16G内存）<br>-Xmx与-Xms最好设置一致，减少内存抖动带来的性能影响，如果设置不一致容易导致频繁fullgc。</p>
-<h3 id="优化flume的filechannel读取速度："><a href="#优化flume的filechannel读取速度：" class="headerlink" title="优化flume的filechannel读取速度："></a>优化flume的filechannel读取速度：</h3><p>file要比memory慢，但是file保存数据安全<br>所以在传输重要数据又要求速度时可以通过如下方式进行优化：</p>
-<p>通过配置dataDirs指向多个路径，每个路径对应不同的硬盘，增大Flume吞吐量。<br>checkpointDir和backupCheckpointDir也尽量配置在不同硬盘对应的目录中，保证checkpoint坏掉后，可以快速使用backupCheckpointDir恢复数据</p>
-<p>官方文档也有说明如下<br>Comma separated list of directories for storing log files.<br>Using multiple directories on separate disks can improve file channel<br>peformance</p>
-<h3 id="小文件处理："><a href="#小文件处理：" class="headerlink" title="小文件处理："></a>小文件处理：</h3><p>HDFS存入大量小文件，有什么影响？<br>元数据层面：每个小文件都有一份元数据，其中包括文件路径，文件名，所有者，所属组，权限，创建时间等，这些信息都保存在Namenode内存中。所以小文件过多，会占用Namenode服务器大量内存，影响Namenode性能和使用寿命<br>计算层面：默认情况下MR会对每个小文件启用一个Map任务计算，非常影响计算性能。同时也影响磁盘寻址时间。<br>处理方法其一：<br>官方默认的这三个参数配置写入HDFS后会产生小文件，hdfs.rollInterval、hdfs.rollSize、hdfs.rollCount<br>基于以上hdfs.rollInterval=3600，hdfs.rollSize=134217728，hdfs.rollCount =0，hdfs.roundValue=10，hdfs.roundUnit= second几个参数综合作用，效果如下：<br>（1）tmp文件在达到128M时会滚动生成正式文件<br>（2）tmp文件创建超10秒时会滚动生成正式文件<br>举例：在2018-01-01 05:23的时侯sink接收到数据，那会产生如下tmp文件：<br>/atguigu/20180101/atguigu.201801010520.tmp<br>即使文件内容没有达到128M，也会在05:33时滚动生成正式文件</p>
-<h2 id="kafka0-11-02"><a href="#kafka0-11-02" class="headerlink" title="kafka0.11.02"></a>kafka0.11.02</h2><h3 id="在flume从kafka拿数据消费到hdfs出过错：hdfs端没有数据"><a href="#在flume从kafka拿数据消费到hdfs出过错：hdfs端没有数据" class="headerlink" title="在flume从kafka拿数据消费到hdfs出过错：hdfs端没有数据"></a>在flume从kafka拿数据消费到hdfs出过错：hdfs端没有数据</h3><p>解决思路：二分查找<br>1.去看kafka-flume-hdfs.conf文件配置是否正确<br>2.去看zookeeper状态<br>3.去看flume是否能正常工作<br>4.去看kafka brokerid是否正确<br>5.去看log.txt看3节点的flume消费是否正常工作</p>
-<h3 id="lzo挂了：如果完全跟着别人的思维走，做到这一步你应该会发现你lzo挂了23333"><a href="#lzo挂了：如果完全跟着别人的思维走，做到这一步你应该会发现你lzo挂了23333" class="headerlink" title="lzo挂了：如果完全跟着别人的思维走，做到这一步你应该会发现你lzo挂了23333"></a>lzo挂了：如果完全跟着别人的思维走，做到这一步你应该会发现你lzo挂了23333</h3><p>hdfs端读取数据生成一堆没用的临时文件<br>报错是找不到native<br>后来翻阅官方配置文档发现是网上的项目文档少配了两个地方</p>
-<p>只叫配了core-site<br>还应该去配hadoop-env和mapred-site<br>指定java-library还有native路径</p>
+<h3 id="4-周（月）活跃用户"><a href="#4-周（月）活跃用户" class="headerlink" title="4.     周（月）活跃用户"></a>4.     周（月）活跃用户</h3><p>某个自然周（月）内启动过应用的用户，该周（月）内的多次启动只记一个活跃用户。</p>
+<h3 id="5-月活跃率"><a href="#5-月活跃率" class="headerlink" title="5.     月活跃率"></a>5.     月活跃率</h3><p>月活跃用户与截止到该月累计的用户总和之间的比例。</p>
+<h3 id="6-沉默用户"><a href="#6-沉默用户" class="headerlink" title="6.     沉默用户"></a>6.     沉默用户</h3><p>用户仅在安装当天（次日）启动一次，后续时间无再启动行为。该指标可以反映新增用户质量和用户与APP的匹配程度。</p>
+<h3 id="7-版本分布"><a href="#7-版本分布" class="headerlink" title="7.     版本分布"></a>7.     版本分布</h3><p>不同版本的周内各天新增用户数，活跃用户数和启动次数。利于判断APP各个版本之间的优劣和用户行为习惯。</p>
+<h3 id="8-本周回流用户"><a href="#8-本周回流用户" class="headerlink" title="8.     本周回流用户"></a>8.     本周回流用户</h3><p>上周未启动过应用，本周启动了应用的用户。</p>
+<h3 id="9-连续n周活跃用户"><a href="#9-连续n周活跃用户" class="headerlink" title="9.     连续n周活跃用户"></a>9.     连续n周活跃用户</h3><p>连续n周，每周至少启动一次。</p>
+<h3 id="10-忠诚用户"><a href="#10-忠诚用户" class="headerlink" title="10.  忠诚用户"></a>10.  忠诚用户</h3><p>连续活跃5周以上的用户</p>
+<h3 id="11-连续活跃用户"><a href="#11-连续活跃用户" class="headerlink" title="11.  连续活跃用户"></a>11.  连续活跃用户</h3><p>连续2周及以上活跃的用户</p>
+<h3 id="12-近期流失用户"><a href="#12-近期流失用户" class="headerlink" title="12.  近期流失用户"></a>12.  近期流失用户</h3><p>连续n(2&lt;= n &lt;= 4)周没有启动应用的用户。（第n+1周没有启动过）</p>
+<h3 id="13-留存用户"><a href="#13-留存用户" class="headerlink" title="13.  留存用户"></a>13.  留存用户</h3><p>某段时间内的新增用户，经过一段时间后，仍然使用应用的被认作是留存用户；这部分用户占当时新增用户的比例即是留存率。<br>例如，5月份新增用户200，这200人在6月份启动过应用的有100人，7月份启动过应用的有80人，8月份启动过应用的有50人；则5月份新增用户一个月后的留存率是50%，二个月后的留存率是40%，三个月后的留存率是25%。</p>
+<h3 id="14-用户新鲜度"><a href="#14-用户新鲜度" class="headerlink" title="14.  用户新鲜度"></a>14.  用户新鲜度</h3><p>每天启动应用的新老用户比例，即新增用户数占活跃用户数的比例。</p>
+<h3 id="15-单次使用时长"><a href="#15-单次使用时长" class="headerlink" title="15.  单次使用时长"></a>15.  单次使用时长</h3><p>每次启动使用的时间长度。</p>
+<h3 id="16-日使用时长"><a href="#16-日使用时长" class="headerlink" title="16.  日使用时长"></a>16.  日使用时长</h3><p>累计一天内的使用时间长度。</p>
+<h3 id="17-启动次数计算标准"><a href="#17-启动次数计算标准" class="headerlink" title="17.  启动次数计算标准"></a>17.  启动次数计算标准</h3><p>IOS平台应用退到后台就算一次独立的启动；Android平台我们规定，两次启动之间的间隔小于30秒，被计算一次启动。用户在使用过程中，若因收发短信或接电话等退出应用30秒又再次返回应用中，那这两次行为应该是延续而非独立的，所以可以被算作一次使用行为，即一次启动。业内大多使用30秒这个标准，但用户还是可以自定义此时间间隔。</p>
+<h2 id="ods层构建"><a href="#ods层构建" class="headerlink" title="ods层构建"></a>ods层构建</h2><p>建一个外部表，将存放在hdfs中的start_log,event_log数据导入表中作为原数据即可</p>
+<p>建表（可以指定其表中数据存储格式）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">create external table ods_start_log</span><br><span class="line">(</span><br><span class="line">line string</span><br><span class="line">)</span><br><span class="line">partitioned by (`dt` string)</span><br><span class="line">location &apos;/warehouse/gmall/ods/ods_start_log&apos;;</span><br><span class="line"></span><br><span class="line">load data inpath &apos;/origin_data/gmall/log/topic_start/2019-02-10/logstart-.1549785902693&apos; into table ods_start_log partition(dt=&apos;2019-02-10&apos;);</span><br><span class="line"></span><br><span class="line">drop table if exists ods_event_log;</span><br><span class="line">create external table ods_event_log</span><br><span class="line">(</span><br><span class="line">line string</span><br><span class="line">)</span><br><span class="line">partitioned by (`dt` string)</span><br><span class="line">STORED AS</span><br><span class="line">  INPUTFORMAT &apos;com.hadoop.mapred.DeprecatedLzoTextInputFormat&apos;</span><br><span class="line">  OUTPUTFORMAT &apos;org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat&apos;</span><br><span class="line">location &apos;/warehouse/gmall/ods/ods_event_log&apos;</span><br></pre></td></tr></table></figure>
 
+<p>插入原数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">load data inpath &apos;/origin_data/gmall/log/topic_event/2019-02-10&apos; into table gmall.ods_event_log partition(dt=&apos;2019-02-10&apos;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="磁盘崩盘记录"><a href="#磁盘崩盘记录" class="headerlink" title="磁盘崩盘记录"></a>磁盘崩盘记录</h2><p>由于一次非正常关机导致磁盘崩溃，需要修复，不知道是不是xcall.sh poweroff的原因<br>以后还是老老实实发送输入命令到所有会话吧，脑壳疼，不想来第二次了<br>错误如下</p>
+<img src="/2020/03/19/【数仓项目】暴风雨前的宁静-术语介绍-ods层构建-一次磁盘崩溃/1.png" title="[1]">
+
+
+<p>修复方式如下：<br>fsck修复错误的磁盘</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fsck -t ext -r /dev/sda1 </span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
       
       
         <div class="page-reward">
@@ -346,13 +351,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2020/03/18/【数仓项目】万丈高楼平地起-从0开始的环境搭建/">【数仓项目】万丈高楼平地起-从0开始的环境搭建</a></p>
+        <p><span>本文标题:</span><a href="/2020/03/19/【数仓项目】暴风雨前的宁静-术语介绍-ods层构建-一次磁盘崩溃/">【数仓项目】暴风雨前的宁静-术语介绍&amp;ods层构建&amp;一次磁盘崩溃</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Sumiyax 的个人博客">Sumiyax</a></p>
-        <p><span>发布时间:</span>2020年03月18日 - 22时38分</p>
-        <p><span>最后更新:</span>2020年03月18日 - 23时12分</p>
+        <p><span>发布时间:</span>2020年03月19日 - 23时38分</p>
+        <p><span>最后更新:</span>2020年03月20日 - 00时03分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2020/03/18/【数仓项目】万丈高楼平地起-从0开始的环境搭建/" title="【数仓项目】万丈高楼平地起-从0开始的环境搭建">http://yoursite.com/2020/03/18/【数仓项目】万丈高楼平地起-从0开始的环境搭建/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/03/18/【数仓项目】万丈高楼平地起-从0开始的环境搭建/　　作者: Sumiyax" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/03/19/【数仓项目】暴风雨前的宁静-术语介绍-ods层构建-一次磁盘崩溃/" title="【数仓项目】暴风雨前的宁静-术语介绍&amp;ods层构建&amp;一次磁盘崩溃">http://yoursite.com/2020/03/19/【数仓项目】暴风雨前的宁静-术语介绍-ods层构建-一次磁盘崩溃/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/03/19/【数仓项目】暴风雨前的宁静-术语介绍-ods层构建-一次磁盘崩溃/　　作者: Sumiyax" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -365,18 +370,18 @@
 
 <nav id="article-nav">
   
-    <a href="/2020/03/19/【数仓项目】合抱之木-生于毫末-hive-tez-数据分层/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/03/19/【数仓项目】百尺竿头-更进一步-dwd层构建/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          【数仓项目】合抱之木,生于毫末-hive&amp;tez&amp;数据分层
+          【数仓项目】百尺竿头,更进一步-dwd层构建
         
       </div>
     </a>
   
   
-    <a href="/2020/03/18/【数仓项目】数据采集阶段-生成-造-数据/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">【数仓项目】数据采集阶段-生成(造)数据</div>
+    <a href="/2020/03/19/【数仓项目】合抱之木-生于毫末-hive-tez-数据分层/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">【数仓项目】合抱之木,生于毫末-hive&amp;tez&amp;数据分层</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -387,7 +392,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#写在前面"><span class="toc-number">1.</span> <span class="toc-text">写在前面</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#数仓是什么？"><span class="toc-number">1.1.</span> <span class="toc-text">数仓是什么？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数仓中数据从哪来？又去了哪？"><span class="toc-number">1.1.1.</span> <span class="toc-text">数仓中数据从哪来？又去了哪？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HADOOP2-7-2"><span class="toc-number">1.2.</span> <span class="toc-text">HADOOP2.7.2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#有两个参数很重要"><span class="toc-number">1.2.1.</span> <span class="toc-text">有两个参数很重要</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决办法"><span class="toc-number">1.2.2.</span> <span class="toc-text">解决办法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#zookeeper3-4-10"><span class="toc-number">1.3.</span> <span class="toc-text">zookeeper3.4.10</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flume1-7-0"><span class="toc-number">1.4.</span> <span class="toc-text">flume1.7.0</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何测试flume是否稳定？"><span class="toc-number">1.4.1.</span> <span class="toc-text">如何测试flume是否稳定？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#须知道："><span class="toc-number">1.4.2.</span> <span class="toc-text">须知道：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#kafkamanager1-3-3启动："><span class="toc-number">1.4.3.</span> <span class="toc-text">kafkamanager1.3.3启动：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flume内存优化"><span class="toc-number">1.5.</span> <span class="toc-text">Flume内存优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何处理内存溢出问题：比如："><span class="toc-number">1.5.1.</span> <span class="toc-text">如何处理内存溢出问题：比如：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#优化flume的filechannel读取速度："><span class="toc-number">1.5.2.</span> <span class="toc-text">优化flume的filechannel读取速度：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#小文件处理："><span class="toc-number">1.5.3.</span> <span class="toc-text">小文件处理：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#kafka0-11-02"><span class="toc-number">1.6.</span> <span class="toc-text">kafka0.11.02</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在flume从kafka拿数据消费到hdfs出过错：hdfs端没有数据"><span class="toc-number">1.6.1.</span> <span class="toc-text">在flume从kafka拿数据消费到hdfs出过错：hdfs端没有数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lzo挂了：如果完全跟着别人的思维走，做到这一步你应该会发现你lzo挂了23333"><span class="toc-number">1.6.2.</span> <span class="toc-text">lzo挂了：如果完全跟着别人的思维走，做到这一步你应该会发现你lzo挂了23333</span></a></li></ol></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#术语介绍"><span class="toc-number">1.</span> <span class="toc-text">术语介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-用户"><span class="toc-number">1.1.</span> <span class="toc-text">1.     用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-新增用户"><span class="toc-number">1.2.</span> <span class="toc-text">2.     新增用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-活跃用户"><span class="toc-number">1.3.</span> <span class="toc-text">3.     活跃用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-周（月）活跃用户"><span class="toc-number">1.4.</span> <span class="toc-text">4.     周（月）活跃用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-月活跃率"><span class="toc-number">1.5.</span> <span class="toc-text">5.     月活跃率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-沉默用户"><span class="toc-number">1.6.</span> <span class="toc-text">6.     沉默用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-版本分布"><span class="toc-number">1.7.</span> <span class="toc-text">7.     版本分布</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-本周回流用户"><span class="toc-number">1.8.</span> <span class="toc-text">8.     本周回流用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-连续n周活跃用户"><span class="toc-number">1.9.</span> <span class="toc-text">9.     连续n周活跃用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-忠诚用户"><span class="toc-number">1.10.</span> <span class="toc-text">10.  忠诚用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-连续活跃用户"><span class="toc-number">1.11.</span> <span class="toc-text">11.  连续活跃用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-近期流失用户"><span class="toc-number">1.12.</span> <span class="toc-text">12.  近期流失用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-留存用户"><span class="toc-number">1.13.</span> <span class="toc-text">13.  留存用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-用户新鲜度"><span class="toc-number">1.14.</span> <span class="toc-text">14.  用户新鲜度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-单次使用时长"><span class="toc-number">1.15.</span> <span class="toc-text">15.  单次使用时长</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16-日使用时长"><span class="toc-number">1.16.</span> <span class="toc-text">16.  日使用时长</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17-启动次数计算标准"><span class="toc-number">1.17.</span> <span class="toc-text">17.  启动次数计算标准</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ods层构建"><span class="toc-number">2.</span> <span class="toc-text">ods层构建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#磁盘崩盘记录"><span class="toc-number">3.</span> <span class="toc-text">磁盘崩盘记录</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
 
@@ -453,13 +458,13 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2020/03/19/【数仓项目】合抱之木-生于毫末-hive-tez-数据分层/" title="上一篇: 【数仓项目】合抱之木,生于毫末-hive&amp;tez&amp;数据分层">
+            <a href="/2020/03/19/【数仓项目】百尺竿头-更进一步-dwd层构建/" title="上一篇: 【数仓项目】百尺竿头,更进一步-dwd层构建">
                 <i class="fa fa-angle-left"></i>
             </a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2020/03/18/【数仓项目】数据采集阶段-生成-造-数据/" title="下一篇: 【数仓项目】数据采集阶段-生成(造)数据">
+            <a href="/2020/03/19/【数仓项目】合抱之木-生于毫末-hive-tez-数据分层/" title="下一篇: 【数仓项目】合抱之木,生于毫末-hive&amp;tez&amp;数据分层">
                 <i class="fa fa-angle-right"></i>
             </a>
         

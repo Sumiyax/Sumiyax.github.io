@@ -3,11 +3,11 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>Archives: 2020/3 | Welcome to Sumiyax</title>
+  <title>Welcome to Sumiyax</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="Welcome to Sumiyax">
-<meta property="og:url" content="http://yoursite.com/archives/2020/03/index.html">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
 <meta property="og:site_name" content="Welcome to Sumiyax">
 <meta property="og:locale" content="default">
 <meta name="twitter:card" content="summary">
@@ -25,6 +25,9 @@
   <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   
+    
+    
+  
   
       <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
   
@@ -36,9 +39,9 @@
           rootUrl: '/',
           fancybox: true,
           animate: true,
-          isHome: false,
+          isHome: true,
           isPost: false,
-          isArchive: true,
+          isArchive: false,
           isTag: false,
           isCategory: false,
           open_in_new: false
@@ -227,295 +230,255 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-【数仓项目】常用shell脚本编写" class="article article-type-post" itemscope itemprop="blogPost">
   
+    <div class="article-meta">
+      <a href="/2020/03/17/【数仓项目】常用shell脚本编写/" class="article-date">
+      <time datetime="2020-03-17T09:47:14.000Z" itemprop="datePublished">2020-03-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
     
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/17/【数仓项目】常用shell脚本编写/">【数仓项目】常用shell脚本编写 </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h2 id="zk-sh-用于zookeeper的启动，状态，停止"><a href="#zk-sh-用于zookeeper的启动，状态，停止" class="headerlink" title="zk.sh:用于zookeeper的启动，状态，停止"></a>zk.sh:用于zookeeper的启动，状态，停止</h2><hr>
+          
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
+    </div>
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2020/03/19/【数仓项目】重中之重-日活-周活-月活（dws）/" class="archive-article-date">
-      <time datetime="2020-03-19T15:39:19.000Z" itemprop="datePublished">03-19</time>
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+        <p class="article-more-link">
+          <a href="/2020/03/17/【数仓项目】常用shell脚本编写/#more">大航海 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-【做题杂记】sql中的连接" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/03/17/【做题杂记】sql中的连接/" class="article-date">
+      <time datetime="2020-03-17T08:58:27.000Z" itemprop="datePublished">2020-03-17</time>
 </a>
-        </div>
-         
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
   
     <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/19/【数仓项目】重中之重-日活-周活-月活（dws）/">【数仓项目】重中之重-日活&amp;周活&amp;月活（dws）</a>
+      <a class="article-title" href="/2020/03/17/【做题杂记】sql中的连接/">【做题杂记】sql中的连接</a>
     </h1>
   
 
-        <div class="article-info info-on-archive">
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
           
+              <h2 id="外连接-out-join"><a href="#外连接-out-join" class="headerlink" title="外连接(out join)"></a>外连接(out join)</h2><p>外连接分为外左连接(left outer join)和外右连接(right outer join)</p>
+<p>注释：left outer join 与 left join 等价，    一般写成left join<br>           right outer join 与 right join等价，一般写成right join</p>
+<p>左连接，取左边的表的全部，右边的表按条件，符合的显示，不符合则显示null</p>
+<p>举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select &lt;select list&gt; from A left join B on A.id=B.id</span><br></pre></td></tr></table></figure>
 
+<img src="/2020/03/17/【做题杂记】sql中的连接/1.png" title="[1]">
+<!-- ![1](1.png) -->
+<hr>
           
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+      
+        <p class="article-more-link">
+          <a href="/2020/03/17/【做题杂记】sql中的连接/#more">大航海 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
   </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2020/03/19/【灵光一现】学而时习之-SQL查询新姿势/" class="archive-article-date">
-      <time datetime="2020-03-19T15:39:05.000Z" itemprop="datePublished">03-19</time>
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-title-【做题杂记】类型题：查询第N高的数据" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/03/17/title-【做题杂记】类型题：查询第N高的数据/" class="article-date">
+      <time datetime="2020-03-17T08:10:11.000Z" itemprop="datePublished">2020-03-17</time>
 </a>
-        </div>
-         
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
   
     <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/19/【灵光一现】学而时习之-SQL查询新姿势/">【灵光一现】学而时习之-SQL查询新姿势</a>
+      <a class="article-title" href="/2020/03/17/title-【做题杂记】类型题：查询第N高的数据/">【做题杂记】类型题：查询第N高的数据&#39;</a>
     </h1>
   
 
-        <div class="article-info info-on-archive">
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
           
+              <h1 id="现在有“课程表”，记录了学生选修课程的名称以及成绩。"><a href="#现在有“课程表”，记录了学生选修课程的名称以及成绩。" class="headerlink" title="现在有“课程表”，记录了学生选修课程的名称以及成绩。"></a>现在有“课程表”，记录了学生选修课程的名称以及成绩。</h1><h1 id="现在需要找出语文课中成绩第二高的学生成绩。如果不存在第二高成绩的学生，那么查询应返回-null。"><a href="#现在需要找出语文课中成绩第二高的学生成绩。如果不存在第二高成绩的学生，那么查询应返回-null。" class="headerlink" title="现在需要找出语文课中成绩第二高的学生成绩。如果不存在第二高成绩的学生，那么查询应返回 null。"></a>现在需要找出语文课中成绩第二高的学生成绩。如果不存在第二高成绩的学生，那么查询应返回 null。</h1><hr>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
 
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+      
+        <p class="article-more-link">
+          <a href="/2020/03/17/title-【做题杂记】类型题：查询第N高的数据/#more">大航海 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
   </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2020/03/19/【灵光一现】温故而知新-hive常用函数盘点/" class="archive-article-date">
-      <time datetime="2020-03-19T15:38:52.000Z" itemprop="datePublished">03-19</time>
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-菜鸡教程-群发不同邮件脚本编写" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/06/09/菜鸡教程-群发不同邮件脚本编写/" class="article-date">
+      <time datetime="2019-06-09T11:25:13.000Z" itemprop="datePublished">2019-06-09</time>
 </a>
-        </div>
-         
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
   
     <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/19/【灵光一现】温故而知新-hive常用函数盘点/">【灵光一现】温故而知新-hive常用函数盘点</a>
+      <a class="article-title" href="/2019/06/09/菜鸡教程-群发不同邮件脚本编写/">菜鸡教程-群发不同邮件脚本编写</a>
     </h1>
   
 
-        <div class="article-info info-on-archive">
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
           
+              <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>由于近期在协会举办了一场比赛，赛后需要将200份不同成绩单分别发给参赛者，为了方便，用python实现了该功能，并利用博客进行记录分享学习。<br>还是那句话，菜鸡菜笔，如有不正，还请大佬们不吝惜赐教！</p>
+          
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
 
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+      
+        <p class="article-more-link">
+          <a href="/2019/06/09/菜鸡教程-群发不同邮件脚本编写/#more">大航海 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
   </div>
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2020/03/19/【数仓项目】百尺竿头-更进一步-dwd层构建/" class="archive-article-date">
-      <time datetime="2020-03-19T15:38:35.000Z" itemprop="datePublished">03-19</time>
-</a>
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/19/【数仓项目】百尺竿头-更进一步-dwd层构建/">【数仓项目】百尺竿头,更进一步-dwd层构建</a>
-    </h1>
-  
 
-        <div class="article-info info-on-archive">
-          
 
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2020/03/19/【数仓项目】暴风雨前的宁静-术语介绍-ods层构建-一次磁盘崩溃/" class="archive-article-date">
-      <time datetime="2020-03-19T15:38:22.000Z" itemprop="datePublished">03-19</time>
-</a>
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/19/【数仓项目】暴风雨前的宁静-术语介绍-ods层构建-一次磁盘崩溃/">【数仓项目】暴风雨前的宁静-术语介绍&amp;ods层构建&amp;一次磁盘崩溃</a>
-    </h1>
-  
 
-        <div class="article-info info-on-archive">
-          
 
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2020/03/19/【数仓项目】合抱之木-生于毫末-hive-tez-数据分层/" class="archive-article-date">
-      <time datetime="2020-03-19T15:38:06.000Z" itemprop="datePublished">03-19</time>
-</a>
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/19/【数仓项目】合抱之木-生于毫末-hive-tez-数据分层/">【数仓项目】合抱之木,生于毫末-hive&amp;tez&amp;数据分层</a>
-    </h1>
-  
 
-        <div class="article-info info-on-archive">
-          
 
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2020/03/18/【数仓项目】万丈高楼平地起-从0开始的环境搭建/" class="archive-article-date">
-      <time datetime="2020-03-18T14:38:21.000Z" itemprop="datePublished">03-18</time>
-</a>
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/18/【数仓项目】万丈高楼平地起-从0开始的环境搭建/">【数仓项目】万丈高楼平地起-从0开始的环境搭建</a>
-    </h1>
-  
 
-        <div class="article-info info-on-archive">
-          
 
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2020/03/18/【数仓项目】数据采集阶段-生成-造-数据/" class="archive-article-date">
-      <time datetime="2020-03-18T14:29:02.000Z" itemprop="datePublished">03-18</time>
-</a>
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/18/【数仓项目】数据采集阶段-生成-造-数据/">【数仓项目】数据采集阶段-生成(造)数据</a>
-    </h1>
-  
 
-        <div class="article-info info-on-archive">
-          
-
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2020/03/17/【手撕MR】WordCount/" class="archive-article-date">
-      <time datetime="2020-03-17T10:11:30.000Z" itemprop="datePublished">03-17</time>
-</a>
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/17/【手撕MR】WordCount/">【手撕MR】WordCount</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/2020/03/17/【灵光一现】MR辅助排序深入理解-MR重点盘点/" class="archive-article-date">
-      <time datetime="2020-03-17T10:04:19.000Z" itemprop="datePublished">03-17</time>
-</a>
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/17/【灵光一现】MR辅助排序深入理解-MR重点盘点/">【灵光一现】MR辅助排序深入理解&amp;MR重点盘点</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
-  
-
-    
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2020/03/page/2/">2</a><a class="extend next" rel="next" href="/archives/2020/03/page/2/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
     </nav>
   
-
 </div>
       <footer id="footer">
     <div class="outer">
@@ -580,17 +543,6 @@
         };
     })
 </script>
-
-    <button class="hide-labels">TAG 开关</button>
-    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js">
-    </script>
-    <script>
-        $(document).ready(function() {
-            $("button").click(function() {
-                $(".article-info").toggle(200);
-            });
-        });
-    </script>
 
 <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
