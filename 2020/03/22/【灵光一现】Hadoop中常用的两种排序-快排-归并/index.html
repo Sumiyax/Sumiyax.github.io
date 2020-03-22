@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>【灵光一现】Hadoop中常用的两种排序-快排&amp;归并 | Welcome to Sumiyax</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="写在前面众所周知，当执行一个完整的MR流程时，必然会经过快排和归并两种排序，可见这两种排序在日常使用中的重要性。于是，便有了这篇文章，以便捡起过去学过的知识。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【灵光一现】Hadoop中常用的两种排序-快排&amp;归并">
+<meta property="og:url" content="http://yoursite.com/2020/03/22/【灵光一现】Hadoop中常用的两种排序-快排-归并/index.html">
+<meta property="og:site_name" content="Welcome to Sumiyax">
+<meta property="og:description" content="写在前面众所周知，当执行一个完整的MR流程时，必然会经过快排和归并两种排序，可见这两种排序在日常使用中的重要性。于是，便有了这篇文章，以便捡起过去学过的知识。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2020/03/22/【灵光一现】Hadoop中常用的两种排序-快排-归并/1.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/22/【灵光一现】Hadoop中常用的两种排序-快排-归并/2.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/22/【灵光一现】Hadoop中常用的两种排序-快排-归并/3.png">
+<meta property="og:updated_time" content="2020-03-22T15:40:11.095Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【灵光一现】Hadoop中常用的两种排序-快排&amp;归并">
+<meta name="twitter:description" content="写在前面众所周知，当执行一个完整的MR流程时，必然会经过快排和归并两种排序，可见这两种排序在日常使用中的重要性。于是，便有了这篇文章，以便捡起过去学过的知识。">
+<meta name="twitter:image" content="http://yoursite.com/2020/03/22/【灵光一现】Hadoop中常用的两种排序-快排-归并/1.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Welcome to Sumiyax" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet">
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/sumiya.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Sumiyax</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="#">博客首页</a></li>
+                        
+                            <li><a href="/item/works/index.html">程序设计作品展示</a></li>
+                        
+                            <li><a href="/item/about.html">留言打卡</a></li>
+                        
+                            <li><a href="/item/tags.html">静心阅读</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="#" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/Sumiyax" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="#" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://Sumiyax.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">中北大学&lt;br/&gt;1707054151宋子康</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Sumiyax</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/sumiya.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Sumiyax</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="#">博客首页</a></li>
+                
+                    <li><a href="/item/works/index.html">程序设计作品展示</a></li>
+                
+                    <li><a href="/item/about.html">留言打卡</a></li>
+                
+                    <li><a href="/item/tags.html">静心阅读</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="#" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/Sumiyax" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
+                    
+                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-【灵光一现】Hadoop中常用的两种排序-快排-归并" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/03/22/【灵光一现】Hadoop中常用的两种排序-快排-归并/" class="article-date">
+      <time datetime="2020-03-22T14:53:24.000Z" itemprop="datePublished">2020-03-22</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【灵光一现】Hadoop中常用的两种排序-快排&amp;归并
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>众所周知，当执行一个完整的MR流程时，必然会经过快排和归并两种排序，可见这两种排序在日常使用中的重要性。于是，便有了这篇文章，以便捡起过去学过的知识。</p>
+<hr>
+<a id="more"></a>
+
+<h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><p>说到排序，最基础的便是冒泡排序，这可能是大多数人一开始最能写的排序，因为其方法过于暴力，所以查询效率通常情况下较慢，时间复杂度最高为n^2，最好能为n，但是相对的，他也较为稳定</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>数组从前到后依次两两排序，直到最后一位数为一轮，去掉最后一个数（每一轮排序会把数组最大值送到最后一位）开始再重新进行下一轮排序<br>代码如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">package com.practice.bubblesort1;</span><br><span class="line"></span><br><span class="line">public class BubbleSort1 &#123;</span><br><span class="line">    private static int count = 0;</span><br><span class="line">    public static void arrToString(double[] arr , String status)&#123;</span><br><span class="line">        String str = &quot;&quot;;</span><br><span class="line">        for (double word : arr) &#123;</span><br><span class="line">            str = str + word + &quot;\t&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;当前数组状态：&quot;+status+&quot;\t&quot;+str);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void BubbleSort(double[] arr)&#123;</span><br><span class="line">        for (int i = 0;i&lt;arr.length;i++)&#123;</span><br><span class="line">            for(int j = 0;j&lt;arr.length-1-i;j++)&#123;</span><br><span class="line">                if(arr[j]&gt;arr[j+1])&#123;</span><br><span class="line">                    double tmp = arr[j];</span><br><span class="line">                    arr[j] = arr[j+1];</span><br><span class="line">                    arr[j+1] = tmp;</span><br><span class="line">                &#125;</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        double[] arr = &#123;21,43,5,67,11,87,33,2&#125;;</span><br><span class="line">        arrToString(arr,&quot;UnSorted&quot;);</span><br><span class="line">        System.out.println(&quot;Sorting.............&quot;);</span><br><span class="line">        BubbleSort(arr);</span><br><span class="line">        arrToString(arr,&quot;Sorted&quot;);</span><br><span class="line">        System.out.println(&quot;循环次数：&quot;+count);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果如下</p>
+<img src="/2020/03/22/【灵光一现】Hadoop中常用的两种排序-快排-归并/1.png" title="[1]">
+
+
+<h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><p>快排是冒泡的改进，有很高的上限，最快以及平均的时间复杂度能到o(nlog2n)<br>，最坏情况则是n^2,稳定性也较差。<br>这里解释下稳定性：<br>所谓稳定性是指待排序的序列中有两元素相等,排序之后它们的先后顺序不变.假如为A1,A2.它们的索引分别为1,2.则排序之后A1,A2的索引仍然是1和2。稳定也可以理解为一切皆在掌握中,元素的位置处在你在控制中.而不稳定算法有时就有点碰运气,随机的成分.当两元素相等时它们的位置在排序后可能仍然相同。但也可能不同。是未可知的。<br>举个例子：5 3 3 4 3 8 9 10 11， 现在中枢元素5和3(第5个元素，下标从1开始计)交换就会把元素3的稳定性打乱</p>
+<h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><p>1.一般选择数组第一个数为中枢点，中枢点是基准，或许位置会变，但值是不变的，所以在写代码的时候要记得每次循环定好中枢点的值<br>2.从末尾开始从右向左读数，直到找到一个小于中枢点的数，标记其位置<br>3.从起点开始向右读书，直到找到一个大于中枢点的数，标记其位置<br>4.交换两点，总结就是，比中枢点小的放左边，比中枢点大的放右边。<br>5.至此，重新定位中枢点位置，递归上述步骤，直到左边的指针大于等于右边的指针，此时即表示所有数都已排序过</p>
+<p>ps:当数组个数为奇数时可考虑选中间值为中枢点，可有效提升计算效率</p>
+<p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">package com.practice.quicksort1;</span><br><span class="line"></span><br><span class="line">public class QuickSort1 &#123;</span><br><span class="line">    private static int count = 0;</span><br><span class="line">    public static void arrToString(double[] arr,String status)&#123;</span><br><span class="line">        String str = &quot;&quot;;</span><br><span class="line">        for (double word : arr) &#123;</span><br><span class="line">            str = str + word + &quot;\t&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;当前状态：&quot;+status+&quot;\n&quot;+ str);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void QuickSort(double[] arr,int left, int right)&#123;</span><br><span class="line">        if(left&gt;=right)&#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        int i = left;</span><br><span class="line">        int j = right;</span><br><span class="line">        double key = arr[left];</span><br><span class="line"></span><br><span class="line">        while(i&lt;j)&#123;</span><br><span class="line">            while(i&lt;j&amp;&amp;arr[j]&gt;=key)&#123;</span><br><span class="line">                j--;</span><br><span class="line">            &#125;</span><br><span class="line">            while(i&lt;j&amp;&amp;arr[i]&lt;=key)&#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            double tmp;</span><br><span class="line">            tmp = arr[i];</span><br><span class="line">            arr[i] = arr[j];</span><br><span class="line">            arr[j] = tmp;</span><br><span class="line">            count++;</span><br><span class="line">        &#125;</span><br><span class="line">        arr[left] = arr[i];</span><br><span class="line">        arr[i] = key;</span><br><span class="line"></span><br><span class="line">        QuickSort(arr,left,i-1);</span><br><span class="line">        QuickSort(arr,i+1,right);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        double[] arr = &#123;21,43,5,67,11,87,33,2&#125;;</span><br><span class="line">        arrToString(arr,&quot;0&quot;);</span><br><span class="line">        System.out.println(&quot;ing...................&quot;);</span><br><span class="line">        QuickSort(arr,0,arr.length-1);</span><br><span class="line">        arrToString(arr,&quot;1&quot;);</span><br><span class="line">        System.out.println(&quot;count:&quot;+count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<img src="/2020/03/22/【灵光一现】Hadoop中常用的两种排序-快排-归并/2.png" title="[2]">
+
+<h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><p>归并排序是建立在归并操作上的一种有效的排序算法，该算法是采用分治法的典型利用。将已有序的子序列合并，得到完全有序的序列；即先使每个子序列有序，再使子序列段间有序。是一种牺牲空间换取时间的算法，算法稳定，平均时间复杂度为O(Nlog2N)同时最坏情况也是这个速度</p>
+<h3 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h3><p>1.将待排序数据不断对半切分，直至不可再切<br>2.切分后不断由下往上进行有序合并操作<br>合并时：<br>3.申明临时数组，临时指针指向临时数组第一位，以及两个指针分别指向数组第一位和中间值的后一位<br>4.不断比较两个指针，通过临时指针将较小数存到临时数组后，对应选到的指针和临时指针都朝后移一位，直到左指针指到中间数，或者右指针指到最后一位，即不能继续后移<br>5.将还没指到终点的指针继续后移，依次将指到的数存到临时数组中<br>6.将临时数组覆盖写入排序数组</p>
+<p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">package com.practice.mergesort1;</span><br><span class="line"></span><br><span class="line">public class MergeSort1 &#123;</span><br><span class="line">    private static int count = 0;</span><br><span class="line">    public static void arrToString(double[] arr,String status)&#123;</span><br><span class="line">        String str = &quot;&quot;;</span><br><span class="line">        for (double word : arr) &#123;</span><br><span class="line">            str = str + word + &quot;\t&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;当前状态：&quot;+status+&quot;\n&quot;+ str);</span><br><span class="line">    &#125;</span><br><span class="line">    public static void merge(double[] arr,int left,int right,int mid)&#123;</span><br><span class="line">        double[] tmp = new double[right-left+1];</span><br><span class="line">        int k = 0;</span><br><span class="line">        int l = left;</span><br><span class="line">        int r = mid+1;</span><br><span class="line">        while(l&lt;=mid&amp;&amp;r&lt;=right)&#123;</span><br><span class="line">            if(arr[l]&lt;=arr[r])&#123;</span><br><span class="line">                tmp[k++] = arr[l++];</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                tmp[k++] = arr[r++];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        while(l&lt;=mid)&#123;</span><br><span class="line">            tmp[k++] = arr[l++];</span><br><span class="line">        &#125;</span><br><span class="line">        while(r&lt;=right)&#123;</span><br><span class="line">            tmp[k++] = arr[r++];</span><br><span class="line">        &#125;</span><br><span class="line">        //覆盖</span><br><span class="line">        for(int i = 0;i&lt;tmp.length;i++)&#123;</span><br><span class="line">            arr[i+left] = tmp[i];</span><br><span class="line">        &#125;</span><br><span class="line">        count++;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void sort(double[] arr ,int left,int right)&#123;</span><br><span class="line">        int mid = (left+right)/2;</span><br><span class="line">        if(left&lt;right)&#123;</span><br><span class="line">            sort(arr,left,mid);</span><br><span class="line">            sort(arr,mid+1,right);</span><br><span class="line"></span><br><span class="line">            merge(arr,left,right,mid);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String args[])&#123;</span><br><span class="line">        double arr[]=&#123;21,43,5,67,11,87,33,2&#125;;</span><br><span class="line">        arrToString(arr,&quot;UnSorted&quot;);</span><br><span class="line">        System.out.println(&quot;Sorting.......&quot;);</span><br><span class="line">        sort(arr,0,arr.length-1);</span><br><span class="line">        arrToString(arr,&quot;Sorted&quot;);</span><br><span class="line">        System.out.println(&quot;循环次数：&quot;+count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<img src="/2020/03/22/【灵光一现】Hadoop中常用的两种排序-快排-归并/3.png" title="[3]">
+
+<hr>
+<p>路漫漫其修远兮，吾将上下而求索</p>
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫">
+            </div>
+              <div class="pay_explain">谢谢你</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.jpg" alt="支付宝"></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信"></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/03/22/【灵光一现】Hadoop中常用的两种排序-快排-归并/">【灵光一现】Hadoop中常用的两种排序-快排&amp;归并</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Sumiyax 的个人博客">Sumiyax</a></p>
+        <p><span>发布时间:</span>2020年03月22日 - 22时53分</p>
+        <p><span>最后更新:</span>2020年03月22日 - 23时40分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/03/22/【灵光一现】Hadoop中常用的两种排序-快排-归并/" title="【灵光一现】Hadoop中常用的两种排序-快排&amp;归并">http://yoursite.com/2020/03/22/【灵光一现】Hadoop中常用的两种排序-快排-归并/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/03/22/【灵光一现】Hadoop中常用的两种排序-快排-归并/　　作者: Sumiyax" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target="_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2020/03/19/【数仓项目】重中之重-日活-周活-月活（dws）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">【数仓项目】重中之重-日活&amp;周活&amp;月活（dws）</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#写在前面"><span class="toc-number">1.</span> <span class="toc-text">写在前面</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#冒泡排序"><span class="toc-number">1.1.</span> <span class="toc-text">冒泡排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#思路"><span class="toc-number">1.1.1.</span> <span class="toc-text">思路</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#快速排序"><span class="toc-number">1.2.</span> <span class="toc-text">快速排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#思路-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">思路</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#归并排序"><span class="toc-number">1.3.</span> <span class="toc-text">归并排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#思路-2"><span class="toc-number">1.3.1.</span> <span class="toc-text">思路</span></a></li></ol></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'Sumiyax',
+      repo: 'Sumiyax.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2020/03/19/【数仓项目】重中之重-日活-周活-月活（dws）/" title="下一篇: 【数仓项目】重中之重-日活&amp;周活&amp;月活（dws）">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/03/22/【灵光一现】Hadoop中常用的两种排序-快排-归并/">【灵光一现】Hadoop中常用的两种排序-快排&归并</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/19/【数仓项目】重中之重-日活-周活-月活（dws）/">【数仓项目】重中之重-日活&周活&月活（dws）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/19/【灵光一现】学而时习之-SQL查询新姿势/">【灵光一现】学而时习之-SQL查询新姿势</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/19/【灵光一现】温故而知新-hive常用函数盘点/">【灵光一现】温故而知新-hive常用函数盘点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/19/【数仓项目】百尺竿头-更进一步-dwd层构建/">【数仓项目】百尺竿头,更进一步-dwd层构建</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/19/【数仓项目】暴风雨前的宁静-术语介绍-ods层构建-一次磁盘崩溃/">【数仓项目】暴风雨前的宁静-术语介绍&ods层构建&一次磁盘崩溃</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/19/【数仓项目】合抱之木-生于毫末-hive-tez-数据分层/">【数仓项目】合抱之木,生于毫末-hive&tez&数据分层</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/18/【数仓项目】万丈高楼平地起-从0开始的环境搭建/">【数仓项目】万丈高楼平地起-从0开始的环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/18/【数仓项目】数据采集阶段-生成-造-数据/">【数仓项目】数据采集阶段-生成(造)数据</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/17/【手撕MR】WordCount/">【手撕MR】WordCount</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/17/【灵光一现】MR辅助排序深入理解-MR重点盘点/">【灵光一现】MR辅助排序深入理解&MR重点盘点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/17/【数仓项目】常用shell脚本编写/">【数仓项目】常用shell脚本编写 </a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/17/【做题杂记】sql中的连接/">【做题杂记】sql中的连接</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/17/title-【做题杂记】类型题：查询第N高的数据/">【做题杂记】类型题：查询第N高的数据'</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/09/菜鸡教程-群发不同邮件脚本编写/">菜鸡教程-群发不同邮件脚本编写</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2020 Sumiyax
+            </div>
+            <div class="footer-right">
+                
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit">到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 12;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
