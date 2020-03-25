@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>【灵光一现】两三点雨山前-二分查找&amp;二叉树的创建和遍历 | Welcome to Sumiyax</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="写在前面二分查找思维不论是在算法中，还是在错误查找中都占据着及其重要的角色，所以本章用来复习二分查找。此外，由于在写MR的TOPN时用到了treemap（由红黑树算法实现），突然意识到自己在二叉树这一块有欠缺，所以本文也对二叉树做一个初步复习以下内容均为个人理解，若有不对，欢迎指正。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【灵光一现】两三点雨山前-二分查找&amp;二叉树的创建和遍历">
+<meta property="og:url" content="http://yoursite.com/2020/03/25/【灵光一现】两三点雨山前-二分查找-二叉树的创建和遍历/index.html">
+<meta property="og:site_name" content="Welcome to Sumiyax">
+<meta property="og:description" content="写在前面二分查找思维不论是在算法中，还是在错误查找中都占据着及其重要的角色，所以本章用来复习二分查找。此外，由于在写MR的TOPN时用到了treemap（由红黑树算法实现），突然意识到自己在二叉树这一块有欠缺，所以本文也对二叉树做一个初步复习以下内容均为个人理解，若有不对，欢迎指正。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-03-25T08:51:21.966Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【灵光一现】两三点雨山前-二分查找&amp;二叉树的创建和遍历">
+<meta name="twitter:description" content="写在前面二分查找思维不论是在算法中，还是在错误查找中都占据着及其重要的角色，所以本章用来复习二分查找。此外，由于在写MR的TOPN时用到了treemap（由红黑树算法实现），突然意识到自己在二叉树这一块有欠缺，所以本文也对二叉树做一个初步复习以下内容均为个人理解，若有不对，欢迎指正。">
+  
+    <link rel="alternative" href="/atom.xml" title="Welcome to Sumiyax" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet">
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head></html>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/sumiya.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Sumiyax</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="#">博客首页</a></li>
+                        
+                            <li><a href="/item/works/index.html">程序设计作品展示</a></li>
+                        
+                            <li><a href="/item/about.html">留言打卡</a></li>
+                        
+                            <li><a href="/item/tags.html">静心阅读</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="#" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/Sumiyax" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="#" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://Sumiyax.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">中北大学&lt;br/&gt;1707054151宋子康</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Sumiyax</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/sumiya.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Sumiyax</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="#">博客首页</a></li>
+                
+                    <li><a href="/item/works/index.html">程序设计作品展示</a></li>
+                
+                    <li><a href="/item/about.html">留言打卡</a></li>
+                
+                    <li><a href="/item/tags.html">静心阅读</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="#" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/Sumiyax" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
+                    
+                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-【灵光一现】两三点雨山前-二分查找-二叉树的创建和遍历" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/03/25/【灵光一现】两三点雨山前-二分查找-二叉树的创建和遍历/" class="article-date">
+      <time datetime="2020-03-25T08:29:24.000Z" itemprop="datePublished">2020-03-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【灵光一现】两三点雨山前-二分查找&amp;二叉树的创建和遍历
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>二分查找思维不论是在算法中，还是在错误查找中都占据着及其重要的角色，所以本章用来复习二分查找。<br>此外，由于在写MR的TOPN时用到了treemap（由红黑树算法实现），突然意识到自己在二叉树这一块有欠缺，所以本文也对二叉树做一个初步复习<br>以下内容均为个人理解，若有不对，欢迎指正。</p>
+<hr>
+<a id="more"></a>
+
+
+<h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><p>所谓二分查找便是不停的将待查找树组对半分，取其中间值于查找值进行比较，若找到则不再对分，若不是则根据大小比结果朝不同方向继续对分。<br>这里需要注意的是，查找数组需要是有序的，可以在查找前先进行排序。</p>
+<h3 id="整个查找过程遵循两个原则"><a href="#整个查找过程遵循两个原则" class="headerlink" title="整个查找过程遵循两个原则"></a>整个查找过程遵循两个原则</h3><p>1.若中间值大于查找值，则取中间值左边（即比中间值小的值）部分进行对分。<br>2.若中间值小于查找值，则取中间值右边（即比中间值大的值）部分进行对分。</p>
+<p>归并排序&amp;二分查找代码如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">package com.sumiya.binarysearch;</span><br><span class="line"></span><br><span class="line">import com.sun.xml.internal.org.jvnet.mimepull.CleanUpExecutorFactory;</span><br><span class="line"></span><br><span class="line">public class BinarySearch &#123;</span><br><span class="line">    public static double binarySearch(double[] arr,int left,int right,double key)&#123;</span><br><span class="line">        if(key&lt;arr[left]||key&gt;arr[right]||left&gt;right)&#123;</span><br><span class="line">            return  -1;</span><br><span class="line">        &#125;</span><br><span class="line">        int mid = (left+right)/2;</span><br><span class="line">        if(arr[mid]==key)&#123;</span><br><span class="line">            return mid;</span><br><span class="line">        &#125;else if(arr[mid]&gt;key)&#123;</span><br><span class="line">            return binarySearch(arr,left,mid-1,key);</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            return binarySearch(arr,mid+1,right,key);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void mergeSort(double[] arr,int left,int right)&#123;</span><br><span class="line">        int mid = (left+right)/2;</span><br><span class="line">        if(left&lt;right)&#123;</span><br><span class="line">            mergeSort(arr,left,mid);</span><br><span class="line">            mergeSort(arr,mid+1,right);</span><br><span class="line"></span><br><span class="line">            merge(arr,left,right,mid);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void merge(double[] arr ,int left,int right,int mid)&#123;</span><br><span class="line">        double[] tmp = new double[right-left+1];</span><br><span class="line">        int k = 0;</span><br><span class="line">        int i = left;</span><br><span class="line">        int j = mid+1;</span><br><span class="line">        while(i&lt;=mid&amp;&amp;j&lt;=right)&#123;</span><br><span class="line">            if(arr[i]&lt;arr[j])&#123;</span><br><span class="line">                tmp[k++] = arr[i++];</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                tmp[k++] = arr[j++];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        while(i&lt;=mid)&#123;</span><br><span class="line">            tmp[k++] = arr[i++];</span><br><span class="line">        &#125;</span><br><span class="line">        while(j&lt;=right)&#123;</span><br><span class="line">            tmp[k++] = arr[j++];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for(int l = 0;l&lt;tmp.length;l++)&#123;</span><br><span class="line">            arr[l+left] = tmp[l];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public static int count=0;</span><br><span class="line">    public static void arrToString(double[] arr,String status)&#123;</span><br><span class="line">        String str = &quot;&quot;;</span><br><span class="line">        for (double word : arr) &#123;</span><br><span class="line">            str = str + word + &quot;\t&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;当前数组状态：&quot;+ status+&quot;\t&quot;+str);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        double[] arr = &#123;21,43,5,67,11,87,33,2&#125;;</span><br><span class="line">        int left = 0;</span><br><span class="line">        int right = arr.length-1;</span><br><span class="line">        int key = 21;</span><br><span class="line">        arrToString(arr,&quot;未排序：&quot;);</span><br><span class="line">        mergeSort(arr,0,arr.length-1);</span><br><span class="line">        arrToString(arr,&quot;排序后：&quot;);</span><br><span class="line">        System.out.println(&quot;循环次数：&quot;+count);</span><br><span class="line">        System.out.println(&quot;数组21,43,5,67,11,87,33,2，排序后二分查找21的索引结果为：&quot;);</span><br><span class="line">        System.out.println(binarySearch(arr,left,right,key));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="二叉树的创建和遍历"><a href="#二叉树的创建和遍历" class="headerlink" title="二叉树的创建和遍历"></a>二叉树的创建和遍历</h2><p>思路：<br>1.定义一个二叉树类BinaryTree<br>2.调用本类去定义三个变量left,root,right<br>3.定义一个BinaryTree类型的集合datas，用于存放节点<br>4.定义一个Object类型的data用于存放实际数据<br>5.建立left,root,right的构造方法<br>6.初始化二叉树，将左右节点都置空</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//将初始的左右孩子置为空</span><br><span class="line">    public BinaryTree(Object data)&#123;</span><br><span class="line">        this(null,null,data);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>7.创建二叉树创建方法create，设置参数为Object[] objs<br>8.将传入的数组转换为BinaryTree类型，存储到datas中<br>9.设置节点数组的第一个为根节点，之后的奇数索引为左节点，偶数索引为右节点<br>10.先序中序后序遍历分别为：根左右，左根右，右左根</p>
+<p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line">package com.sumiya.binarytree;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">public class BinaryTree &#123;</span><br><span class="line">    private static String str = &quot;&quot;;</span><br><span class="line">    private BinaryTree root;</span><br><span class="line">    private BinaryTree left;</span><br><span class="line">    private BinaryTree right;</span><br><span class="line"></span><br><span class="line">    //数据域</span><br><span class="line">    private Object data;</span><br><span class="line">    //存节点</span><br><span class="line">    public List&lt;BinaryTree&gt; datas;</span><br><span class="line"></span><br><span class="line">    public BinaryTree(BinaryTree left, BinaryTree right,Object data)&#123;</span><br><span class="line">        this.left = left;</span><br><span class="line">        this.right = right;</span><br><span class="line">        this.data = data;</span><br><span class="line">    &#125;</span><br><span class="line">    //将初始的左右孩子置为空</span><br><span class="line">    public BinaryTree(Object data)&#123;</span><br><span class="line">        this(null,null,data);</span><br><span class="line">    &#125;</span><br><span class="line">    public BinaryTree()&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void create(Object[] objs)&#123;</span><br><span class="line">        datas = new ArrayList&lt;BinaryTree&gt;();</span><br><span class="line">        //将传入的数组转换为node</span><br><span class="line">        for (Object obj : objs) &#123;</span><br><span class="line">            datas.add(new BinaryTree(obj));</span><br><span class="line">        &#125;</span><br><span class="line">        //设置节点数组的第一个为根节点，之后的奇数索引为左节点，偶数索引为右节点</span><br><span class="line">        root = datas.get(0);</span><br><span class="line">        for(int i =0;i&lt;objs.length/2;i++)&#123;</span><br><span class="line">            //左孩子</span><br><span class="line">            datas.get(i).left=datas.get(i*2+1);</span><br><span class="line">            str+=datas.get(i).left.data+&quot;\t&quot;;</span><br><span class="line">            //防止超出数组范围</span><br><span class="line">            if(i*2+2&lt;datas.size())&#123;</span><br><span class="line">                datas.get(i).right = datas.get(i*2+2);</span><br><span class="line">                str+=datas.get(i).right.data+&quot;\t&quot;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //先序</span><br><span class="line">    public void preorder(BinaryTree root)&#123;</span><br><span class="line">        if(root!=null)&#123;</span><br><span class="line">            System.out.print(root.data+&quot;\t&quot;);</span><br><span class="line">            preorder(root.left);</span><br><span class="line">            preorder(root.right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    //中序</span><br><span class="line">    public void midOrder(BinaryTree root)&#123;</span><br><span class="line">        if (root!=null)&#123;</span><br><span class="line">            midOrder(root.left);</span><br><span class="line">            System.out.print(root.data+&quot;\t&quot;);</span><br><span class="line">            midOrder(root.right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    //后序</span><br><span class="line">    public void lastOrder(BinaryTree root)&#123;</span><br><span class="line">        if (root!=null)&#123;</span><br><span class="line">            lastOrder(root.left);</span><br><span class="line">            lastOrder(root.right);</span><br><span class="line">            System.out.print(root.data+&quot;\t&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        BinaryTree bt = new BinaryTree();</span><br><span class="line">        Object[] data = &#123;2,4,5,7,1,6,12,32,51,22&#125;;</span><br><span class="line">        bt.create(data);</span><br><span class="line">        //创建后的二叉树</span><br><span class="line">        System.out.println(&quot;创建后的二叉树为：&quot;+str);</span><br><span class="line">        System.out.print(&quot;前序遍历结果为：&quot;+&quot;\t&quot;);</span><br><span class="line">        bt.preorder(bt.root);</span><br><span class="line">        System.out.println();</span><br><span class="line">        System.out.print(&quot;中序遍历结果为：&quot;+&quot;\t&quot;);</span><br><span class="line">        bt.midOrder(bt.root);</span><br><span class="line">        System.out.println();</span><br><span class="line">        System.out.print(&quot;后序遍历结果为：&quot;+&quot;\t&quot;);</span><br><span class="line">        bt.lastOrder(bt.root);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫">
+            </div>
+              <div class="pay_explain">谢谢你</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.jpg" alt="支付宝"></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信"></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/03/25/【灵光一现】两三点雨山前-二分查找-二叉树的创建和遍历/">【灵光一现】两三点雨山前-二分查找&amp;二叉树的创建和遍历</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Sumiyax 的个人博客">Sumiyax</a></p>
+        <p><span>发布时间:</span>2020年03月25日 - 16时29分</p>
+        <p><span>最后更新:</span>2020年03月25日 - 16时51分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/03/25/【灵光一现】两三点雨山前-二分查找-二叉树的创建和遍历/" title="【灵光一现】两三点雨山前-二分查找&amp;二叉树的创建和遍历">http://yoursite.com/2020/03/25/【灵光一现】两三点雨山前-二分查找-二叉树的创建和遍历/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/03/25/【灵光一现】两三点雨山前-二分查找-二叉树的创建和遍历/　　作者: Sumiyax" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target="_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2020/03/22/【灵光一现】Hadoop中常用的两种排序-快排-归并/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">【灵光一现】Hadoop中常用的两种排序-快排&amp;归并</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#写在前面"><span class="toc-number">1.</span> <span class="toc-text">写在前面</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#二分查找"><span class="toc-number">1.1.</span> <span class="toc-text">二分查找</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#整个查找过程遵循两个原则"><span class="toc-number">1.1.1.</span> <span class="toc-text">整个查找过程遵循两个原则</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树的创建和遍历"><span class="toc-number">1.2.</span> <span class="toc-text">二叉树的创建和遍历</span></a></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'Sumiyax',
+      repo: 'Sumiyax.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2020/03/22/【灵光一现】Hadoop中常用的两种排序-快排-归并/" title="下一篇: 【灵光一现】Hadoop中常用的两种排序-快排&amp;归并">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/03/25/【灵光一现】两三点雨山前-二分查找-二叉树的创建和遍历/">【灵光一现】两三点雨山前-二分查找&二叉树的创建和遍历</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/22/【灵光一现】Hadoop中常用的两种排序-快排-归并/">【灵光一现】Hadoop中常用的两种排序-快排&归并</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/19/【数仓项目】重中之重-日活-周活-月活（dws）/">【数仓项目】重中之重-日活&周活&月活（dws）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/19/【灵光一现】学而时习之-SQL查询新姿势/">【灵光一现】学而时习之-SQL查询新姿势</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/19/【灵光一现】温故而知新-hive常用函数盘点/">【灵光一现】温故而知新-hive常用函数盘点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/19/【数仓项目】百尺竿头-更进一步-dwd层构建/">【数仓项目】百尺竿头,更进一步-dwd层构建</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/19/【数仓项目】暴风雨前的宁静-术语介绍-ods层构建-一次磁盘崩溃/">【数仓项目】暴风雨前的宁静-术语介绍&ods层构建&一次磁盘崩溃</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/19/【数仓项目】合抱之木-生于毫末-hive-tez-数据分层/">【数仓项目】合抱之木,生于毫末-hive&tez&数据分层</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/18/【数仓项目】万丈高楼平地起-从0开始的环境搭建/">【数仓项目】万丈高楼平地起-从0开始的环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/18/【数仓项目】数据采集阶段-生成-造-数据/">【数仓项目】数据采集阶段-生成(造)数据</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/17/【手撕MR】WordCount/">【手撕MR】WordCount</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/17/【灵光一现】MR辅助排序深入理解-MR重点盘点/">【灵光一现】MR辅助排序深入理解&MR重点盘点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/17/【数仓项目】常用shell脚本编写/">【数仓项目】常用shell脚本编写 </a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/17/【做题杂记】sql中的连接/">【做题杂记】sql中的连接</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/17/title-【做题杂记】类型题：查询第N高的数据/">【做题杂记】类型题：查询第N高的数据'</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/09/菜鸡教程-群发不同邮件脚本编写/">菜鸡教程-群发不同邮件脚本编写</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2020 Sumiyax
+            </div>
+            <div class="footer-right">
+                
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style="display:none">
+                        <span id="site-visit">到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style="display:none">
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 12;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+  </div>
+</body>
+</html>
