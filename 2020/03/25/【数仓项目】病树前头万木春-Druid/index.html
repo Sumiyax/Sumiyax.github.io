@@ -3,19 +3,19 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>【灵光一现】温故而知新-hive常用函数盘点 | Welcome to Sumiyax</title>
+  <title>【数仓项目】病树前头万木春-Druid | Welcome to Sumiyax</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="不得不说hive虽然走mr跑的很慢 要借助tez才能快点，但是它函数方面还是做的很好的呀除了能udf，udtf，多近多出外还有一些函数大大方便了使用者的编写难度和查询效率本篇文章就用来写一些做项目过程中发光发热的那些函数">
+  <meta name="description" content="写在前面lz由于电脑配置问题。。集群跑Druid崩了，跑不动，所以实践不了，但不影响lz对优秀的即席查询框架进行了解写一篇笔记呀~ 接下来进入正题">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【灵光一现】温故而知新-hive常用函数盘点">
-<meta property="og:url" content="http://yoursite.com/2020/03/19/【灵光一现】温故而知新-hive常用函数盘点/index.html">
+<meta property="og:title" content="【数仓项目】病树前头万木春-Druid">
+<meta property="og:url" content="http://yoursite.com/2020/03/25/【数仓项目】病树前头万木春-Druid/index.html">
 <meta property="og:site_name" content="Welcome to Sumiyax">
-<meta property="og:description" content="不得不说hive虽然走mr跑的很慢 要借助tez才能快点，但是它函数方面还是做的很好的呀除了能udf，udtf，多近多出外还有一些函数大大方便了使用者的编写难度和查询效率本篇文章就用来写一些做项目过程中发光发热的那些函数">
+<meta property="og:description" content="写在前面lz由于电脑配置问题。。集群跑Druid崩了，跑不动，所以实践不了，但不影响lz对优秀的即席查询框架进行了解写一篇笔记呀~ 接下来进入正题">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-03-19T16:10:15.666Z">
+<meta property="og:updated_time" content="2020-03-25T14:41:15.025Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【灵光一现】温故而知新-hive常用函数盘点">
-<meta name="twitter:description" content="不得不说hive虽然走mr跑的很慢 要借助tez才能快点，但是它函数方面还是做的很好的呀除了能udf，udtf，多近多出外还有一些函数大大方便了使用者的编写难度和查询效率本篇文章就用来写一些做项目过程中发光发热的那些函数">
+<meta name="twitter:title" content="【数仓项目】病树前头万木春-Druid">
+<meta name="twitter:description" content="写在前面lz由于电脑配置问题。。集群跑Druid崩了，跑不动，所以实践不了，但不影响lz对优秀的即席查询框架进行了解写一篇笔记呀~ 接下来进入正题">
   
     <link rel="alternative" href="/atom.xml" title="Welcome to Sumiyax" type="application/atom+xml">
   
@@ -229,11 +229,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-【灵光一现】温故而知新-hive常用函数盘点" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-【数仓项目】病树前头万木春-Druid" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/03/19/【灵光一现】温故而知新-hive常用函数盘点/" class="article-date">
-      <time datetime="2020-03-19T15:38:52.000Z" itemprop="datePublished">2020-03-19</time>
+      <a href="/2020/03/25/【数仓项目】病树前头万木春-Druid/" class="article-date">
+      <time datetime="2020-03-25T13:32:30.000Z" itemprop="datePublished">2020-03-25</time>
 </a>
     </div>
   
@@ -246,7 +246,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      【灵光一现】温故而知新-hive常用函数盘点
+      【数仓项目】病树前头万木春-Druid
     </h1>
   
 
@@ -263,40 +263,17 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>不得不说hive虽然走mr跑的很慢 要借助tez才能快点，但是它函数方面还是做的很好的呀<br>除了能udf，udtf，多近多出外还有一些函数大大方便了使用者的编写难度和查询效率<br>本篇文章就用来写一些做项目过程中发光发热的那些函数</p>
+        <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>lz由于电脑配置问题。。集群跑Druid崩了，跑不动，所以实践不了，但不影响lz对优秀的即席查询框架进行了解写一篇笔记呀~</p>
+<p>接下来进入正题</p>
 <hr>
 <a id="more"></a>
 
-<p>1.collect_set（）<br>能够查询分组情况下，将同一分组不同行的数据聚合在一起<br>比如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hive (gmall)&gt; select course, collect_set(area), avg(score) from stud group by course;</span><br><span class="line">chinese [&quot;sh&quot;,&quot;bj&quot;]     79.0</span><br><span class="line">math    [&quot;bj&quot;]  93.5</span><br></pre></td></tr></table></figure>
-
-<p>也可以用下标来将某一个取出来</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hive (gmall)&gt; select course, collect_set(area)[0], avg(score) from stud group by course;</span><br><span class="line">chinese sh      79.0</span><br><span class="line">math    bj      93.5</span><br></pre></td></tr></table></figure>
-
-<p>2.日期处理函数</p>
-<p>1）date_format函数（根据格式整理日期）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hive (gmall)&gt; select date_format(&apos;2019-02-10&apos;,&apos;yyyy-MM&apos;);</span><br><span class="line">2019-02</span><br></pre></td></tr></table></figure>
-
-<p>2）date_add函数（加减日期）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hive (gmall)&gt; select date_add(&apos;2019-02-10&apos;,-1);</span><br><span class="line">2019-02-09</span><br><span class="line">hive (gmall)&gt; select date_add(&apos;2019-02-10&apos;,1);</span><br><span class="line">2019-02-11</span><br></pre></td></tr></table></figure>
-
-<p>3）next_day函数<br>       （1）取当前天的下一个周二<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hive (gmall)&gt; select next_day(&apos;2020-03-19&apos;,&apos;TU&apos;);</span><br><span class="line">OK</span><br><span class="line">2020-03-24</span><br></pre></td></tr></table></figure></p>
-<p>说明：星期一到星期日的英文（Monday，Tuesday、Wednesday、Thursday、Friday、Saturday、Sunday）<br>（2）取当前周的周二</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hive (gmall)&gt; select date_add(next_day(&apos;2020-03-19&apos;,&apos;TU&apos;),-7);</span><br><span class="line">OK</span><br><span class="line">2020-03-17</span><br></pre></td></tr></table></figure>
-
-<p>4）last_day函数（求当月最后一天日期）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hive (gmall)&gt; select last_day(&apos;2020-02-18&apos;);</span><br><span class="line">OK</span><br><span class="line">2020-02-29</span><br></pre></td></tr></table></figure>
-
-<p>3.行转列 concat_ws<br>有点类似于mysql中的concat字符串拼接函数<br>它是一个特殊形式的 CONCAT()。第一个参数剩余参数间的分隔符。分隔符可以是与剩余参数一样的字符串。如果分隔符是 NULL，返回值也将为 NULL。这个函数会跳过分隔符参数后的任何 NULL 和空字符串。分隔符将被加到被连接的字符串之间<br>案例<br>如下表</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select * from person_info</span><br><span class="line">           &gt; ;</span><br><span class="line">OK</span><br><span class="line">孙悟空	白羊座	A</span><br><span class="line">大海	射手座	A</span><br><span class="line">宋宋	白羊座	B</span><br><span class="line">猪八戒	白羊座	A</span><br><span class="line">凤姐	射手座	A</span><br></pre></td></tr></table></figure>
-
-<p>将同血型同星座的人放一起</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">射手座,A	大海|凤姐</span><br><span class="line">白羊座,A	孙悟空|猪八戒</span><br><span class="line">白羊座,B	宋宋</span><br><span class="line">select</span><br><span class="line">    t1.base,</span><br><span class="line">    concat_ws(&apos;|&apos;, collect_set(t1.name)) name</span><br><span class="line">from</span><br><span class="line">    (select</span><br><span class="line">        name,</span><br><span class="line">        concat(constellation, &quot;,&quot;, blood_type) base</span><br><span class="line">    from</span><br><span class="line">        person_info) t1</span><br><span class="line">group by</span><br><span class="line">    t1.base;</span><br></pre></td></tr></table></figure>
-
-<p>4.列转行explode()<br>EXPLODE(col)：将hive一列中复杂的array或者map结构拆分成多行。<br>LATERAL VIEW<br>用法：LATERAL VIEW udtf(expression) tableAlias AS columnAlias<br>解释：用于和split, explode等UDTF一起使用，它能够将一列数据拆成多行数据，在此基础上可以对拆分后的数据进行聚合。<br>案例：<br>movie category<br>《疑犯追踪》 悬疑,动作,科幻,剧情<br>《Lie to me》 悬疑,警匪,动作,心理,剧情<br>《战狼2》 战争,动作,灾难<br>使用explode将其炸开，效果如下：<br>《疑犯追踪》      悬疑<br>《疑犯追踪》      动作<br>《疑犯追踪》      科幻<br>《疑犯追踪》      剧情<br>《Lie to me》   悬疑<br>《Lie to me》   警匪<br>《Lie to me》   动作<br>《Lie to me》   心理<br>《Lie to me》   剧情<br>《战狼2》        战争<br>《战狼2》        动作<br>《战狼2》        灾难</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select</span><br><span class="line">    movie,</span><br><span class="line">    category_name</span><br><span class="line">from</span><br><span class="line">    movie_info lateral view explode(category) table_tmp as category_name;</span><br></pre></td></tr></table></figure>
-
-<p>5.over()窗口函数（mysql中也有，不过没这么花里胡哨）<br>相关函数说明<br>OVER()：指定分析函数工作的数据窗口大小，这个数据窗口大小可能会随着行的变而变化<br>CURRENT ROW：当前行<br>n PRECEDING：往前n行数据<br>n FOLLOWING：往后n行数据<br>UNBOUNDED：起点，UNBOUNDED PRECEDING 表示从前面的起点， UNBOUNDED FOLLOWING表示到后面的终点<br>LAG(col,n)：往前第n行数据<br>LEAD(col,n)：往后第n行数据<br>NTILE(n)：把有序分区中的行分发到指定数据的组中，各个组有编号，编号从1开始，对于每一    行，NTILE返回此行所属的组的编号。注意：n必须为int类型。<br>rank()系列：排名用<br>RANK() 排序相同时会重复，总数不会变<br>DENSE_RANK() 排序相同时会重复，总数会减少<br>ROW_NUMBER() 会根据顺序计算<br>开窗是个大环节，案例博主会单独开一篇文章介绍</p>
+<p>Druid是一个快速的列示分布式的支持实时分析的数据存储系统。它在处理PB级数据，毫秒级查询（毫秒。。比presto的秒强。。可惜跑不动。。馋），数据实时处理方面，比传统的系统有显著的改进</p>
+<h2 id="Druid特点"><a href="#Druid特点" class="headerlink" title="Druid特点"></a>Druid特点</h2><p>1.列式存储<br>2.可扩展的分布式系统<br>3.大规模的并行处理<br>4.实时或批量摄取处理数据<br>5.自愈自平衡易操作（解释下：集群扩展和缩小只需要添加删除服务器，集群在后台会自动平衡，无需停机时间）<br>6.数据进行了有效的预聚合和预计算（我可能找到崩盘的罪魁祸首了），查询速度快<br>7.数据结果应用Bitmap压缩算法</p>
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>1.适合清洗好的数据实事录入，但不需要更新操作<br>2.是用于支持宽表，少或者不用join的方法（单表查询）<br>3.适用于可以总结出基础的统计指标，用一个字段表示<br>4.适用于实时性要求高的场景<br>5.适用于对数据质量不敏感的场景</p>
+<h2 id="架构原理"><a href="#架构原理" class="headerlink" title="架构原理"></a>架构原理</h2><p>Druid中有如下角色：<br>1.MiddleMannager Nodes：中间管理节点，及时摄入实时数据 生成segment文件<br>2.Historical Nodes：历史节点，加载已生成的数据文件，以供数据查询，是整个查询性能的核心所在，会承担绝大部分的segment查询<br>3.Broker Nodes：查询节点，接受客户端的查询请求，并发给HN和MN，当其收到查询结果时会将这些结果合并后返回给调用者，运用了缓存技术<br>4.Coordinator Nodes：协调节点，主要负责历史节点的负载均衡以及通过规则管理数据的生命周期<br>5.Overlord Nodes：统治者，进程监视MN的进程，并且是数据摄入Druid的控制器，他们负责提取任务分配给MN并协调Segment发部<br>6.Deep Storage：数据存储文件，存放segment数据文件并提供历史服务器下载，对于单节点集群可以是本地磁盘，而对于分布式一般是HDFS<br>7.MetaData Storage:元数据库，同理hive，存储元数据信息，一般用mysql<br>8.zk：为Druid提供协调服务，如内部服务的监视，协调和领导者选举</p>
+<hr>
+<p>剩余的有关于实践的部分会在以后有了新的设备后进行更新~</p>
 
       
       
@@ -352,13 +329,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2020/03/19/【灵光一现】温故而知新-hive常用函数盘点/">【灵光一现】温故而知新-hive常用函数盘点</a></p>
+        <p><span>本文标题:</span><a href="/2020/03/25/【数仓项目】病树前头万木春-Druid/">【数仓项目】病树前头万木春-Druid</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Sumiyax 的个人博客">Sumiyax</a></p>
-        <p><span>发布时间:</span>2020年03月19日 - 23时38分</p>
-        <p><span>最后更新:</span>2020年03月20日 - 00时10分</p>
+        <p><span>发布时间:</span>2020年03月25日 - 21时32分</p>
+        <p><span>最后更新:</span>2020年03月25日 - 22时41分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2020/03/19/【灵光一现】温故而知新-hive常用函数盘点/" title="【灵光一现】温故而知新-hive常用函数盘点">http://yoursite.com/2020/03/19/【灵光一现】温故而知新-hive常用函数盘点/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/03/19/【灵光一现】温故而知新-hive常用函数盘点/　　作者: Sumiyax" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/03/25/【数仓项目】病树前头万木春-Druid/" title="【数仓项目】病树前头万木春-Druid">http://yoursite.com/2020/03/25/【数仓项目】病树前头万木春-Druid/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/03/25/【数仓项目】病树前头万木春-Druid/　　作者: Sumiyax" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -371,18 +348,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2020/03/19/【灵光一现】学而时习之-SQL查询新姿势/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          【灵光一现】学而时习之-SQL查询新姿势
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/03/19/【数仓项目】百尺竿头-更进一步-dwd层构建/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">【数仓项目】百尺竿头,更进一步-dwd层构建</div>
+    <a href="/2020/03/25/【数仓项目】沉舟侧畔千帆过-Presto/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">【数仓项目】沉舟侧畔千帆过-Presto</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -393,7 +361,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#写在前面"><span class="toc-number">1.</span> <span class="toc-text">写在前面</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Druid特点"><span class="toc-number">1.1.</span> <span class="toc-text">Druid特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#应用场景"><span class="toc-number">1.2.</span> <span class="toc-text">应用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#架构原理"><span class="toc-number">1.3.</span> <span class="toc-text">架构原理</span></a></li></ol></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
 
@@ -459,13 +427,11 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2020/03/19/【灵光一现】学而时习之-SQL查询新姿势/" title="上一篇: 【灵光一现】学而时习之-SQL查询新姿势">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2020/03/19/【数仓项目】百尺竿头-更进一步-dwd层构建/" title="下一篇: 【数仓项目】百尺竿头,更进一步-dwd层构建">
+            <a href="/2020/03/25/【数仓项目】沉舟侧畔千帆过-Presto/" title="下一篇: 【数仓项目】沉舟侧畔千帆过-Presto">
                 <i class="fa fa-angle-right"></i>
             </a>
         

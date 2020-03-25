@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="Welcome to Sumiyax">
 <meta property="og:description" content="写在前面二分查找思维不论是在算法中，还是在错误查找中都占据着及其重要的角色，所以本章用来复习二分查找。此外，由于在写MR的TOPN时用到了treemap（由红黑树算法实现），突然意识到自己在二叉树这一块有欠缺，所以本文也对二叉树做一个初步复习以下内容均为个人理解，若有不对，欢迎指正。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2020-03-25T08:51:21.966Z">
+<meta property="og:updated_time" content="2020-03-25T11:34:51.571Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【灵光一现】两三点雨山前-二分查找&amp;二叉树的创建和遍历">
 <meta name="twitter:description" content="写在前面二分查找思维不论是在算法中，还是在错误查找中都占据着及其重要的角色，所以本章用来复习二分查找。此外，由于在写MR的TOPN时用到了treemap（由红黑树算法实现），突然意识到自己在二叉树这一块有欠缺，所以本文也对二叉树做一个初步复习以下内容均为个人理解，若有不对，欢迎指正。">
@@ -339,7 +339,7 @@
         <p><span>本文标题:</span><a href="/2020/03/25/【灵光一现】两三点雨山前-二分查找-二叉树的创建和遍历/">【灵光一现】两三点雨山前-二分查找&amp;二叉树的创建和遍历</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Sumiyax 的个人博客">Sumiyax</a></p>
         <p><span>发布时间:</span>2020年03月25日 - 16时29分</p>
-        <p><span>最后更新:</span>2020年03月25日 - 16时51分</p>
+        <p><span>最后更新:</span>2020年03月25日 - 19时34分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2020/03/25/【灵光一现】两三点雨山前-二分查找-二叉树的创建和遍历/" title="【灵光一现】两三点雨山前-二分查找&amp;二叉树的创建和遍历">http://yoursite.com/2020/03/25/【灵光一现】两三点雨山前-二分查找-二叉树的创建和遍历/</a>
             <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/03/25/【灵光一现】两三点雨山前-二分查找-二叉树的创建和遍历/　　作者: Sumiyax" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -354,6 +354,15 @@
 
 
 <nav id="article-nav">
+  
+    <a href="/2020/03/25/【灵光一现】初窥门径-ClickHouse/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          【灵光一现】初窥门径-ClickHouse
+        
+      </div>
+    </a>
   
   
     <a href="/2020/03/22/【灵光一现】Hadoop中常用的两种排序-快排-归并/" id="article-nav-older" class="article-nav-link-wrap">
@@ -434,7 +443,9 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2020/03/25/【灵光一现】初窥门径-ClickHouse/" title="上一篇: 【灵光一现】初窥门径-ClickHouse">
+                <i class="fa fa-angle-left"></i>
+            </a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
@@ -443,7 +454,7 @@
             </a>
         
     </div>
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/03/25/【灵光一现】两三点雨山前-二分查找-二叉树的创建和遍历/">【灵光一现】两三点雨山前-二分查找&二叉树的创建和遍历</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/22/【灵光一现】Hadoop中常用的两种排序-快排-归并/">【灵光一现】Hadoop中常用的两种排序-快排&归并</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/19/【数仓项目】重中之重-日活-周活-月活（dws）/">【数仓项目】重中之重-日活&周活&月活（dws）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/19/【灵光一现】学而时习之-SQL查询新姿势/">【灵光一现】学而时习之-SQL查询新姿势</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/19/【灵光一现】温故而知新-hive常用函数盘点/">【灵光一现】温故而知新-hive常用函数盘点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/19/【数仓项目】百尺竿头-更进一步-dwd层构建/">【数仓项目】百尺竿头,更进一步-dwd层构建</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/19/【数仓项目】暴风雨前的宁静-术语介绍-ods层构建-一次磁盘崩溃/">【数仓项目】暴风雨前的宁静-术语介绍&ods层构建&一次磁盘崩溃</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/19/【数仓项目】合抱之木-生于毫末-hive-tez-数据分层/">【数仓项目】合抱之木,生于毫末-hive&tez&数据分层</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/18/【数仓项目】万丈高楼平地起-从0开始的环境搭建/">【数仓项目】万丈高楼平地起-从0开始的环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/18/【数仓项目】数据采集阶段-生成-造-数据/">【数仓项目】数据采集阶段-生成(造)数据</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/17/【手撕MR】WordCount/">【手撕MR】WordCount</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/17/【灵光一现】MR辅助排序深入理解-MR重点盘点/">【灵光一现】MR辅助排序深入理解&MR重点盘点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/17/【数仓项目】常用shell脚本编写/">【数仓项目】常用shell脚本编写 </a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/17/【做题杂记】sql中的连接/">【做题杂记】sql中的连接</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/17/title-【做题杂记】类型题：查询第N高的数据/">【做题杂记】类型题：查询第N高的数据'</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/09/菜鸡教程-群发不同邮件脚本编写/">菜鸡教程-群发不同邮件脚本编写</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/03/25/【数仓项目】病树前头万木春-Druid/">【数仓项目】病树前头万木春-Druid</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/25/【数仓项目】沉舟侧畔千帆过-Presto/">【数仓项目】沉舟侧畔千帆过-Presto</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/25/【灵光一现】初窥门径-ClickHouse/">【灵光一现】初窥门径-ClickHouse</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/25/【灵光一现】两三点雨山前-二分查找-二叉树的创建和遍历/">【灵光一现】两三点雨山前-二分查找&二叉树的创建和遍历</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/22/【灵光一现】Hadoop中常用的两种排序-快排-归并/">【灵光一现】Hadoop中常用的两种排序-快排&归并</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/19/【数仓项目】重中之重-日活-周活-月活（dws）/">【数仓项目】重中之重-日活&周活&月活（dws）</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/19/【灵光一现】学而时习之-SQL查询新姿势/">【灵光一现】学而时习之-SQL查询新姿势</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/19/【灵光一现】温故而知新-hive常用函数盘点/">【灵光一现】温故而知新-hive常用函数盘点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/19/【数仓项目】百尺竿头-更进一步-dwd层构建/">【数仓项目】百尺竿头,更进一步-dwd层构建</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/19/【数仓项目】暴风雨前的宁静-术语介绍-ods层构建-一次磁盘崩溃/">【数仓项目】暴风雨前的宁静-术语介绍&ods层构建&一次磁盘崩溃</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/19/【数仓项目】合抱之木-生于毫末-hive-tez-数据分层/">【数仓项目】合抱之木,生于毫末-hive&tez&数据分层</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/18/【数仓项目】万丈高楼平地起-从0开始的环境搭建/">【数仓项目】万丈高楼平地起-从0开始的环境搭建</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/18/【数仓项目】数据采集阶段-生成-造-数据/">【数仓项目】数据采集阶段-生成(造)数据</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/17/【手撕MR】WordCount/">【手撕MR】WordCount</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/17/【灵光一现】MR辅助排序深入理解-MR重点盘点/">【灵光一现】MR辅助排序深入理解&MR重点盘点</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/17/【数仓项目】常用shell脚本编写/">【数仓项目】常用shell脚本编写 </a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/17/【做题杂记】sql中的连接/">【做题杂记】sql中的连接</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/17/title-【做题杂记】类型题：查询第N高的数据/">【做题杂记】类型题：查询第N高的数据'</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/09/菜鸡教程-群发不同邮件脚本编写/">菜鸡教程-群发不同邮件脚本编写</a></li></ul>
     <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
     <script>
         $(".post-list").addClass("toc-article");
