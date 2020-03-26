@@ -3,23 +3,24 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>【灵光一现】初窥门径-ClickHouse | Welcome to Sumiyax</title>
+  <title>【灵光一现】此心安处是吾乡-MapReduce&amp;Shuffle&amp;yarn机制 | Welcome to Sumiyax</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="写在前面ClickHouse是一个面向联机分析处理(OLAP)的开源的面向列式存储的DBMS，简称CK, 与Hadoop,Spark相比，ClickHouse很轻量级,由俄罗斯第一大搜索引擎Yandex于2016年6月发布, 开发语言为C++与flink的发展态势一样，目前在国内大厂间运用越发广泛">
+  <meta name="description" content="写在前面本篇主要介绍mapreduce的工作机制或者shuffle的工作机制，其实mapreduce整个流程就包含了shuffle  先放两张从某谷那扒下来的mapreduce机制图以及单独的shuffle图 mapreduce机制：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【灵光一现】初窥门径-ClickHouse">
-<meta property="og:url" content="http://yoursite.com/2020/03/25/【灵光一现】初窥门径-ClickHouse/index.html">
+<meta property="og:title" content="【灵光一现】此心安处是吾乡-MapReduce&amp;Shuffle&amp;yarn机制">
+<meta property="og:url" content="http://yoursite.com/2020/03/26/【灵光一现】此心安处是吾乡-MapReduce-Shuffle机制/index.html">
 <meta property="og:site_name" content="Welcome to Sumiyax">
-<meta property="og:description" content="写在前面ClickHouse是一个面向联机分析处理(OLAP)的开源的面向列式存储的DBMS，简称CK, 与Hadoop,Spark相比，ClickHouse很轻量级,由俄罗斯第一大搜索引擎Yandex于2016年6月发布, 开发语言为C++与flink的发展态势一样，目前在国内大厂间运用越发广泛">
+<meta property="og:description" content="写在前面本篇主要介绍mapreduce的工作机制或者shuffle的工作机制，其实mapreduce整个流程就包含了shuffle  先放两张从某谷那扒下来的mapreduce机制图以及单独的shuffle图 mapreduce机制：">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2020/03/25/【灵光一现】初窥门径-ClickHouse/2.png">
-<meta property="og:image" content="http://yoursite.com/2020/03/25/【灵光一现】初窥门径-ClickHouse/3.png">
-<meta property="og:image" content="http://yoursite.com/2020/03/25/【灵光一现】初窥门径-ClickHouse/1.png">
-<meta property="og:updated_time" content="2020-03-25T13:26:46.131Z">
+<meta property="og:image" content="http://yoursite.com/2020/03/26/【灵光一现】此心安处是吾乡-MapReduce-Shuffle机制/1.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/26/【灵光一现】此心安处是吾乡-MapReduce-Shuffle机制/2.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/26/【灵光一现】此心安处是吾乡-MapReduce-Shuffle机制/3.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/26/【灵光一现】此心安处是吾乡-MapReduce-Shuffle机制/4.png">
+<meta property="og:updated_time" content="2020-03-26T15:26:27.759Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【灵光一现】初窥门径-ClickHouse">
-<meta name="twitter:description" content="写在前面ClickHouse是一个面向联机分析处理(OLAP)的开源的面向列式存储的DBMS，简称CK, 与Hadoop,Spark相比，ClickHouse很轻量级,由俄罗斯第一大搜索引擎Yandex于2016年6月发布, 开发语言为C++与flink的发展态势一样，目前在国内大厂间运用越发广泛">
-<meta name="twitter:image" content="http://yoursite.com/2020/03/25/【灵光一现】初窥门径-ClickHouse/2.png">
+<meta name="twitter:title" content="【灵光一现】此心安处是吾乡-MapReduce&amp;Shuffle&amp;yarn机制">
+<meta name="twitter:description" content="写在前面本篇主要介绍mapreduce的工作机制或者shuffle的工作机制，其实mapreduce整个流程就包含了shuffle  先放两张从某谷那扒下来的mapreduce机制图以及单独的shuffle图 mapreduce机制：">
+<meta name="twitter:image" content="http://yoursite.com/2020/03/26/【灵光一现】此心安处是吾乡-MapReduce-Shuffle机制/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Welcome to Sumiyax" type="application/atom+xml">
   
@@ -233,11 +234,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-【灵光一现】初窥门径-ClickHouse" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-【灵光一现】此心安处是吾乡-MapReduce-Shuffle机制" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/03/25/【灵光一现】初窥门径-ClickHouse/" class="article-date">
-      <time datetime="2020-03-25T13:12:24.000Z" itemprop="datePublished">2020-03-25</time>
+      <a href="/2020/03/26/【灵光一现】此心安处是吾乡-MapReduce-Shuffle机制/" class="article-date">
+      <time datetime="2020-03-26T12:29:29.000Z" itemprop="datePublished">2020-03-26</time>
 </a>
     </div>
   
@@ -250,7 +251,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      【灵光一现】初窥门径-ClickHouse
+      【灵光一现】此心安处是吾乡-MapReduce&amp;Shuffle&amp;yarn机制
     </h1>
   
 
@@ -267,33 +268,49 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>ClickHouse是一个面向联机分析处理(OLAP)的开源的面向列式存储的DBMS，简称CK, 与Hadoop,Spark相比，ClickHouse很轻量级,由俄罗斯第一大搜索引擎Yandex于2016年6月发布, 开发语言为C++<br>与flink的发展态势一样，目前在国内大厂间运用越发广泛</p>
+        <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>本篇主要介绍mapreduce的工作机制或者shuffle的工作机制，其实mapreduce整个流程就包含了shuffle</p>
 <hr>
+<p>先放两张从某谷那扒下来的mapreduce机制图以及单独的shuffle图</p>
+<p>mapreduce机制：</p>
 <a id="more"></a>
 
-<p>官方如是描述：</p>
-<img src="/2020/03/25/【灵光一现】初窥门径-ClickHouse/2.png" title="[2]">
-<img src="/2020/03/25/【灵光一现】初窥门径-ClickHouse/3.png" title="[3]">
+<img src="/2020/03/26/【灵光一现】此心安处是吾乡-MapReduce-Shuffle机制/1.png" title="[1]">
+<img src="/2020/03/26/【灵光一现】此心安处是吾乡-MapReduce-Shuffle机制/2.png" title="[2]">
+
+<p>shuffle机制：</p>
+<img src="/2020/03/26/【灵光一现】此心安处是吾乡-MapReduce-Shuffle机制/3.png" title="[3]">
+
+<h2 id="MapTask"><a href="#MapTask" class="headerlink" title="MapTask"></a>MapTask</h2><p>整个MapTask分为五个阶段：READ,MAP,COLLECT,溢写(Spill),Combine</p>
+<h3 id="MapTask之前"><a href="#MapTask之前" class="headerlink" title="MapTask之前"></a>MapTask之前</h3><p>客户端获取待处理文件，根据其文件大小，参数配置形成一个任务分配规划（切片），之后将切片信息，jar包，xml文件一起提交给yarn，然后计算出maptask的数量后，开辟maptask空间</p>
+<h3 id="Read阶段"><a href="#Read阶段" class="headerlink" title="Read阶段"></a>Read阶段</h3><p>MapTask通过用户编写的RecordReader（自定义的InputFormat方法）或者初始的InputFormat方法（一行一行读TextInputFormat）来获取一个个的key/value键值对</p>
+<h3 id="Map阶段"><a href="#Map阶段" class="headerlink" title="Map阶段"></a>Map阶段</h3><p>该阶段主要是将解析出的key/value交给用户编写的map()函数进行处理，并通过写出context.write产生新的key/value</p>
+<h3 id="Collect收集阶段"><a href="#Collect收集阶段" class="headerlink" title="Collect收集阶段"></a>Collect收集阶段</h3><p>在用户编写map()中当数据处理完成后，一般会调用OutputCollector.collect()输出结果。在该函数内部，它会将生成的key/value分区（调用Partitioner），并写入一个环形内存缓冲区中。</p>
+<h3 id="溢写阶段"><a href="#溢写阶段" class="headerlink" title="溢写阶段"></a>溢写阶段</h3><p>环形缓冲区有一定的大小可以自行设置，环形缓冲区在到达一定界限后会将缓存的内容写到本地磁盘上生成临时文件，默认的界限是百分之八十。界限值也可以自己设置。而在上传之前会先根据分区进行排序，再根据数据分区号按key值，也可以自己定义key值大小排序（重写Compareto方法）进行快排。并且，在环形缓冲区，会朝左边写数据元数据，右边写实际数据，如下图所示</p>
+<img src="/2020/03/26/【灵光一现】此心安处是吾乡-MapReduce-Shuffle机制/4.png" title="[4]">
 
 
-<p>安装如下：</p>
-<img src="/2020/03/25/【灵光一现】初窥门径-ClickHouse/1.png" title="[1]">
+<h3 id="Combine阶段"><a href="#Combine阶段" class="headerlink" title="Combine阶段"></a>Combine阶段</h3><p>当所有数据处理完成后，MapTask对所有临时文件进行归并排序，以确保最终只会生成一个有序数据文件。<br>在归并过程中，会根据分区进行合并，将多个内部有序得分区不断通过归并算法合并在一起形成一个有序大文件<br>在combine阶段也可进行压缩</p>
+<p>让每个MapTask最终只生成一个数据文件，可避免同时打开大量文件和同时读取大量小文件产生的随机读取带来的开销。</p>
+<h2 id="ReduceTask"><a href="#ReduceTask" class="headerlink" title="ReduceTask"></a>ReduceTask</h2><p>整个ReduceTask分为四个阶段：Copy，Merge，Sort，Reduce</p>
+<h3 id="Copy阶段"><a href="#Copy阶段" class="headerlink" title="Copy阶段"></a>Copy阶段</h3><p>ReduceTask从每个Maptask上远程拷贝一片数据到内存中，如果内存到了设定的阈值就写到磁盘中，否则直接放内存中</p>
+<h3 id="Merge阶段"><a href="#Merge阶段" class="headerlink" title="Merge阶段"></a>Merge阶段</h3><p>对内存和磁盘上的数据进行归并排序以生成一个大的有序的文件</p>
+<h3 id="Sort"><a href="#Sort" class="headerlink" title="Sort"></a>Sort</h3><p>在此阶段即在进入reduce()之前会对所有键值对按照key值进行聚合，相同的key在一起，也可在此进行辅助排序对key的比较进行定义。</p>
+<h3 id="reduce阶段"><a href="#reduce阶段" class="headerlink" title="reduce阶段"></a>reduce阶段</h3><p>reduce()函数将计算结果写到HDFS上，如果在函数中定义了逻辑，则按照逻辑执行写入</p>
+<p>需注意：maptask的数量又切片数决定，但是reducetask的数量却可以自己设置,比如设置为4<br>具体设置多少能达到最好的性能需要根据实际情况去测试，并不是设置越多越好，大概是一个正态曲线。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 默认值是1，手动设置为4</span><br><span class="line">job.setNumReduceTasks(4);</span><br></pre></td></tr></table></figure>
 
-<p>官方使用文档：<a href="https://clickhouse.tech/docs/en/" target="_blank" rel="noopener">https://clickhouse.tech/docs/en/</a></p>
-<h2 id="总结一下"><a href="#总结一下" class="headerlink" title="总结一下~"></a>总结一下~</h2><h3 id="CH特点"><a href="#CH特点" class="headerlink" title="CH特点"></a>CH特点</h3><p>·开源的列式存储数据库管理系统，简单方便，高可靠性<br>·由于是列式存储，所以按列查找运行速度极快，可达mysql的800倍，处理的数据是PB级<br>·内置功能多</p>
-<h3 id="CH性能"><a href="#CH性能" class="headerlink" title="CH性能"></a>CH性能</h3><p>低延迟：对于数据量（几千行，列不是很多）不是很大的短查询，如果数据已经被载入缓存，且使用主码，延迟在50MS左右。<br>并发量：虽然 ClickHouse 是一种在线分析型数据库，也可支持一定的并发。当单个查询比较短时，官方建议 100 Queries / second。<br>写入速度：在使用 MergeTree 引擎的情况下，写入速度大概是 50 - 200 M / s，如果按照 1 K 一条记录来算，大约每秒可写入 50000 ~ 200000 条记录每秒。如果每条记录比较小的话写入速度会更快</p>
-<p>总结：速度快，并发高，写入快</p>
-<h3 id="主要应用场景"><a href="#主要应用场景" class="headerlink" title="主要应用场景"></a>主要应用场景</h3><p>用于结构良好清晰且不可变的事件或日志流分析</p>
-<p>Web和App分析，广告网络和RTB，电信，电子商务和金融，信息安全，监测和遥感，时间序列，商业智能，网络游戏，物联网</p>
-<h3 id="不适合于"><a href="#不适合于" class="headerlink" title="不适合于"></a>不适合于</h3><p>由于clickHouse不支持事务操作,顾不能作为传统数据库来使用OLTP),以及高请求率的键值访问，Blob或文档存储，超标准化数据</p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>官方给的quickstart为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install yum-utils</span><br><span class="line">sudo rpm --import https://repo.clickhouse.tech/CLICKHOUSE-KEY.GPG</span><br><span class="line">sudo yum-config-manager --add-repo https://repo.clickhouse.tech/rpm/stable/x86_64</span><br><span class="line">sudo yum install clickhouse-server clickhouse-client</span><br><span class="line"></span><br><span class="line">sudo /etc/init.d/clickhouse-server start</span><br></pre></td></tr></table></figure>
-
-<p>登录clickHouse:</p>
-<p>第一种方式(连接本地): /etc/init.d/clickhouse-client<br>第二种方式(连接远程): /etc/init.d/clickhouse-client –host=… –port=… –user=… –password=…</p>
-<p>登录后, 其基本操作采用类SQL的方式即可使用, 但需要注意, 在建表时候, 需要开启多行查询, 否则建表时候会报错</p>
-<p>开启多行查询的方式:</p>
-<p>clickhouse-client -m  或者:  clickhouse-client –multiline</p>
+<h2 id="suffle"><a href="#suffle" class="headerlink" title="suffle"></a>suffle</h2><p>suffle就是mapreduce流程中map()方法出来到进入reduce()方法之间那一段流程</p>
+<h2 id="yarn作业提交全流程"><a href="#yarn作业提交全流程" class="headerlink" title="yarn作业提交全流程"></a>yarn作业提交全流程</h2><p>1.客户端调用job.waitForCompletion（Driver末尾写的）方法向整个集群提交mr作业<br>2.客户端向RM申请一个作业id<br>3.RM给客户端返回该job资源的提交路径和作业id<br>4.客户端提交jar包，切片信息，配置文件到指定的资源提交路径<br>5.客户端提交完资源后向RM申请运行MRAppMaster<br>6.RM收到客户端的请求后，将job添加到容量调度器中<br>7.某空闲的NM领取到该job<br>8.NM创建Container，并产生MRAppmaster<br>9.下载客户端提交的资源到本地<br>10.MrAppMaster向RM申请运行切片数对应的MapTask任务资源<br>11.RM将MT任务分配给其他NM，NM分别领取到任务创建容器<br>12.MR向接收到任务的NM发送程序启动脚本，NM启动MapTask对数据分区排序<br>13.MrAppMaster等待所有MapTask运行完毕后，向RM申请容器，运行ReduceTask<br>14.RT向MT获取相应分区的数据<br>15.程序运行完成后MR向RM申请注销自己</p>
+<h2 id="关于资源调度器"><a href="#关于资源调度器" class="headerlink" title="关于资源调度器"></a>关于资源调度器</h2><p>分为FIFO，容量，公平三种调度器，可自行设置</p>
+<h3 id="FIFO"><a href="#FIFO" class="headerlink" title="FIFO"></a>FIFO</h3><p>按照job的到达时间进行服务，先到先服务</p>
+<h3 id="容量"><a href="#容量" class="headerlink" title="容量"></a>容量</h3><p>1.支持多个队列，每个队列有多个job，采用FIFO调度<br>2.为防止同一个用户的作业独占资源，会对同一用户提交的作业所占资源进行限制<br>3.首先计算每个队列正在运行的任务数与其应该分得得计算资源之间得比值，选择比值最小的，即最闲得队列<br>4.其次按照作业优先级和时间顺序同时考虑用户资源限制和内存限制对队列内任务进行排序<br>5.多个队列并行执行自己队列中的job任务</p>
+<h3 id="公平调度器"><a href="#公平调度器" class="headerlink" title="公平调度器"></a>公平调度器</h3><p>缺额：一个job理想情况下需要的资源和实际资源得差值<br>该调度器支持多个队列，每个队列按照job的优先级进行资源分配，优先级与缺值有关，缺值越大优先级越大，同样支持并行运行</p>
+<h2 id="任务推测执行"><a href="#任务推测执行" class="headerlink" title="任务推测执行"></a>任务推测执行</h2><p>一个作业由若干个Map任务和Reduce任务构成。因硬件老化、软件Bug等，某些任务可能运行非常慢。<br>此时可通过更改配置开启推测执行<br>发现拖后腿的任务，比如某个任务运行速度远慢于任务平均速度。为拖后腿任务启动一个备份任务，同时运行。谁先运行完，则采用谁的结果。</p>
+<h3 id="推测执行算法原理"><a href="#推测执行算法原理" class="headerlink" title="推测执行算法原理"></a>推测执行算法原理</h3><p>假设推测运行时间为imtime,推测执行完时间为imendtime，备份任务执行完时间为imendtime2<br>当前时刻为cutime，任务启动时刻为stime，任务平均完成时间为avgtime，任务运行比例为progress</p>
+<p>则：<br>imtime = (cutime+stime)/progress</p>
+<p>imendtime = imtime+stime</p>
+<p>imendtime2 = stime+avgtime</p>
+<p>MR总是选择（imendtime-imendtime2）差值最大的任务来开启备份任务<br>此方法是以空间换时间，在集群资源紧缺时应避免使用</p>
 
       
       
@@ -349,13 +366,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2020/03/25/【灵光一现】初窥门径-ClickHouse/">【灵光一现】初窥门径-ClickHouse</a></p>
+        <p><span>本文标题:</span><a href="/2020/03/26/【灵光一现】此心安处是吾乡-MapReduce-Shuffle机制/">【灵光一现】此心安处是吾乡-MapReduce&amp;Shuffle&amp;yarn机制</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Sumiyax 的个人博客">Sumiyax</a></p>
-        <p><span>发布时间:</span>2020年03月25日 - 21时12分</p>
-        <p><span>最后更新:</span>2020年03月25日 - 21时26分</p>
+        <p><span>发布时间:</span>2020年03月26日 - 20时29分</p>
+        <p><span>最后更新:</span>2020年03月26日 - 23时26分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2020/03/25/【灵光一现】初窥门径-ClickHouse/" title="【灵光一现】初窥门径-ClickHouse">http://yoursite.com/2020/03/25/【灵光一现】初窥门径-ClickHouse/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/03/25/【灵光一现】初窥门径-ClickHouse/　　作者: Sumiyax" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/03/26/【灵光一现】此心安处是吾乡-MapReduce-Shuffle机制/" title="【灵光一现】此心安处是吾乡-MapReduce&amp;Shuffle&amp;yarn机制">http://yoursite.com/2020/03/26/【灵光一现】此心安处是吾乡-MapReduce-Shuffle机制/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2020/03/26/【灵光一现】此心安处是吾乡-MapReduce-Shuffle机制/　　作者: Sumiyax" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -368,18 +385,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2020/03/25/【数仓项目】沉舟侧畔千帆过-Presto/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          【数仓项目】沉舟侧畔千帆过-Presto
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/03/25/【灵光一现】两三点雨山前-二分查找-二叉树的创建和遍历/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">【灵光一现】两三点雨山前-二分查找&amp;二叉树的创建和遍历</div>
+    <a href="/2020/03/25/【数仓项目】病树前头万木春-Druid/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">【数仓项目】病树前头万木春-Druid</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -390,7 +398,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#写在前面"><span class="toc-number">1.</span> <span class="toc-text">写在前面</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#总结一下"><span class="toc-number">1.1.</span> <span class="toc-text">总结一下~</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CH特点"><span class="toc-number">1.1.1.</span> <span class="toc-text">CH特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CH性能"><span class="toc-number">1.1.2.</span> <span class="toc-text">CH性能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#主要应用场景"><span class="toc-number">1.1.3.</span> <span class="toc-text">主要应用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不适合于"><span class="toc-number">1.1.4.</span> <span class="toc-text">不适合于</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装"><span class="toc-number">1.1.5.</span> <span class="toc-text">安装</span></a></li></ol></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#写在前面"><span class="toc-number">1.</span> <span class="toc-text">写在前面</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#MapTask"><span class="toc-number">1.1.</span> <span class="toc-text">MapTask</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MapTask之前"><span class="toc-number">1.1.1.</span> <span class="toc-text">MapTask之前</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Read阶段"><span class="toc-number">1.1.2.</span> <span class="toc-text">Read阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Map阶段"><span class="toc-number">1.1.3.</span> <span class="toc-text">Map阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Collect收集阶段"><span class="toc-number">1.1.4.</span> <span class="toc-text">Collect收集阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#溢写阶段"><span class="toc-number">1.1.5.</span> <span class="toc-text">溢写阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Combine阶段"><span class="toc-number">1.1.6.</span> <span class="toc-text">Combine阶段</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ReduceTask"><span class="toc-number">1.2.</span> <span class="toc-text">ReduceTask</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Copy阶段"><span class="toc-number">1.2.1.</span> <span class="toc-text">Copy阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Merge阶段"><span class="toc-number">1.2.2.</span> <span class="toc-text">Merge阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sort"><span class="toc-number">1.2.3.</span> <span class="toc-text">Sort</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reduce阶段"><span class="toc-number">1.2.4.</span> <span class="toc-text">reduce阶段</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#suffle"><span class="toc-number">1.3.</span> <span class="toc-text">suffle</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#yarn作业提交全流程"><span class="toc-number">1.4.</span> <span class="toc-text">yarn作业提交全流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于资源调度器"><span class="toc-number">1.5.</span> <span class="toc-text">关于资源调度器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FIFO"><span class="toc-number">1.5.1.</span> <span class="toc-text">FIFO</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#容量"><span class="toc-number">1.5.2.</span> <span class="toc-text">容量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#公平调度器"><span class="toc-number">1.5.3.</span> <span class="toc-text">公平调度器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#任务推测执行"><span class="toc-number">1.6.</span> <span class="toc-text">任务推测执行</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#推测执行算法原理"><span class="toc-number">1.6.1.</span> <span class="toc-text">推测执行算法原理</span></a></li></ol></li></ol></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录" title="点击按钮隐藏或者显示文章目录">
 
@@ -456,13 +464,11 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2020/03/25/【数仓项目】沉舟侧畔千帆过-Presto/" title="上一篇: 【数仓项目】沉舟侧畔千帆过-Presto">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2020/03/25/【灵光一现】两三点雨山前-二分查找-二叉树的创建和遍历/" title="下一篇: 【灵光一现】两三点雨山前-二分查找&amp;二叉树的创建和遍历">
+            <a href="/2020/03/25/【数仓项目】病树前头万木春-Druid/" title="下一篇: 【数仓项目】病树前头万木春-Druid">
                 <i class="fa fa-angle-right"></i>
             </a>
         
